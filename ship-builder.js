@@ -495,7 +495,7 @@ $(document).ready(function(){
 			}
 		});
 
-		let sidebar_status = false;
+		let sidebar_status = true;
 		// Sidebar Show/Hide
 		$('#sidebar-controls').on('click', function(){
 			if (sidebar_status == false) {
@@ -912,72 +912,72 @@ $(document).ready(function(){
 				cargo_bay_count = parseInt($('#cargo-bay').val());
 				cargo_bay_tonnage = cargo_bay_count * 1;
 				cargo_bay_cost = cargo_bay_count * 100;
-				cargo_bay_count > 0 ? $('#cargo-bay-output').show():$('#cargo-bay-output').hide();
+				cargo_bay_count > 0 ? $('#cargo-bay-output').show() : $('#cargo-bay-output').hide();
 			// Ships Locker
 				ships_locker_count = parseInt($('#ships-locker').val());
 				ships_locker_tonnage = ships_locker_count * 2;
 				ships_locker_cost = ships_locker_count * 5000;
-				cargo_bay_count > 0 ? $('#ships-locker-output').show():$('#ships-locker-output').hide();
+				cargo_bay_count > 0 ? $('#ships-locker-output').show() : $('#ships-locker-output').hide();
 			// Common Area
 				common_area_count = parseInt($('#common-area').val());
 				common_area_tonnage = common_area_count * 4;
 				common_area_cost = common_area_count * 1000;
-				cargo_bay_count > 0 ? $('#common-area-output').show():$('#common-area-output').hide();
+				cargo_bay_count > 0 ? $('#common-area-output').show() : $('#common-area-output').hide();
 			// State Room
 				state_room_count = parseInt($('#state-room').val());
 				state_room_tonnage = state_room_count * 4;
 				state_room_cost = state_room_count * 1000;
-				cargo_bay_count > 0 ? $('#state-room-output').show():$('#state-room-output').hide();
+				cargo_bay_count > 0 ? $('#state-room-output').show() : $('#state-room-output').hide();
 			// Drone Bay
 				drone_bay_count = parseInt($('#drone-bay').val());
 				drone_bay_tonnage = drone_bay_count * 5;
 				drone_bay_cost = drone_bay_count * 12000;
-				cargo_bay_count > 0 ? $('#drone-bay-output').show():$('#drone-bay-output').hide();
+				cargo_bay_count > 0 ? $('#drone-bay-output').show() : $('#drone-bay-output').hide();
 			// Barracks
 				barracks_count = parseInt($('#barracks').val());
 				barracks_tonnage = barracks_count * 6;
 				barracks_cost = barracks_count * 200;
-				cargo_bay_count > 0 ? $('#barracks-output').show():$('#barracks-output').hide();
+				cargo_bay_count > 0 ? $('#barracks-output').show() : $('#barracks-output').hide();
 			// Medical Bay
 				medical_bay_count = parseInt($('#medical-bay').val());
 				medical_bay_tonnage = medical_bay_count * 6;
 				medical_bay_cost = medical_bay_count * 10000;
-				cargo_bay_count > 0 ? $('#medical-bay-output').show():$('#medical-bay-output').hide();
+				cargo_bay_count > 0 ? $('#medical-bay-output').show() : $('#medical-bay-output').hide();
 			// Science Bay
 				science_bay_count = parseInt($('#science-bay').val());
 				science_bay_tonnage = science_bay_count * 6;
 				science_bay_cost = science_bay_count * 10000;
-				cargo_bay_count > 0 ? $('#science-bay-output').show():$('#science-bay-output').hide();
+				cargo_bay_count > 0 ? $('#science-bay-output').show() : $('#science-bay-output').hide();
 			// Technical Bay
 				technical_bay_count = parseInt($('#technical-bay').val());
 				technical_bay_tonnage = technical_bay_count * 6;
 				technical_bay_cost = technical_bay_count * 10000;
-				cargo_bay_count > 0 ? $('#technical-bay-output').show():$('#technical-bay-output').hide();
+				cargo_bay_count > 0 ? $('#technical-bay-output').show() : $('#technical-bay-output').hide();
 			// Weapons Bay
 				weapons_bay_count = parseInt($('#weapons-bay').val());
 				weapons_bay_tonnage = weapons_bay_count * 8;
 				weapons_bay_cost = weapons_bay_count * 10000;
-				cargo_bay_count > 0 ? $('#weapons-bay-output').show():$('#weapons-bay-output').hide();
+				cargo_bay_count > 0 ? $('#weapons-bay-output').show() : $('#weapons-bay-output').hide();
 			// Launch Bay
 				launch_bay_count = parseInt($('#launch-bay').val());
 				launch_bay_tonnage = launch_bay_count * 10;
 				launch_bay_cost = launch_bay_count * 25000;
-				cargo_bay_count > 0 ? $('#launch-bay-output').show():$('#launch-bay-output').hide();
+				cargo_bay_count > 0 ? $('#launch-bay-output').show() : $('#launch-bay-output').hide();
 			// Low Berths
 				low_berths_count = parseInt($('#low-berths').val());
 				low_berths_tonnage = low_berths_count;
 				low_berths_cost = low_berths_count * 6500;
-				cargo_bay_count > 0 ? $('#low-berth-output').show():$('#low-berth-output').hide();
+				cargo_bay_count > 0 ? $('#low-berth-output').show() : $('#low-berth-output').hide();
 			// Escape Pods
 				escape_pod_count =  parseInt($('#escape-pods').val());
 				escape_pod_tonnage = escape_pod_count * 2;
 				escape_pod_cost = escape_pod_count * 5000;
-				cargo_bay_count > 0 ? $('#escape-pods-output').show():$('#escape-pods-output').hide();
+				cargo_bay_count > 0 ? $('#escape-pods-output').show() : $('#escape-pods-output').hide();
 			// Conservatory
 				conservatory_count =  parseInt($('#conservatories').val());
 				conservatory_tonnage = conservatory_count * 9;
 				conservatory_cost = conservatory_count * 20000;
-				cargo_bay_count > 0 ? $('#conservatory-output').show():$('#conservatory-output').hide();
+				cargo_bay_count > 0 ? $('#conservatory-output').show() : $('#conservatory-output').hide();
 
 			crew_space = (state_room_count * 2) + (barracks_count * 6);
 			room_total_cost = cargo_bay_cost + ships_locker_cost + common_area_cost + state_room_cost + drone_bay_cost + barracks_cost + medical_bay_cost + science_bay_cost + technical_bay_cost + weapons_bay_cost + launch_bay_cost + low_berths_cost + escape_pod_cost + garden_cost + conservatory_cost;
@@ -1012,6 +1012,7 @@ $(document).ready(function(){
 				bridge_seats = 12;
 				bridge_description = '1 Commander<br>2 Pilots<br>2 Comms<br>2 Sensors<br>2 Defenses<br>1 Navigation<br>1 Advisor<br>1 Technician';
 			}
+			crew_size < bridge_seats ? $('#bridge-warning').show() : $('#bridge-warning').hide();
 
 		// Computer
 			computer_type = $('#computer-type').val();
@@ -1842,7 +1843,7 @@ $(document).ready(function(){
 
 
 		// Warning Updates
-			if ($('#processor-warning').css('display') != 'none') {
+			if (($('#processor-warning').css('display') != 'none') || ($('#bridge-warning').css('display') != 'none')) {
 				$('#bridge-alert').show();
 			} else {
 				$('#bridge-alert').hide();
