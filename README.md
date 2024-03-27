@@ -12,7 +12,7 @@ Copyright: None
 2. Extract contents
 3. Open HTML file in a browser of your choice
 
-Editing files on your own will have deletrious consequences
+Editing files on your own may have deletrious consequences
 
 Please remember, the save/load system does not function; refreshing the page, going "Back", or closing the browser will reset all choices.
 
