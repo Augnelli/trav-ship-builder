@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Ship Builder | 0.9.19</title>
+		<link rel="icon" type="image/x-icon" href="images/shuttle.png">
+
+		<!-- jQuery 3.6.0 -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script src="jquery/jquery-3-7-1.js"></script>
+		
+		<!-- Local CSS and Scripts -->
+		<link rel="stylesheet" type="text/css" href="ship-builder.css">
+		<script type="text/javascript" src="ship-builder.js"></script>
+
+	</head>
+	<body>
+		<div class="core">
+			<div id="sidebar-controls" class="right-sidebar">
+				<p id="sidebar-status">|</p>
+			</div>
+			<header>
+				<h1>Ship Builder</h1>
+			</header>
+			<div class="content">
+					<form id="ship-builder-form">
+						<div class="tabs" id="input-tabs">
+							<ul>
+								<li class="tab-item active" id="basic-info">Basics</li>
+								<li class="tab-item" id="engineering">Engineering</li>
+								<li class="tab-item" id="interiors">Crew</li>
+								<li class="tab-item" id="bridge">Bridge</li>
+								<li class="tab-item" id="defenses">Defense</li>
+							</ul>
+						</div>
+						<!-- ----- Section 1 Start ----- -->
+						<!-- <h4><span class="section-status">-</span> Basic Information <span class="section-status">-</span></h4> -->
+						<div class="section section-group active" id="basic-info-group">
+							<div class="item basic">
+								<!-- Tonnage -->
+								<label>Tonnage</label>
+								<input type="number" name="tonnage" id="tonnage" min="100" max="2000" step="100" value="100">
+								<p class="advice">The displacement tonnage of your ship. Each ton roughly represents a 5x5x5 foot square.</p>
+							</div>
+							<div class="item basic">
+								<!-- Layout -->
+								<label>Layout</label>
+								<select id="layout-type">
+									<option value="Standard" selected>Standard</option>
+									<option value="Streamlined">Streamlined</option>
+									<option value="Distributed">Distributed</option>
+								</select>
+								<p class="advice">The overall shape of the ship. More aerodynamic shapes vs more sturdy shapes.</p>
+							</div>
+							<div class="item basic">
+								<!-- Manufacturer -->
+								<label>Manufacturer</label>
+								<select id="manufacturer-type">
+									<option value="Infinite Horizons" selected>Infinite Horizons</option>
+									<option value="Atlas">Atlas Industries</option>
+									<option value="Conglomerate Inc">Conglomerate Inc.</option>
+									<option value="Imperial Designs">Imperial Designs</option>
+									<option value="Raider">Raider Corp</option>
+								</select>
+								<div class="variable-section" id="manufacturer-details">
+									<p class="advice" id="infinite-horizons-details">More expensive but better power and software systems.</p>
+									<p class="advice hidden" id="atlas-industries-details">More expensive but faster, and more efficient engines.</p>
+									<p class="advice hidden" id="conglomerate-inc-details">Cheaper construction with lower speed and toughness.</p>
+									<p class="advice hidden" id="imperial-designs-details">High costs, faster and tougher, with improved armor.</p>
+									<p class="advice hidden" id="raider-corp-details">No cost changes and improved weapons and defenses.</p>
+								</div>
+							</div>
+							<div class="item basic">
+								<!-- Tech Level -->
+								<label>Tech Level</label>
+								<input type="number" name="tech-level" id="tech-level" value="9" step="1" max="16" min="9">
+								<p class="advice">The average tech level of the ship. Starts at rank 9 and each additional rank GREATLY increases costs and benefits.</p>
+							</div>
+						</div>
+						<!-- ----- Section 1 End ----- -->
+						<!-- ----- Section 2 Start ----- -->
+						<!-- <h4><span class="section-status">-</span> Engineering Section <span class="section-status">-</span></h4> -->
+						<div class="section section-group" id="engineering-group">
+							<div class="item basic">
+								<!-- Fuel -->
+								<label>Fuel Allocation</label>
+								<input type="number" name="fuel-capacity" id="fuel-tonnage" value="30" step="1" min="0">
+								<p class="advice">Tonnage allocated to fuel storage, 30% of total tonnage is recommended.</p>
+							</div>
+							<div class="item basic">
+								<p>Optional Fuel Equipment</p>
+								<!-- Fuel Collector -->
+								<label class="associated-label" for="fuel-collector"><input type="checkbox" id="fuel-collector" value="Fuel Collector" name="fuel-collector">Sweep Collector</label>
+								<p class="advice">Allows for automatic collection of raw hydrogen fuel from natural resources.</p>
+								<!-- Fuel Partitions -->
+								<label class="associated-label" for="fuel-partitions"><input type="checkbox" id="fuel-partitions" value="Fuel Partitions" name="fuel-partitions">Storage Partitions</label>
+								<p class="advice">Prevents catastrophic leaks in case of a rupture.</p>
+								<!-- Fuel Refinery -->
+								<label class="associated-label" for="fuel-refinery"><input type="checkbox" id="fuel-refinery" value="Fuel Refinery" name="fuel-refinery">Automatic Refinery</label>
+								<p class="advice">Converts tainted raw fuel to clean fuel.</p>
+							</div>
+							<div class="item basic">
+								<!-- Power Plant Size -->
+								<label>Power Plant Size</label>
+								<select id="power-size">
+									<option value="1" selected>A</option>
+									<option value="2">B</option>
+									<option value="3">C</option>
+									<option value="4">D</option>
+									<option value="5">E</option>
+									<option value="6">F</option>
+									<option value="7">G</option>
+									<option value="8">H</option>
+									<option value="9">I</option>
+									<option value="10">J</option>
+								</select>
+								<p class="advice">The size of your power plant, larger systems output more power.</p>
+							</div>
+							<div class="item basic">
+								<!-- Power Plant Type -->
+								<label>Power Plant Type</label>
+								<select id="power-type">
+									<option value="Fusion Generator" selected>Fusion Generator</option>
+									<option value="Antimatter Collider">Antimatter Collider</option>
+									<option value="Quark Fusion Generator">Quark Fusion Generator</option>
+									<option value="Warp Field Collector">Warp Field Generator</option>
+								</select>
+								<p class="advice">How the power plant system generates power.</p>
+							</div>
+							<div class="item basic">
+								<!-- Power Plant Count -->
+								<label>Power Plant Count</label>
+								<input type="number" name="power-count" id="power-count" min="1" value="1">
+								<p class="advice">Redundanct or additional power plants improves survivability but greatly increase fuel usage.</p>
+							</div>
+							<div class="item basic">
+								<!-- Capacitance Count -->
+								<label>Capacitance Module Count</label>
+								<input type="number" name="capacitance-count" id="capacitance-module-count" min="0" value="0" class="start-zero">
+								<p class="advice">Stores power, giving you greater allowable maximums.</p>
+							</div>
+							<div class="item basic">
+								<!-- M-Drive -->
+								<label>Maneuver Drives (M-Drives)</label>
+								<select id="mDrive-type">
+									<option value="Directed Fusion Drive">Directed Fusion Drive</option>
+									<option value="Pulsed Fusion Drive">Pulsed Fusion Drive</option>
+									<option value="Ion Accelerator">Ion Accelerator</option>
+									<option value="Slipstream Rocket">Slipstream Rocket</option>
+									<option value="Photon Rocket">Photon Rocket</option>
+								</select>
+								<div class="variable-section" id="m-drive-details">
+									<p class="advice" id="directed-fusion-details">Balanced overall stats.</p>
+									<p class="advice hidden" id="pulsed-fusion-details">Highest tonnage but great acceleration and agility.</p>
+									<p class="advice hidden" id="ion-accelerator-details">Most expensive, but best overall performance.</p>
+									<p class="advice hidden" id="slipstream-rocket-details">Lowest tonnage and fuel use, but highest heat generation and power useage.</p>
+									<p class="advice hidden" id="photon-rocket-details">Low heat generation and cost, but lowest thrust.</p>
+								</div>
+							</div>
+							<div class="item basic">
+								<!-- M-Drive Count -->
+								<label>(M-Drives) Count</label>
+								<input type="number" name="m-drive-count" id="mDrive-count" value="1" step="1" min="0">
+							</div>
+							<div class="item basic">
+								<!-- J-Drive -->
+								<label>Jump Drives (J-Drives)</label>
+								<select id="max-jump-distance">
+									<option value="0">0</option>
+									<option value="1" selected="selected">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+								<p class="advice">Recommend having Jump 1 or more.<p>
+							</div>
+							<div class="item basic">
+								<!-- Heat Sink Count -->
+								<label>Heat Sink Count</label>
+								<input type="number" name="heat-sink-count" id="heat-sink-count" value="2" step="1" min="0">
+							</div>
+						</div>
+						<!-- ----- Section 2 End ----- -->
+						<!-- ----- Section 3 Start ----- -->
+						<!-- <h4><span class="section-status">-</span> Interior Information <span class="section-status">-</span></h4> -->
+						<div class="section section-group" id="interiors-group">
+							<div class="item basic">
+								<label>Interior Design</label>
+								<select id="interior-type">
+									<option value="Clean" selected="selected">Clean</option>
+									<option value="Exposed">Exposed</option>
+									<option value="Military">Military</option>
+									<option value="Minimalism">Minimalism</option>
+									<option value="Opulent">Opulent</option>
+								</select>
+							</div>
+							<div class="item basic">
+								<label>Air Locks</label>
+								<input type="number" name="air-locks" id="air-lock-count" value="1" min="1" step="1">
+							</div>
+							<div class="item basic">
+								<label>Crew Size</label>
+								<input type="number" name="crew-size" id="crew-size" value="1" min="1" step="1">
+							</div>
+							<div class="item basic">
+								<label>Additional Life Support</label>
+								<input type="number" name="additional-life-support" id="additional-life-support" value="0" min="0" step="1">
+								<p class="advice">Measured in Weeks.</p>
+							</div>
+							<div class="item full-width-item multi-item-list">
+								<div class="sub-item">
+									<label>Cargo Bay Size</label>
+									<input type="number" name="cargo-bay-allocation" id="cargo-bay" min="0" value="10" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Ships Locker</label>
+									<input type="number" name="ships-locker-allocation" id="ships-locker" min="0" value="1" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Common Area</label>
+									<input type="number" name="common-area-allocation" id="common-area" min="0" value="0" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>State Room</label>
+									<input type="number" name="state-room-allocation" id="state-room" min="0" value="1" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Barracks</label>
+									<input type="number" name="barracks-allocation" id="barracks" min="0" value="0" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Low Berths</label>
+									<input type="number" name="low-berth-allocation" id="low-berths" min="0" value="0" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Medical Bay</label>
+									<input type="number" name="medical-bay-allocation" id="medical-bay" min="0" value="0" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Science Bay</label>
+									<input type="number" name="science-bay-allocation" id="science-bay" min="0" value="0" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Technical Bay</label>
+									<input type="number" name="technical-bay-allocation" id="technical-bay" min="0" value="0" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Weapons Bay</label>
+									<input type="number" name="weapons-bay-allocation" id="weapons-bay" min="0" value="0" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Launch Bay</label>
+									<input type="number" name="launch-bay-allocation" id="launch-bay" min="0" value="0" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Drone Bay</label>
+									<input type="number" name="drone-bay-allocation" id="drone-bay" min="0" value="0" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Escape Pod</label>
+									<input type="number" name="escape-pod-allocation" id="escape-pods" min="0" value="0" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Conservatory</label>
+									<input type="number" name="conservatory-allocation" id="conservatories" min="0" value="0" class="start-zero">
+								</div>
+							</div>
+						</div>
+						<!-- ----- Section 3 End ----- -->
+						<!-- ----- Section 4 Start ----- -->
+						<!-- <h4><span class="section-status">-</span> Bridge <span class="section-status">-</span></h4> -->
+						<div class="section section-group" id="bridge-group">
+							<div class="item basic">
+								<label>Bridge Type</label>
+								<select id="bridge-type">
+									<option value="Single Pilot" selected="selected">Single Pilot</option>
+									<option value="Supported Pilot">Supported Pilot</option>
+									<option value="Standard Team">Standard Team</option>
+									<option value="Command">Command</option>
+									<option value="Extended Command">Extended Command</option>
+								</select>
+							</div>
+							<div class="item basic">
+								<label>Comms Type</label>
+								<select id="comms-type">
+									<option value="Civilian" selected="selected">Civilian</option>
+									<option value="Military">Military</option>
+									<option value="Advanced">Advanced</option>
+									<option value="Expert">Expert</option>
+								</select>
+							</div>
+							<div class="item basic">
+								<label>Computer Type</label>
+								<select id="computer-type">
+									<option value="Civilian" selected="selected">Civilian</option>
+									<option value="Military">Military</option>
+									<option value="Advanced">Advanced</option>
+									<option value="Expert">Expert</option>
+								</select>
+							</div>
+							<div class="item basic">
+								<label>Additional Processors</label>
+								<input type="number" name="processors" id="additional-processors" min="0" step="1" value="0" class="start-zero">
+							</div>
+
+							<div class="item basic">
+								<p>Optional Software</p>
+								<!-- Security Tracker Software -->
+								<label class="associated-label" for="security-tracking-software"><input type="checkbox" id="security-tracking-software" value="Security Tracker" name="security-tracking-software">Security Tracker</label>
+								<!-- Autopilot Software -->
+								<label class="associated-label" for="autopilot-software"><input type="checkbox" id="autopilot-software" value="Autopilot Software" name="autopilot-software">Autopilot</label>
+								<!-- Combat Automation Software -->
+								<label class="associated-label" for="combat-automation-software"><input type="checkbox" id="combat-automation-software" value="Combat Automation Software" name="combat-automation-software">Combat Automation</label>
+								<!-- Jump Control Software -->
+								<label class="associated-label" for="jump-control-software"><input type="checkbox" id="jump-control-software" value="Jump Control Software" name="jump-control-software">Jump Control</label>
+								<!-- Intrusion Software -->
+								<label class="associated-label" for="intrusion-software"><input type="checkbox" id="intrusion-software" value="Intrusion Software" name="intrusion-software">Intrusion</label>
+								<!-- Network Software -->
+								<label class="associated-label" for="network-software"><input type="checkbox" id="network-software" value="Network Software" name="network-software">Network Software</label>
+								<!-- Expert Software -->
+								<label class="associated-label" for="expert-software"><input type="checkbox" id="expert-software" value="Expert Software" name="expert-software">Expert Software</label>
+								<!-- Virtual Intelligence Software -->
+								<label class="associated-label" for="virtual-intelligence-software"><input type="checkbox" id="virtual-intelligence-software" value="Virtual Intelligence Software" name="virtual-intelligence-software">Virtual Intelligence</label>
+								<!-- Diagnostics Software -->
+								<label class="associated-label" for="diagnostics-software"><input type="checkbox" id="diagnostics-software" value="Diagnostics Software" name="diagnostics-software">Diagnostics Software</label>
+							</div>
+
+
+							<div class="item basic" id="sensors">
+								<p>Optional Sensors</p>
+								<!-- Multispectrum -->
+								<label class="associated-label" for="multispectrum"><input type="checkbox" id="multispectrum" value="Multispectrum" name="multispectrum" checked="checked">Multispectrum</label>
+								<!-- Radar -->
+								<label class="associated-label" for="radar"><input type="checkbox" id="radar" value="Radar" name="radar" checked="checked">Radar</label>
+								<!-- Lidar -->
+								<label class="associated-label" for="lidar"><input type="checkbox" id="lidar" value="Lidar" name="lidar">LIDAR</label>
+								<!-- Densitrometer -->
+								<label class="associated-label" for="densitrometer"><input type="checkbox" id="densitrometer" value="Densitrometer" name="densitrometer">Densitrometer</label>
+								<!-- Bioscanner -->
+								<label class="associated-label" for="bioscanner"><input type="checkbox" id="bioscanner" value="Bioscanner" name="bioscanner">Bioscanner</label>
+								<!-- Jammer -->
+								<label class="associated-label" for="jammer"><input type="checkbox" id="jammer" value="Jammer" name="jammer">Jammer</label>
+							</div>
+						</div>
+						<!-- ----- Section 4 End ----- -->
+						<!-- ----- Section 5 Start ----- -->
+						<!-- <h4><span class="section-status">-</span> Defenses <span class="section-status">-</span></h4> -->
+						<div class="section section-group" id="defenses-group">
+							<div class="item basic">
+								<label>Armor</label>
+								<select id="armor-type">
+									<option value="None" selected="selected">None</option>
+									<option value="Titanium">Titanium</option>
+									<option value="Crystaliron">Crystaliron</option>
+									<option value="Carbide">Carbide</option>
+									<option value="Ablative">Ablative</option>
+									<option value="Bonded Superdense">Bonded Superdense</option>
+								</select>
+								
+								<p class="advice">The base layer of armor.</p>
+							</div>
+							<div class="item basic">
+								<label>Coating</label>
+								<select id="coating-type">
+									<option value="None" selected="selected">None</option>
+									<option value="Reflec">Reflec</option>
+									<option	value="Reactive Defense">Reactive Defense</option>
+									<option value="Self Sealing">Self Sealing</option>
+									<option value="Hazard Resistant">Hazard Resistant</option>
+									<option value="Sensor Absorbing">Sensor Absorbing</option>
+									<option value="Radiative Cooling">Radiative Cooling</option>
+								</select>
+								<p class="advice">An outer coating painted on the ship.</p>
+							</div>
+							<div class="item full-width-item multi-item-list">
+								<div class="sub-item">
+									<label>Kinetic Armor</label>
+									<input type="number" name="reinforce-kinetic-armor" id="reinforce-kinetic-dr" min="0" value="0" max="4" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Energy Armor</label>
+									<input type="number" name="reinforce-energy-armor" id="reinforce-energy-dr" min="0" value="0" max="4" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Radiation Armor</label>
+									<input type="number" name="reinforce-rad-armor" id="reinforce-rad-dr" min="0" value="0" max="4" class="start-zero">
+								</div>
+								<div class="sub-item">
+									<label>Explosive Armor</label>
+									<input type="number" name="reinforce-explosive-armor" id="reinforce-explosive-dr" min="0" value="0" max="4" class="start-zero">
+								</div>
+								<p class="advice">Option to add more layers of armor plating. Up to 4 additional layers of each type can be added.</p>
+							</div>
+							<div class="item full-width-item category-items">
+								<div class="category-item">
+									<div class="category-list">
+										<label>Autocannon 20mm (AC2)</label>
+										<input type="number" name="Autocannon 2" id="autocannon-2" min="0" value="0" class="start-zero">
+										<label>Autocannon 50mm (AC5)</label>
+										<input type="number" name="Autocannon 5" id="autocannon-5" min="0" value="0" class="start-zero">
+										<label>Autocannon 100mm (AC10)</label>
+										<input type="number" name="Autocannon 10" id="autocannon-10" min="0" value="0" class="start-zero">
+										<label>Autocannon 200mm (AC20)</label>
+										<input type="number" name="Autocannon 20" id="autocannon-20" min="0" value="0" class="start-zero">
+									</div>
+									<div class="category-description">
+										<p>Chemical propellent accelerates an explosive projectile to high speed, causing significant kinetic and explosive damage to the target. Effective at short to medium ranges.</p>
+									</div>
+								</div>
+								<div class="category-item">
+									<div class="category-list">
+										<label>Railgun 10mm (RG1)</label>
+										<input type="number" name="Railgun 1" id="railgun-1" min="0" value="0" class="start-zero">
+										<label>Railgun 30mm (RG3)</label>
+										<input type="number" name="Railgun 3" id="railgun-3" min="0" value="0" class="start-zero">
+										<label>Railgun 50mm (RG5)</label>
+										<input type="number" name="Railgun 5" id="railgun-5" min="0" value="0" class="start-zero">
+										<label>Railgun 80mm (RG8)</label>
+										<input type="number" name="Railgun 80" id="railgun-8" min="0" value="0" class="start-zero">
+									</div>
+									<div class="category-description">
+										<p>By accelerating a smaller projectile to higher speeds, a railgun can cause tremendous damage to distant targets without the energy requirements of an energy weapon.</p>
+									</div>
+								</div>
+								<div class="category-item">
+									<div class="category-list">
+										<label>Ortillery 40mm (OR4)</label>
+										<input type="number" name="Ortillery 4" id="ortillery-4" min="0" value="0" class="start-zero">
+										<label>Ortillery 80mm (OR8)</label>
+										<input type="number" name="Ortillery 8" id="ortillery-8" min="0" value="0" class="start-zero">
+										<label>Ortillery 160mm (OR16)</label>
+										<input type="number" name="Ortillery 16" id="ortillery-16" min="0" value="0" class="start-zero">
+										<label>Ortillery 320mm (OR32)</label>
+										<input type="number" name="Ortillery 32" id="ortillery-32" min="0" value="0" class="start-zero">
+									</div>
+									<div class="category-description">
+										<p>Similar to an autocannon, but substantially larger in caliber. This weapon is designed to target slower or stationary terrestrial objects from orbit.</p>
+									</div>
+								</div>
+								<div class="category-item">
+									<div class="category-list">
+										<label>Short Range Missile 2 (SRM2)</label>
+										<input type="number" name="Short Missile 2" id="short-range-missile-2" min="0" value="0" class="start-zero">
+										<label>Short Range Missile 4 (SRM4)</label>
+										<input type="number" name="Short Missile 4" id="short-range-missile-4" min="0" value="0" class="start-zero">
+										<label>Short Range Missile 6 (SRM6)</label>
+										<input type="number" name="Short Missile 6" id="short-range-missile-6" min="0" value="0" class="start-zero">
+										<label>Short Range Missile 8 (SRM8)</label>
+										<input type="number" name="Short Missile 8" id="short-range-missile-8" min="0" value="0" class="start-zero">
+									</div>
+									<div class="category-description">
+										<p>Fires a grouping of powerful missiles that burn out after a short distance. They pack a powerful warhead but lack sophisticated tracking systems.</p>
+									</div>
+								</div>
+								<div class="category-item">
+									<div class="category-list">
+										<label>Long Range Missile 5 (LRM5)</label>
+										<input type="number" name="Long Missile 5" id="long-range-missile-5" min="0" value="0" class="start-zero">
+										<label>Long Range Missile 10 (LRM10)</label>
+										<input type="number" name="Long Missile 10" id="long-range-missile-10" min="0" value="0" class="start-zero">
+										<label>Long Range Missile 15 (LRM15)</label>
+										<input type="number" name="Long Missile 15" id="long-range-missile-15" min="0" value="0" class="start-zero">
+										<label>Long Range Missile 20 (LRM20)</label>
+										<input type="number" name="Long Missile 20" id="long-range-missile-20" min="0" value="0" class="start-zero">
+									</div>
+									<div class="category-description">
+										<p>Fires a swarm of small guided missiles that accelerate toward their distant target. Fired in groups to overcome any point defense systems the enemy ship may have.</p>
+									</div>
+								</div>
+								<div class="category-item">
+									<div class="category-list">
+										<label>Torpedo Tube (TT)</label>
+										<input type="number" name="Torpdeo Tube" id="torpedo-tube" min="0" value="0" class="start-zero">
+										<label>Torpedo Tube Array (TTA)</label>
+										<input type="number" name="Torpedo Tube Array" id="torpedo-tube-array" min="0" value="0" class="start-zero">
+									</div>
+									<div class="category-description">
+										<p>A single nuclear missile that can disable a ship with a single hit. This weapon is highly vulnerable to point defense systems as it is large and slow.</p>
+									</div>
+								</div>
+								<div class="category-item">
+									<div class="category-list">
+										<label>Particle Beam (PB)</label>
+										<input type="number" name="Particle Beam" id="particle-beam" min="0" value="0" class="start-zero">
+										<label>Particle Beam Array (PBA)</label>
+										<input type="number" name="Particle Beam Array" id="particle-beam-array" min="0" value="0" class="start-zero">
+									</div>
+									<div class="category-description">
+										<p>Accelerates a stream of charged particles to near light speed. This can cause substantial damage to a ship, but it requires a huge energy resevoir to fire repeatedly.</p>
+									</div>
+								</div>
+								<div class="category-item">
+									<div class="category-list">
+										<label>Small Pulse Laser (SPL)</label>
+										<input type="number" name="Small Pulse Laser" id="small-pulse-laser" min="0" value="0" class="start-zero">
+										<label>Medium Pulse Laser (MPL)</label>
+										<input type="number" name="Medium Pulse Laser" id="medium-pulse-laser" min="0" value="0" class="start-zero">
+										<label>Large Pulse Laser (LPL)</label>
+										<input type="number" name="Large Pulse Laser" id="large-pulse-laser" min="0" value="0" class="start-zero">
+									</div>
+									<div class="category-description">
+										<p>Using a shorter firing period, more damage is done in a shorter period. Pulse lasers make minute and precise adjustments to increase damage potential.</p>
+									</div>
+								</div>
+								<div class="category-item">
+									<div class="category-list">
+										<label>Small Ion Laser (SIL)</label>
+										<input type="number" name="Small Ion Laser" id="small-ion-laser" min="0" value="0" class="start-zero">
+										<label>Medium Ion Laser (MIL)</label>
+										<input type="number" name="Medium Ion Laser" id="medium-ion-laser" min="0" value="0" class="start-zero">
+										<label>Large Ion Laser (LIL)</label>
+										<input type="number" name="Large Ion Laser" id="large-ion-laser" min="0" value="0" class="start-zero">
+									</div>
+									<div class="category-description">
+										<p>An Ion laser disrupts the nuclear bonds of the atoms in the target, creating a field of deadly radiation that can harm organics even if the laser doesn't penetrate the armor.</p>
+									</div>
+								</div>
+								<div class="category-item">
+									<div class="category-list">
+										<label>Small EM Laser (SEL)</label>
+										<input type="number" name="Small EM Laser" id="small-em-laser" min="0" value="0" class="start-zero">
+										<label>Medium EM Laser (MEL)</label>
+										<input type="number" name="Medium EM Laser" id="medium-em-laser" min="0" value="0" class="start-zero">
+										<label>Large EM Laser (LEL)</label>
+										<input type="number" name="Large Pulse LAser" id="large-em-laser" min="0" value="0" class="start-zero">
+									</div>
+									<div class="category-description">
+										<p>An EM laser disrupts the electrical fields near the target point, creating an electromagnetic distrubance that damages computers, sensors, and other non-organic systems.</p>
+									</div>
+								</div>
+								<div class="category-item">
+									<div class="category-list">
+										<label>Sand Caster (SC)</label>
+										<input type="number" name="Sandcaster" id="sandcaster" min="0" value="0" class="start-zero">
+										<label>Rapid Sand Caster (SCA)</label>
+										<input type="number" name="Rapid Sandcaster" id="rapid-sandcaster" min="0" value="0" class="start-zero">
+									</div>
+									<div class="category-description">
+										<p>A defensive weapon that disrupts beam weapons, such as particle beams and lasers, by creating a field of reflective and negtively charged particulate.</p>
+									</div>
+								</div>
+								<div class="category-item">
+									<div class="category-list">
+										<label>Small Point Defense Laser (SPDL)</label>
+										<input type="number" name="Small Point Defense Laser" id="small-point-defense-laser" min="0" value="0" class="start-zero">
+										<label>Medium Point Defense Laser (MPDL)</label>
+										<input type="number" name="Medium Point Defense Laser" id="medium-point-defense-laser" min="0" value="0" class="start-zero">
+										<label>Large Point Defense Laser (LPDL)</label>
+										<input type="number" name="Large Point Defense Laser" id="large-point-defense-laser" min="0" value="0" class="start-zero">
+									</div>
+									<div class="category-description">
+										<p>Incorporates a powerful, short ranged target tracker system that lets this weapon automatically detect and destroy incoming missiles and small obstacles.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- ----- Section 5 End ----- -->
+				</form>
+				<div class="output">
+					<div class="output-section">
+						<h4>Output for <span id="designation-output">100 dTon TL 9 Standard Infinite Horizons Civilian Ship</span></h4>
+						<p>Cost: <span id="cost-output">1,313,000</span></p>
+						<p>Upkeep: <span id="upkeep-output">263</span></p>
+						<p>Mortgage: <span id="monthly-output">3647</span></p>
+						<p>Tonnage: <span id="tonnage-used-output">61</span>/<span id="tonnage-output">100</span> <span id="tonnage-warning" class="warning">Insufficient tonnage</span></p>
+					</div>
+					<div class="tabs" id="output-tabs">
+						<ul>
+							<li class="tab-item active" id="basic-output">Basics<span class="alert-icon" id="basics-alert">!</span></li>
+							<li class="tab-item" id="engineering-output">Engineering<span class="alert-icon" id="engineering-alert">!</span></li>
+							<li class="tab-item" id="crew-output">Crew<span class="alert-icon" id="crew-alert">!</span></li>
+							<li class="tab-item" id="bridge-output">Bridge<span class="alert-icon" id="bridge-alert">!</span></li>
+							<li class="tab-item" id="defense-output">Defense<span class="alert-icon" id="defense-alert">!</span></li>
+						</ul>
+					</div>
+					<div class="output-section output-details active" id="basic-output-group">
+						<div class="specification">
+							<p><strong>Design</strong></p>
+							<div class="shape standard-shape"></div>
+							<p class="shape-description active" id="standard-shape-description">The general shape of the your ship is represented above. Standard ships are well balanced; they can operate in atmosphere to a degree (-2 DM) and are of average durability (+0% Hull).</p>
+							<p class="shape-description" id="streamlined-shape-description">The general shape of the your ship is represented above. Streamlined ships are agile and well suited to operating in atmosphere (+0 DM), but they are fragile (-20% Hull).</p>
+							<p class="shape-description" id="distributed-shape-description">The general shape of the your ship is represented above. Distributed ships are very sturdy (+20% Hull) both internally and externally, but suffer in atmosphere (-6 DM).</p>
+						</div>
+						<div class="specification">
+							<p><strong>Manufacturer</strong></p>
+							<div class="subset manufacturer-subset active" id="infinite-subset">
+								<img src="images/infinite-horizons.png">
+								<h5>Infininte Horizons</h5>
+								<p>Explore the unknown.</p>
+							</div>
+							<div class="subset manufacturer-subset" id="atlas-subset">
+								<img src="images/atlas-industries.png">
+								<h5>Atlas Industries</h5>
+								<p>Raising civilization.</p>
+							</div>
+							<div class="subset manufacturer-subset" id="conglomerate-subset">
+								<img src="images/conglomerate-inc.png">
+								<h5>Conglomerate Inc.</h5>
+								<p>Synonymous with value!</p>
+							</div>
+							<div class="subset manufacturer-subset" id="raider-subset">
+								<img src="images/raider-corp.png">
+								<h5>Raider Corp.</h5>
+								<p>No quarter given.</p>
+							</div>
+							<div class="subset manufacturer-subset" id="imperial-subset">
+								<img src="images/imperial-designs.png">
+								<h5>Imperial Designs</h5>
+								<p>Perfection.</p>
+							</div>
+						</div>
+						<div class="specification">
+							<p><strong>Hull/Structure</strong></p>
+							<img src="images/pharmacy.png" class="icon-image">
+							<p>Hull (HP): <span id="hull-output">10</span></p>
+							<p>Structure (SP): <span id="structure-output">5</span></p>
+						</div>
+						<div class="specification">
+							<p><strong>Tonnage</strong></p>
+							<img src="images/weight.png" class="icon-image">
+							<p>Max: <span id="tonnage-focused-output">100</span> Tons</p>
+							<p>Used: <span id="tonnage-focused-used-output">61</span> Tons</p>
+						</div>
+						<div class="specification full-width-specification">
+							<p><strong>Data Management</strong></p>
+								<p class="button" id="save-data">Save</p>
+								<p class="button" id="load-data">Load</p>
+								<p class="warning" id="loading">No Data Found!</p>
+						</div>
+					</div>
+					<div class="output-section output-details" id="bridge-output-group">
+						<div class="specification">
+							<p><strong>Bridge Layout</strong></p>
+							<p>Seats: <span id="bridge-seats-output">1</span></p>
+							<p id="bridge-description-output" class="advice">1 Pilot</p>
+							<img src="images/steering.png" class="icon-image">
+						</div>
+						<div class="specification">
+							<p><strong>Sensors</strong></p>
+							<img src="images/radar.png" class="icon-image">
+							<p class="listed-item visible" id="multispectrum-output">Multispectrum Scope<br><span class="advice">Passively detects visible, infrared, and ultraviolet light.</span></p>
+							<p class="listed-item visible" id="radar-output">Radar<br><span class="advice">Active sensor that detects all nearby solid objects.</span></p>
+							<p class="listed-item hidden" id="lidar-output">LIDAR Scanner<br><span class="advice">Actively detects range and basic shape of locked target.</span></p>
+							<p class="listed-item hidden" id="densitrometer-output">Densitrometer<br><span class="advice">Actively creates 3d projection map of an object.</span></p>
+							<p class="listed-item hidden" id="bioscanner-output">Bioscanner<br><span class="advice">Passively detects electrical signals in brain activity.</span></p>
+							<p class="listed-item hidden" id="jammer-output">Sensor Jammer<br><span class="advice">Imposes penalties to detection and interrupts locks.</span></p>
+						</div>
+						<div class="specification">
+							<p><strong>Comms</strong></p>
+							<p>Type: <span id="comms-type-output">Civilian</span></p>
+							<p>Security: DC <span id="comms-security-output">7</span></p>
+							<p>Range: <span id="comms-range-output">25000</span> km</p>
+							<p class="lited-item hidden" id="comms-local-network-output">Networked Locally</p>
+							<img src="images/antenna.png" class="icon-image">
+						</div>
+						<div class="specification">
+							<p><strong>Computer</strong></p>
+							<img src="images/cpu.png" class="icon-image">
+							<p>Processors: <span id="total-processor-output">5</span></p>
+							<p>Required: <span id="used-processor-output">2</span></p>
+							<p id="processor-warning" class="warning">Insufficient processors.</p>
+							<p class="listed-item visible" id="database-software-output">Database Software
+								<br><span class="advice">Basic computer function, includes a wide array of detailed information.</span></p>
+							<p class="listed-item visible" id="interface-software-output">Interface Software
+								<br><span class="advice">Manages user profiles, basic security, and multiple inputs.</span></p>
+							<p class="listed-item hidden" id="security-software-output">Security Software
+								<br><span class="advice">Enhanced ship security, includes tracking and surveilance software.</span></p>
+							<p class="listed-item hidden" id="autopilot-software-output">Autopilot Software
+								<br><span class="advice">Handles basic ship piloting skills like landing and avoiding obstacles.</span></p>
+							<p class="listed-item hidden" id="combat-automation-software-output">Combat Automation Software
+								<br><span class="advice">Aligns and fires weapons automatically with reduced accuracy.</span></p>
+							<p class="listed-item hidden" id="intrusion-software-output">Intrusion Software
+								<br><span class="advice">Lets the user hack an oponents computer.</span></p>
+							<p class="listed-item hidden" id="jump-control-software-output">Jump Control Software
+								<br><span class="advice">Calculates and plots accurate jump vectors.</span></p>
+							<p class="listed-item hidden" id="network-software-output">Network Software
+								<br><span class="advice">Creates a wide range network for crewmates operating planetside.</span></p>
+							<p class="listed-item hidden" id="expert-software-output">Expert Program Software
+								<br><span class="advice">Runs a single skill package for every 2 processing power allocated.</span></p>
+							<p class="listed-item hidden" id="virtual-intelligience-software-output">Virtual Intelligence Software
+								<br><span class="advice">Talk to your ship! Provides intelligent responses and data collation.</span></p>
+							<p class="listed-item hidden" id="diagnostics-software-output">Diagnostics Software
+								<br><span class="advice">Grants superior information about ship operations and status.</span></p>
+						</div>
+					</div>
+					<div class="output-section output-details" id="engineering-output-group">
+						<div class="specification">
+							<p><strong>Fuel</strong></p>
+							<img src="images/hydrogen.png" class="icon-image">
+							<p>Total Fuel: <span id="fuel-tonnage-output">30</span></p>
+							<p>Fuel/Week Total: <span id="fuel-used-total-output">4</span></p>
+							<p class="listed-item hidden" id="fuel-collector-output">Collector</p>
+							<p class="listed-item hidden" id="fuel-partitions-output">Partitions</p>
+							<p class="listed-item hidden" id="fuel-refinery-output">Refinery</p>
+						</div>
+						<div class="specification">
+							<p><strong>Power</strong></p>
+							<img src="images/power.png" class="icon-image">
+							<p>Maximum Power: <span id="power-capacity-output">5</span></p>
+							<p>Power Regen: <span id="power-regen-output">2</span> per turn</p>
+							<p>Fuel: <span id="power-fuel-use-output">2</span> per week</p>
+						</div>
+						<div class="specification">
+							<p><strong>M-Drive</strong></p>
+							<img src="images/directions.png" class="icon-image">
+							<p>Speed: <span id="speed-output">3</span></p>
+							<p>Reactions: <span id="agility-output">2</span></p>
+							<p>Fuel: <span id="mDrive-fuel-use-output">2</span> per week</p>
+							<p id="m-drive-warning" class="warning">Ship can not maneuver!</p>
+						</div>
+						<div class="specification">
+							<p><strong>J-Drive</strong></p>
+							<img src="images/teleportation.png" class="icon-image">
+							<p>Max Jump Distances: <span id="jump-distances-output">1</span></p>
+							<p>Jump Fuel Cost: <span id="jump-fuel-output">10</span> per Jump</p>
+							<p>Jump Power Use: <span id="jump-power-output">5</span> per Jump</p>
+							<p id="j-drive-warning" class="warning">Ship can not jump!</p>
+						</div>
+						<div class="specification full-width-specification">
+							<p><strong>Heat Management</strong></p>
+							<img src="images/thermometer.png" class="icon-image">
+							<p>Heat Capacity: <span id="total-heat-generation">7</span>/<span id="heat-capacity-output">5</span></p>
+							<p id="heat-warning" class="warning">Insufficient heat management.</p>
+							<p>Power Plant: <span id="power-heat-output">1</span></p>
+							<p>M-Drive: <span id="m-drive-heat-output">2</span></p>
+							<p>J-Drive: <span id="jump-heat-output">4</span></p>
+						</div>
+						<div class="specification full-width-specification">
+							<p class="action-title"><strong>Engineering Actions</strong> <span class="action-status">+</span></p>
+							<div class="action-details">
+								<p>Divert Power: </p>
+								<p>Manage Heat: </p>
+								<p>Engage Jump: </p>
+							</div>
+							<p></p>
+						</div>
+					</div>
+					<div class="output-section output-details" id="crew-output-group">
+						<div class="specification">
+							<p><strong>Crew Notes</strong></p>
+							<img src="images/multiple-users-silhouette.png" class="icon-image">
+							<p>Crew Size: <span id="crew-size-output">1</span></p>
+							<p>Crew Capacity: <span id="crew-space-output">2</span></p>
+							<p id="crew-warning" class="warning">Insufficient crew space.</p>
+						</div>
+						<div class="specification">
+							<p><strong>Life Support</strong></p>
+							<p>Units: <span id="life-support-units-output">10</span></p>
+							<p>Weeks: <span id="life-support-output">10</span></p>
+							<p class="advice">Baseline is tonnage divided by 10.<br>1 person uses 1 unit per week.</p>
+							<p id="life-support-warning" class="warning">Insufficient Life Support</p>
+							<img src="images/atmosphere.png" class="icon-image">
+						</div>
+						<div class="specification full-width-specification" id="rooms-list">
+							<p><strong>Rooms</strong></p>
+							<img src="images/box.png" class="icon-image">
+							<div class="item-list">
+
+								<div class="item-card" id="cargo-bay-output">
+									<p><strong>Cargo Bay</strong></p>
+									<p>Allocation: <span id="cargo-bay-count-output">10</span> <span class="advice">1 ton each</span></p>
+									<p class="advice">Congruent storage space with a large non-airlocked door.</p>
+								</div>
+								<div class="item-card" id="ships-locker-output">
+									<p><strong>Ships Locker</strong></p>
+									<p>Allocation: <span id="ships-locker-count-output">1</span> <span class="advice">2 tons each</span></p>
+									<p class="advice">Small secure storage space for general equipment.</p>
+								</div>
+								<div class="item-card" id="common-area-output">
+									<p><strong>Common Area</strong></p>
+									<p>Allocation: <span id="common-area-count-output">0</span> <span class="advice">4 tons each</span></p>
+									<p class="advice">Area for rest, making and eating meals, entertainment, etc.</p>
+								</div>
+								<div class="item-card" id="state-room-output">
+									<p><strong>State Room</strong></p>
+									<p>Allocation: <span id="state-room-count-output">1</span> <span class="advice">4 tons each</span></p>
+									<p class="advice">Personal Room for 1 or 2 people. Includes restroom.</p>
+								</div>
+								<div class="item-card" id="barracks-ouput">
+									<p><strong>Barracks</strong></p>
+									<p>Allocation: <span id="barracks-count-output">0</span> <span class="advice">5 tons each</span></p>
+									<p class="advice">Space for 4 to 6 people, cramped but efficient.</p>
+								</div>
+								<div class="item-card" id="low-berths-output">
+									<p><strong>Low Berths</strong></p>
+									<p>Allocation: <span id="low-berth-count-output">0</span> <span class="advice">1 ton each</span></p>
+									<p class="advice">2 Cryosleep pods for enduring long journeys without aging.</p>
+								</div>
+								<div class="item-card" id="medical-bay-output">
+									<p><strong>Medical Bay</strong></p>
+									<p>Allocation: <span id="medical-bay-count-output">0</span> <span class="advice">6 tons each</span></p>
+									<p class="advice">Sterile room for curative treatments and surgery.</p>
+								</div>
+								<div class="item-card" id="science-bay-output">
+									<p><strong>Science Bay</strong></p>
+									<p>Allocation: <span id="science-bay-count-output">0</span> <span class="advice">6 tons each</span></p>
+									<p class="advice">Sterile laboratory for generalized scientific pursuits.</p>
+								</div>
+								<div class="item-card" id="technical-bay-output">
+									<p><strong>Technical Bay</strong></p>
+									<p>Allocation: <span id="technical-bay-count-output">0</span> <span class="advice">6 tons each</span></p>
+									<p class="advice">Workshop equipped with various mechanical tools.</p>
+								</div>
+								<div class="item-card" id="weapons-bay-output">
+									<p><strong>Weapons Bay</strong></p>
+									<p>Allocation: <span id="weapons-bay-count-output">0</span> <span class="advice">8 tons each</span></p>
+									<p class="advice">Static-free room for handling explosives and weapons.</p>
+								</div>
+								<div class="item-card" id="launch-bay-output">
+									<p><strong>Launch Bay</strong></p>
+									<p>Allocation: <span id="launch-bay-count-output">0</span> <span class="advice">10 tons each</span></p>
+									<p class="advice">Airlock with magnetic actuators to launch and land small ships.</p>
+								</div>
+								<div class="item-card" id="drone-bay-output">
+									<p><strong>Drone Bay</strong></p>
+									<p>Allocation: <span id="drone-bay-count-output">0</span> <span class="advice">5 tons each</span></p>
+									<p class="advice">Specialized Airlock with drone maintenance and repair tools.</p>
+								</div>
+								<div class="item-card" id="escape-pods-output">
+									<p><strong>Escape Pod</strong></p>
+									<p>Allocation: <span id="escape-pod-count-output">0</span> <span class="advice">2 tons each</span></p>
+									<p class="advice">Similar to launch bay, but equipped with one-way, 4 person vessels.</p>
+								</div>
+								<div class="item-card" id="conservatory-output">
+									<p><strong>Conservatory</strong></p>
+									<p>Allocation: <span id="conservatory-count-output">0</span> <span class="advice">9 tons each</span></p>
+									<p class="advice">Gardening and food production space.</p>
+								</div>
+						</div>
+						</div>
+					</div>
+					<div class="output-section output-details" id="defense-output-group">
+						<div class="specification">
+							<p><strong>Armor</strong></p>
+							<img src="images/shield.png" class="icon-image">
+							<p>Type: <span id="armor-type-output">None</span></p>
+							<p>Kinetic: <span id="kinetic-dr-output">0</span></p> 
+							<p>Energy: <span id="energy-dr-output">0</span></p> 
+							<p>Explosive: <span id="explosive-dr-output">0</span></p> 
+							<p>Radiation: <span id="rad-dr-output">0</span></p> 
+						</div>
+						<div class="specification">
+							<p><strong>Coatings</strong></p>
+							<img src="images/layers.png" class="icon-image">
+							<p>Type: <span id="coating-type-output">None</span></p>
+							<p>Kinetic: <span id="coating-kinetic-output">0</span></p> 
+							<p>Energy: <span id="coating-energy-output">0</span></p> 
+							<p>Explosive: <span id="coating-explosive-output">0</span></p> 
+							<p>Radiation: <span id="coating-rad-output">0</span></p> 
+							<p>Heat Modifier: <span id="coating-heat-output">0</span></p>
+							<p class="advice" id="coating-description-output">No coating applied.</p>
+						</div>
+						<div class="specification full-width-specification">
+							<p><strong>Weapons</strong></p>
+							<img src="images/shield-swords.png" class="icon-image">
+							<div class="item-list">
+								<div class="item-card" id="no-weapons">
+									<p>No Weapons Included</p>
+								</div>
+								<div class="item-card hidden" id="ac2-output">
+									<img src="images/bullet.png" class="small-image">
+									<p>Autocannon 2 <span class="advice">x<span id="autocannon-2-count-output">0</span></span></p>
+									<p class="advice">Light automatic slug thrower</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-2</span>
+										<span>-3</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>1d3</em></p>
+									<p>Type: <em>Kinetic</em></p>
+									<p>Ammo: <em>200/ton</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Auto 6</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="ac5-output">
+									<img src="images/bullet.png" class="small-image">
+									<p>Autocannon 5 <span class="advice">x<span id="autocannon-5-count-output">0</span></span></p>
+									<p class="advice">Medium automatic slug thrower</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-2</span>
+										<span>-3</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>1d6</em></p>
+									<p>Type: <em>Kinetic</em></p>
+									<p>Ammo: <em>100/ton</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Auto 4</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="ac10-output">
+									<img src="images/bullet.png" class="small-image">
+									<p>Autocannon 10 <span class="advice">x<span id="autocannon-10-count-output">0</span></span></p>
+									<p class="advice">Standard slug thrower</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-2</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>2d6</em></p>
+									<p>Type: <em>Kinetic</em></p>
+									<p>Ammo: <em>50/ton</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Semi 1</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="ac20-output">
+									<img src="images/bullet.png" class="small-image">
+									<p>Autocannon 20 <span class="advice">x<span id="autocannon-20-count-output">0</span></span></p>
+									<p class="advice">Heavy slug thrower</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-2</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>3d6</em></p>
+									<p>Type: <em>Kinetic</em></p>
+									<p>Ammo: <em>20/ton</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Single 1</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="rg1-output">
+									<img src="images/bullet.png" class="small-image">
+									<p>Railgun 1 <span class="advice">x<span id="railgun-1-count-output">0</span></span></p>
+									<p class="advice">Light mass accelerator</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-2</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>1d3+1</em></p>
+									<p>Type: <em>Kinetic</em></p>
+									<p>Ammo: <em>200/ton</em></p>
+									<p>Power: <em>1</em></p>
+									<p>Rate: <em>Auto 4</em></p>
+									<p>Effect: <em>AP 1</em></p>
+								</div>
+								<div class="item-card hidden" id="rg3-output">
+									<img src="images/bullet.png" class="small-image">
+									<p>Railgun 3 <span class="advice">x<span id="railgun-3-count-output">0</span></span></p>
+									<p class="advice">Medium mass accelerator</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-2</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>1d6+1</em></p>
+									<p>Type: <em>Kinetic</em></p>
+									<p>Ammo: <em>100/ton</em></p>
+									<p>Power: <em>2</em></p>
+									<p>Rate: <em>Semi 1</em></p>
+									<p>Effect: <em>AP 2</em></p>
+								</div>
+								<div class="item-card hidden" id="rg5-output">
+									<img src="images/bullet.png" class="small-image">
+									<p>Railgun 5 <span class="advice">x<span id="railgun-5-count-output">0</span></span></p>
+									<p class="advice">Standard mass accelerator</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-2</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>2d6+1</em></p>
+									<p>Type: <em>Kinetic</em></p>
+									<p>Ammo: <em>50/ton</em></p>
+									<p>Power: <em>3</em></p>
+									<p>Rate: <em>Single 1</em></p>
+									<p>Effect: <em>AP 3</em></p>
+								</div>
+								<div class="item-card hidden" id="rg8-output">
+									<img src="images/bullet.png" class="small-image">
+									<p>Railgun 8 <span class="advice">x<span id="railgun-8-count-output">0</span></span></p>
+									<p class="advice">Heavy mass accelerator</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-2</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>3d6+2</em></p>
+									<p>Type: <em>Kinetic</em></p>
+									<p>Ammo: <em>20/ton</em></p>
+									<p>Power: <em>4</em></p>
+									<p>Rate: <em>Single 1</em></p>
+									<p>Effect: <em>AP 4</em></p>
+								</div>
+								<div class="item-card hidden" id="or4-output">
+									<img src="images/bullet.png" class="small-image">
+									<p>Ortillery 4 <span class="advice">x<span id="ortillery-4-count-output">0</span></span></p>
+									<p class="advice">Light automatic ship-to-surface gun</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-4</span>
+										<span>-3</span>
+										<span>-2</span>
+										<span>-2</span>
+										<span>-3</span>
+										<span>-4</span>
+										<span>-5</span>
+									</p>
+									<p>Damage: <em>1d6</em></p>
+									<p>Type: <em>Kinetic</em></p>
+									<p>Ammo: <em>120/ton</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Auto 4</em></p>
+									<p>Effect: <em>+2 DM vs Terrestrial</em></p>
+								</div>
+								<div class="item-card hidden" id="or8-output">
+									<img src="images/bullet.png" class="small-image">
+									<p>Ortillery 8 <span class="advice">x<span id="ortillery-8-count-output">0</span></span></p>
+									<p class="advice">Standard ship-to-surface gun</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-4</span>
+										<span>-3</span>
+										<span>-2</span>
+										<span>-2</span>
+										<span>-3</span>
+										<span>-4</span>
+										<span>-5</span>
+									</p>
+									<p>Damage: <em>2d6</em></p>
+									<p>Type: <em>Kinetic</em></p>
+									<p>Ammo: <em>60/ton</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>+2 DM vs Terrestrial</em></p>
+								</div>
+								<div class="item-card hidden" id="or16-output">
+									<img src="images/bullet.png" class="small-image">
+									<p>Ortillery 16 <span class="advice">x<span id="ortillery-16-count-output">0</span></span></p>
+									<p class="advice">Heavy ship-to-surface gun</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-4</span>
+										<span>-3</span>
+										<span>-2</span>
+										<span>-2</span>
+										<span>-3</span>
+										<span>-4</span>
+										<span>-5</span>
+									</p>
+									<p>Damage: <em>3d6</em></p>
+									<p>Type: <em>Kinetic</em></p>
+									<p>Ammo: <em>30/ton</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Single 1</em></p>
+									<p>Effect: <em>+2 DM vs Terrestrial</em></p>
+								</div>
+								<div class="item-card hidden" id="or32-output">
+									<img src="images/bullet.png" class="small-image">
+									<p>Ortillery 32 <span class="advice">x<span id="ortillery-32-count-output">0</span></span></p>
+									<p class="advice">Gigantic ship-to-surface gun</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-4</span>
+										<span>-3</span>
+										<span>-2</span>
+										<span>-2</span>
+										<span>-3</span>
+										<span>-4</span>
+										<span>-5</span>
+									</p>
+									<p>Damage: <em>4d6</em></p>
+									<p>Type: <em>Kinetic</em></p>
+									<p>Ammo: <em>16/ton</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Single 2</em></p>
+									<p>Effect: <em>+2 DM vs Terrestrial</em></p>
+								</div>
+								<div class="item-card hidden" id="spl-output">
+									<img src="images/laser-pen.png" class="icon-image">
+									<p>Small Pulse Laser <span class="advice">x<span id="small-pulse-laser-count-output">0</span></span></p>
+									<p class="advice">Light rapid laser projector</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>1d6</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Heat: <em>1</em></p>
+									<p>Power: <em>3</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="mpl-output">
+									<img src="images/laser-pen.png" class="icon-image">
+									<p>Medium Pulse Laser <span class="advice">x<span id="medium-pulse-laser-count-output">0</span></span></p>
+									<p class="advice">Standard laser projector</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>2d6</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Heat: <em>2</em></p>
+									<p>Power: <em>5</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="lpl-output">
+									<img src="images/laser-pen.png" class="icon-image">
+									<p>Large Pulse Laser <span class="advice">x<span id="large-pulse-laser-count-output">0</span></span></p>
+									<p class="advice">Heavy laser projector</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>3d6</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Heat: <em>3</em></p>
+									<p>Power: <em>7</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="sil-output">
+									<img src="images/laser-pen.png" class="icon-image">
+									<p>Small Ion Laser <span class="advice">x<span id="small-ion-laser-count-output">0</span></span></p>
+									<p class="advice">Light laser ionization projector</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>1d6</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Heat: <em>1</em></p>
+									<p>Power: <em>3</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>Radiation Hit</em></p>
+								</div>
+								<div class="item-card hidden" id="mil-output">
+									<img src="images/laser-pen.png" class="icon-image">
+									<p>Medium Ion Laser <span class="advice">x<span id="medium-ion-laser-count-output">0</span></span></p>
+									<p class="advice">Standard laser ionization projector</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>2d6</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Heat: <em>2</em></p>
+									<p>Power: <em>5</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>Double Radiation Hit</em></p>
+								</div>
+								<div class="item-card hidden" id="lil-output">
+									<img src="images/laser-pen.png" class="icon-image">
+									<p>Large Ion Laser <span class="advice">x<span id="large-ion-laser-count-output">0</span></span></p>
+									<p class="advice">Heavy laser ionization projector</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>3d6</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Ammo: <em>None</em></p>
+									<p>Power: <em>4</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>Triple Radiation Hit</em></p>
+								</div>
+								<div class="item-card hidden" id="sel-output">
+									<img src="images/laser-pen.png" class="icon-image">
+									<p>Small EM Laser <span class="advice">x<span id="small-em-laser-count-output">0</span></span></p>
+									<p class="advice">Light laser gauss projector</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>1d6</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Heat: <em>3</em></p>
+									<p>Power: <em>7</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>Radiation Hit</em></p>
+								</div>
+								<div class="item-card hidden" id="mel-output">
+									<img src="images/laser-pen.png" class="icon-image">
+									<p>Medium EM Laser <span class="advice">x<span id="medium-em-laser-count-output">0</span></span></p>
+									<p class="advice">Standard laser gauss projector</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>2d6</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Heat: <em>1</em></p>
+									<p>Power: <em>3</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>Double Radiation Hit</em></p>
+								</div>
+								<div class="item-card hidden" id="lel-output">
+									<img src="images/laser-pen.png" class="icon-image">
+									<p>Large EM Laser <span class="advice">x<span id="large-em-laser-count-output">0</span></span></p>
+									<p class="advice">Heavy laser gauss projector</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-2</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>3d6</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Heat: <em>2</em></p>
+									<p>Power: <em>5</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>Triple Radiation Hit</em></p>
+								</div>
+								<div class="item-card hidden" id="pb-output">
+									<img src="images/laser-pen.png" class="icon-image">
+									<p>Particle Beam <span class="advice">x<span id="particle-beam-count-output">0</span></span></p>
+									<p class="advice">Accelerates particles to 0.9 C</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-4</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>3d6+3</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Heat: <em>4</em></p>
+									<p>Power: <em>8</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>Triple Radiation Hit</em></p>
+								</div>
+								<div class="item-card hidden" id="pba-output">
+									<img src="images/laser-pen.png" class="icon-image">
+									<p>Particle Beam Array <span class="advice">x<span id="particle-beam-array-count-output">0</span></span></p>
+									<p class="advice">Accelerates particles to 0.9 C in sequence</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>-4</span>
+										<span>-1</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+									</p>
+									<p>Damage: <em>3d6+3</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Heat: <em>8</em></p>
+									<p>Power: <em>16</em></p>
+									<p>Rate: <em>Auto 4</em></p>
+									<p>Effect: <em>Triple Radiation Hit</em></p>
+								</div>
+								<div class="item-card hidden" id="srm2-output">
+									<img src="images/missile.png" class="icon-image">
+									<p>Short Range Missile Pod 2 <span class="advice">x<span id="srm-2-count-output">0</span></span></p>
+									<p class="advice">Unguided Missiles, pair</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>0</span>
+										<span>0</span>
+										<span>1</span>
+										<span>2</span>
+										<span>X</span>
+										<span>X</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>1d6/hit</em></p>
+									<p>Type: <em>Explosive</em></p>
+									<p>Ammo: <em>60</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Auto 4</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="srm4-output">
+									<img src="images/missile.png" class="icon-image">
+									<p>Short Range Missile Pod 4 <span class="advice">x<span id="srm-4-count-output">0</span></span></p>
+									<p class="advice">Unguided Missiles, quad</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>0</span>
+										<span>0</span>
+										<span>1</span>
+										<span>2</span>
+										<span>X</span>
+										<span>X</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>1d6/hit</em></p>
+									<p>Type: <em>Explosive</em></p>
+									<p>Ammo: <em>60</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Auto 8</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="srm6-output">
+									<img src="images/missile.png" class="icon-image">
+									<p>Short Range Missil Pod 6 <span class="advice">x<span id="srm-6-count-output">0</span></span></p>
+									<p class="advice">Unguided Missiles, hexa</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>0</span>
+										<span>0</span>
+										<span>1</span>
+										<span>2</span>
+										<span>X</span>
+										<span>X</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>1d6/hit</em></p>
+									<p>Type: <em>Explosive</em></p>
+									<p>Ammo: <em>60</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Auto 12</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="srm8-output">
+									<img src="images/missile.png" class="icon-image">
+									<p>Short Range Missile Pod 8 <span class="advice">x<span id="srm-8-count-output">0</span></span></p>
+									<p class="advice">Unguided Missiles, octa</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>0</span>
+										<span>0</span>
+										<span>1</span>
+										<span>2</span>
+										<span>X</span>
+										<span>X</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>1d6/hit</em></p>
+									<p>Type: <em>Explosive</em></p>
+									<p>Ammo: <em>60</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Auto 16</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="lrm5-output">
+									<img src="images/missile.png" class="icon-image">
+									<p>Long Range Missile Pod 5 <span class="advice">x<span id="lrm-5-count-output">0</span></span></p>
+									<p class="advice">Guided missiles, small swarm</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>X</span>
+										<span>0</span>
+										<span>0</span>
+										<span>1</span>
+										<span>2</span>
+										<span>4</span>
+										<span>10</span>
+									</p>
+									<p>Damage: <em>1d3/hit</em></p>
+									<p>Type: <em>Explosive</em></p>
+									<p>Ammo: <em>60</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Auto 4</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="lrm10-output">
+									<img src="images/missile.png" class="icon-image">
+									<p>Long Range Missile Pod 10 <span class="advice">x<span id="lrm-10-count-output">0</span></span></p>
+									<p class="advice">Guided missiles, medium swarm</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>X</span>
+										<span>0</span>
+										<span>0</span>
+										<span>1</span>
+										<span>2</span>
+										<span>4</span>
+										<span>10</span>
+									</p>
+									<p>Damage: <em>1d3/hit</em></p>
+									<p>Type: <em>Explosive</em></p>
+									<p>Ammo: <em>60</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Auto 8</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="lrm15-output">
+									<img src="images/missile.png" class="icon-image">
+									<p>Long Range Missile Pod 15 <span class="advice">x<span id="lrm-15-count-output">0</span></span></p>
+									<p class="advice">Guided missiles, large swarm</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>X</span>
+										<span>0</span>
+										<span>0</span>
+										<span>1</span>
+										<span>2</span>
+										<span>4</span>
+										<span>10</span>
+									</p>
+									<p>Damage: <em>1d3/hit</em></p>
+									<p>Type: <em>Explosive</em></p>
+									<p>Ammo: <em>60</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Auto 12</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="lrm20-output">
+									<img src="images/missile.png" class="icon-image">
+									<p>Long Range Missile Pod 20 <span class="advice">x<span id="lrm-20-count-output">0</span></span></p>
+									<p class="advice">Guided missiles, massive swarm</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>X</span>
+										<span>0</span>
+										<span>0</span>
+										<span>1</span>
+										<span>2</span>
+										<span>4</span>
+										<span>10</span>
+									</p>
+									<p>Damage: <em>1d3/hit</em></p>
+									<p>Type: <em>Explosive</em></p>
+									<p>Ammo: <em>60</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Auto 16</em></p>
+									<p>Effect: <em>None</em></p>
+								</div>
+								<div class="item-card hidden" id="tt-output">
+									<img src="images/missile.png" class="icon-image">
+									<p>Torpedo Tube <span class="advice">x<span id="torpedo-tube-count-output">0</span></span></p>
+									<p class="advice">Single nuclear missile</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>X</span>
+										<span>0</span>
+										<span>0</span>
+										<span>1</span>
+										<span>2</span>
+										<span>4</span>
+										<span>10</span>
+									</p>
+									<p>Damage: <em>5d6+5</em></p>
+									<p>Type: <em>Explosive</em></p>
+									<p>Ammo: <em>4</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Single 1</em></p>
+									<p>Effect: <em>Double Radiation Hit</em></p>
+								</div>
+								<div class="item-card hidden" id="tta-output">
+									<img src="images/missile.png" class="icon-image">
+									<p>Torpedo Tube Array <span class="advice">x<span id="torpedo-tube-array-count-output">0</span></span></p>
+									<p class="advice">Single nuclear missile, rapid fire</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>X</span>
+										<span>0</span>
+										<span>0</span>
+										<span>1</span>
+										<span>2</span>
+										<span>4</span>
+										<span>10</span>
+									</p>
+									<p>Damage: <em>5d6+5</em></p>
+									<p>Type: <em>Explosive</em></p>
+									<p>Ammo: <em>4</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>Double Radiation Hit</em></p>
+								</div>
+								<div class="item-card hidden" id="sc-output">
+									<img src="images/security.png" class="icon-image">
+									<p>Sand Caster <span class="advice">x<span id="sandcaster-count-output">0</span></span></p>
+									<p class="advice">Energy weapon disruption cloud</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>X</span>
+										<span>X</span>
+										<span>X</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>2</em></p>
+									<p>Type: <em>Defense</em></p>
+									<p>Ammo: <em>12</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Single 1</em></p>
+									<p>Effect: <em>-3/dice Energy damage</em></p>
+								</div>
+								<div class="item-card hidden" id="rsc-output">
+									<img src="images/security.png" class="icon-image">
+									<p>Sand Caster Array <span class="advice">x<span id="sandcaster-array-count-output">0</span></span></p>
+									<p class="advice">Energy weapon disruption cloud, rapid fire</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>X</span>
+										<span>X</span>
+										<span>X</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>2</em></p>
+									<p>Type: <em>Defenses</em></p>
+									<p>Ammo: <em>12</em></p>
+									<p>Power: <em>0</em></p>
+									<p>Rate: <em>Semi</em></p>
+									<p>Effect: <em>-3/dice Energy damage</em></p>
+								</div>
+								<div class="item-card hidden" id="spdl-output">
+									<img src="images/security.png" class="icon-image">
+									<p>Small Point Defense Laser <span class="advice">x<span id="spdl-count-output">0</span></span></p>
+									<p class="advice">Light missile defense system</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+										<span>X</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>1</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Ammo: <em>-</em></p>
+									<p>Power: <em>1</em></p>
+									<p>Effect: <em>Roll 1d6 per missile, up to 2 missiles. Each 3+ eliminates 1 missile. 2 successes required for torpedoes.</em></p>
+								</div>
+								<div class="item-card hidden" id="mpdl-output">
+									<img src="images/security.png" class="icon-image">
+									<p>Medium Point Defense Laser <span class="advice">x<span id="mpdl-count-output">0</span></span></p>
+									<p class="advice">Standard missile defense system</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>+0</span>
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-3</span>
+										<span>X</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>2</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Ammo: <em>None</em></p>
+									<p>Power: <em>2</em></p>
+									<p>Effect: <em>Roll 1d6 per missile, up to 4 missiles. Each 3+ eliminates 1 missile. 2 successes required for torpedoes.</em></p>
+								</div>
+								<div class="item-card hidden" id="lpdl-output">
+									<img src="images/security.png" class="icon-image">
+									<p>Large Point Defense Laser <span class="advice">x<span id="lpdl-count-output">0</span></span></p>
+									<p class="advice">Heavy missile defense system</p>
+									<p class="brackets">
+										<span>A</span>
+										<span>C</span>
+										<span>S</span>
+										<span>M</span>
+										<span>L</span>
+										<span>VL</span>
+										<span>D</span>
+									</p>
+									<p class="brackets">
+										<span>+0</span>
+										<span>+0</span>
+										<span>-1</span>
+										<span>-2</span>
+										<span>-4</span>
+										<span>X</span>
+										<span>X</span>
+									</p>
+									<p>Damage: <em>3</em></p>
+									<p>Type: <em>Energy</em></p>
+									<p>Ammo: <em>None</em></p>
+									<p>Power: <em>3</em></p>
+									<p>Effect: <em>Roll 1d6 per missile, up to 6 missiles. Each 3+ eliminates 1 missile. 2 successes required for torpedoes.</em></p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div><!-- .content -->
+			<footer>
+			</footer>
+		</div><!-- .core -->
+	</body>
+</html>
