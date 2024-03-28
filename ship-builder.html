@@ -18,12 +18,12 @@
 	<body>
 		<div class="core">
 			<div id="sidebar-controls" class="right-sidebar">
-				<p id="sidebar-status">|</p>
+				<p id="sidebar-status">||</p>
 			</div>
-			<header>
+			<header class="half-width">
 				<h1>Ship Builder</h1>
 			</header>
-			<div class="content">
+			<div class="content half-width">
 					<form id="ship-builder-form">
 						<div class="tabs" id="input-tabs">
 							<ul>
@@ -213,58 +213,72 @@
 								<div class="sub-item">
 									<label>Cargo Bay Size</label>
 									<input type="number" name="cargo-bay-allocation" id="cargo-bay" min="0" value="10" class="start-zero">
+									<p class="advice">1 ton each</p>
 								</div>
 								<div class="sub-item">
 									<label>Ships Locker</label>
 									<input type="number" name="ships-locker-allocation" id="ships-locker" min="0" value="1" class="start-zero">
+									<p class="advice">2 tons each</p>
 								</div>
 								<div class="sub-item">
 									<label>Common Area</label>
 									<input type="number" name="common-area-allocation" id="common-area" min="0" value="0" class="start-zero">
+									<p class="advice">4 tons each</p>
 								</div>
 								<div class="sub-item">
 									<label>State Room</label>
 									<input type="number" name="state-room-allocation" id="state-room" min="0" value="1" class="start-zero">
+									<p class="advice">4 tons each</p>
 								</div>
 								<div class="sub-item">
 									<label>Barracks</label>
 									<input type="number" name="barracks-allocation" id="barracks" min="0" value="0" class="start-zero">
+									<p class="advice">6 tons each</p>
 								</div>
 								<div class="sub-item">
 									<label>Low Berths</label>
 									<input type="number" name="low-berth-allocation" id="low-berths" min="0" value="0" class="start-zero">
+									<p class="advice">1 ton each</p>
 								</div>
 								<div class="sub-item">
 									<label>Medical Bay</label>
 									<input type="number" name="medical-bay-allocation" id="medical-bay" min="0" value="0" class="start-zero">
+									<p class="advice">6 tons each</p>
 								</div>
 								<div class="sub-item">
 									<label>Science Bay</label>
 									<input type="number" name="science-bay-allocation" id="science-bay" min="0" value="0" class="start-zero">
+									<p class="advice">6 tons each</p>
 								</div>
 								<div class="sub-item">
 									<label>Technical Bay</label>
 									<input type="number" name="technical-bay-allocation" id="technical-bay" min="0" value="0" class="start-zero">
+									<p class="advice">6 tons each</p>
 								</div>
 								<div class="sub-item">
 									<label>Weapons Bay</label>
 									<input type="number" name="weapons-bay-allocation" id="weapons-bay" min="0" value="0" class="start-zero">
+									<p class="advice">8 tons each</p>
 								</div>
 								<div class="sub-item">
 									<label>Launch Bay</label>
 									<input type="number" name="launch-bay-allocation" id="launch-bay" min="0" value="0" class="start-zero">
+									<p class="advice">10 tons each</p>
 								</div>
 								<div class="sub-item">
 									<label>Drone Bay</label>
 									<input type="number" name="drone-bay-allocation" id="drone-bay" min="0" value="0" class="start-zero">
+									<p class="advice">5 tons each</p>
 								</div>
 								<div class="sub-item">
 									<label>Escape Pod</label>
 									<input type="number" name="escape-pod-allocation" id="escape-pods" min="0" value="0" class="start-zero">
+									<p class="advice">2 tons each</p>
 								</div>
 								<div class="sub-item">
 									<label>Conservatory</label>
 									<input type="number" name="conservatory-allocation" id="conservatories" min="0" value="0" class="start-zero">
+									<p class="advice">9 tons each</p>
 								</div>
 							</div>
 						</div>
@@ -635,6 +649,7 @@
 							<p><strong>Bridge Layout</strong></p>
 							<p>Seats: <span id="bridge-seats-output">1</span></p>
 							<p id="bridge-description-output" class="advice">1 Pilot</p>
+							<p id="bridge-warning" class="warning">Insufficient Crew</p>
 							<img src="images/steering.png" class="icon-image">
 						</div>
 						<div class="specification">
@@ -684,6 +699,14 @@
 							<p class="listed-item hidden" id="diagnostics-software-output">Diagnostics Software
 								<br><span class="advice">Grants superior information about ship operations and status.</span></p>
 						</div>
+						<div class="specification full-width-specification">
+							<p class="action-title"><strong>Bridge Actions</strong> <span class="action-status">+</span></p>
+							<div class="action-details">
+								<p>Evasion: <span class="listed-item">Pilot (Ship Size) + Dexterity</span></p>
+								<p>Align Weapons: <span class="listed-item">Pilot (Ship Size) + Intellect</span></p>
+								<p>Landing/Take Off: <span class="listed-item">Pilot (Ship Size) + Dexterity <span id="layout-modifier">- 2</span></span></p>
+							</div>
+						</div>
 					</div>
 					<div class="output-section output-details" id="engineering-output-group">
 						<div class="specification">
@@ -730,9 +753,12 @@
 						<div class="specification full-width-specification">
 							<p class="action-title"><strong>Engineering Actions</strong> <span class="action-status">+</span></p>
 							<div class="action-details">
-								<p>Divert Power: </p>
-								<p>Manage Heat: </p>
-								<p>Engage Jump: </p>
+								<p>Divert Power: <span class="listed-item">Engineer (Power) + Intellect</span></p>
+								<p>Manage Heat: <span class="listed-item">Mechanic + Intellect</span></p>
+								<p>Overclock M-Drive: <span class="listed-item">Engineer (M-Drive) + Education</span></p>
+								<p>Engage J-Drive: <span class="listed-item">Engineer (J-Drive) + Education</span></p>
+								<p>Quick Repair System: <span class="listed-item">Mechanic + Intellect</span></p>
+								<p>Complete Repair System: <span class="listed-item">Engineer (Relevant Focus) + Education</span></p>
 							</div>
 							<p></p>
 						</div>
@@ -760,75 +786,84 @@
 
 								<div class="item-card" id="cargo-bay-output">
 									<p><strong>Cargo Bay</strong></p>
-									<p>Allocation: <span id="cargo-bay-count-output">10</span> <span class="advice">1 ton each</span></p>
-									<p class="advice">Congruent storage space with a large non-airlocked door.</p>
+									<p>Reserved Tons: <span id="cargo-bay-tonnage-output">10</span></p>
+									<p class="advice">Congruent storage space, accessible via air tight door.</p>
 								</div>
 								<div class="item-card" id="ships-locker-output">
 									<p><strong>Ships Locker</strong></p>
-									<p>Allocation: <span id="ships-locker-count-output">1</span> <span class="advice">2 tons each</span></p>
+									<p>Reserved Tons: <span id="ships-locker-tonnage-output">2</span></p>
 									<p class="advice">Small secure storage space for general equipment.</p>
 								</div>
-								<div class="item-card" id="common-area-output">
+								<div class="item-card hidden" id="common-area-output">
 									<p><strong>Common Area</strong></p>
-									<p>Allocation: <span id="common-area-count-output">0</span> <span class="advice">4 tons each</span></p>
+									<p>Reserved Tons: <span id="common-area-tonnage-output">0</span></p>
 									<p class="advice">Area for rest, making and eating meals, entertainment, etc.</p>
 								</div>
 								<div class="item-card" id="state-room-output">
 									<p><strong>State Room</strong></p>
-									<p>Allocation: <span id="state-room-count-output">1</span> <span class="advice">4 tons each</span></p>
+									<p>Reserved Tons: <span id="state-room-tonnage-output">4</span></p>
 									<p class="advice">Personal Room for 1 or 2 people. Includes restroom.</p>
 								</div>
-								<div class="item-card" id="barracks-ouput">
+								<div class="item-card hidden" id="barracks-output">
 									<p><strong>Barracks</strong></p>
-									<p>Allocation: <span id="barracks-count-output">0</span> <span class="advice">5 tons each</span></p>
+									<p>Reserved Tons: <span id="barracks-tonnage-output">0</span></p>
 									<p class="advice">Space for 4 to 6 people, cramped but efficient.</p>
 								</div>
-								<div class="item-card" id="low-berths-output">
+								<div class="item-card hidden" id="low-berths-output">
 									<p><strong>Low Berths</strong></p>
-									<p>Allocation: <span id="low-berth-count-output">0</span> <span class="advice">1 ton each</span></p>
+									<p>Reserved Tons: <span id="low-berth-tonnage-output">0</span></p>
 									<p class="advice">2 Cryosleep pods for enduring long journeys without aging.</p>
 								</div>
-								<div class="item-card" id="medical-bay-output">
+								<div class="item-card hidden" id="medical-bay-output">
 									<p><strong>Medical Bay</strong></p>
-									<p>Allocation: <span id="medical-bay-count-output">0</span> <span class="advice">6 tons each</span></p>
+									<p>Reserved Tons: <span id="medical-bay-tonnage-output">0</span></p>
 									<p class="advice">Sterile room for curative treatments and surgery.</p>
 								</div>
-								<div class="item-card" id="science-bay-output">
+								<div class="item-card hidden" id="science-bay-output">
 									<p><strong>Science Bay</strong></p>
-									<p>Allocation: <span id="science-bay-count-output">0</span> <span class="advice">6 tons each</span></p>
+									<p>Reserved Tons: <span id="science-bay-tonnage-output">0</span></p>
 									<p class="advice">Sterile laboratory for generalized scientific pursuits.</p>
 								</div>
-								<div class="item-card" id="technical-bay-output">
+								<div class="item-card hidden" id="technical-bay-output">
 									<p><strong>Technical Bay</strong></p>
-									<p>Allocation: <span id="technical-bay-count-output">0</span> <span class="advice">6 tons each</span></p>
+									<p>Reserved Tons: <span id="technical-bay-tonnage-output">0</span></p>
 									<p class="advice">Workshop equipped with various mechanical tools.</p>
 								</div>
-								<div class="item-card" id="weapons-bay-output">
+								<div class="item-card hidden" id="weapons-bay-output">
 									<p><strong>Weapons Bay</strong></p>
-									<p>Allocation: <span id="weapons-bay-count-output">0</span> <span class="advice">8 tons each</span></p>
+									<p>Reserved Tons: <span id="weapons-bay-tonnage-output">0</span></p>
 									<p class="advice">Static-free room for handling explosives and weapons.</p>
 								</div>
-								<div class="item-card" id="launch-bay-output">
+								<div class="item-card hidden" id="launch-bay-output">
 									<p><strong>Launch Bay</strong></p>
-									<p>Allocation: <span id="launch-bay-count-output">0</span> <span class="advice">10 tons each</span></p>
+									<p>Reserved Tons: <span id="launch-bay-tonnage-output">0</span></p>
 									<p class="advice">Airlock with magnetic actuators to launch and land small ships.</p>
 								</div>
-								<div class="item-card" id="drone-bay-output">
+								<div class="item-card hidden" id="drone-bay-output">
 									<p><strong>Drone Bay</strong></p>
-									<p>Allocation: <span id="drone-bay-count-output">0</span> <span class="advice">5 tons each</span></p>
+									<p>Reserved Tons: <span id="drone-bay-tonnage-output">0</span></p>
 									<p class="advice">Specialized Airlock with drone maintenance and repair tools.</p>
 								</div>
-								<div class="item-card" id="escape-pods-output">
+								<div class="item-card hidden" id="escape-pods-output">
 									<p><strong>Escape Pod</strong></p>
-									<p>Allocation: <span id="escape-pod-count-output">0</span> <span class="advice">2 tons each</span></p>
-									<p class="advice">Similar to launch bay, but equipped with one-way, 4 person vessels.</p>
+									<p>Reserved Tons: <span id="escape-pod-tonnage-output">0</span></p>
+									<p class="advice">Similar to launch bay, but equipped with 4 one-way personal vessels.</p>
 								</div>
-								<div class="item-card" id="conservatory-output">
+								<div class="item-card hidden" id="conservatory-output">
 									<p><strong>Conservatory</strong></p>
-									<p>Allocation: <span id="conservatory-count-output">0</span> <span class="advice">9 tons each</span></p>
+									<p>Reserved Tons: <span id="conservatory-tonnage-output">0</span></p>
 									<p class="advice">Gardening and food production space.</p>
 								</div>
+							</div>
 						</div>
+						<div class="specification full-width-specification">
+							<p class="action-title"><strong>Crew Actions</strong> <span class="action-status">+</span></p>
+							<div class="action-details">
+								<p>Manage Passengers: <span class="listed-item">Steward + Intellect</span></p>
+								<p>Repel Boarders: <span class="listed-item">Any Combat Skill + Appropriate Characteristic</span></p>
+								<p>Quickly Repair Ship Damage: <span class="listed-item">Mechanic + Intellect</span></p>
+
+							</div>
 						</div>
 					</div>
 					<div class="output-section output-details" id="defense-output-group">
@@ -851,6 +886,12 @@
 							<p>Radiation: <span id="coating-rad-output">0</span></p> 
 							<p>Heat Modifier: <span id="coating-heat-output">0</span></p>
 							<p class="advice" id="coating-description-output">No coating applied.</p>
+						</div>
+						<div class="specification full-width-specification">
+							<p class="action-title"><strong>Defense Actions</strong> <span class="action-status">+</span></p>
+							<div class="action-details">
+								<p>Fire Weapon: Turret (Type) + Dexterity</p>
+							</div>
 						</div>
 						<div class="specification full-width-specification">
 							<p><strong>Weapons</strong></p>

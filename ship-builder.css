@@ -77,14 +77,10 @@ sub {
 	display: none;
 }
 
-.tabs .tab-item {
-	position: relative;
-}
-
 .tabs .alert-icon {
 	position: absolute;
 	top: -5px;
-	right: -5px;
+	right: 0px;
 	border-radius: 20px;
 	width: 15px;
 	height: 15px;
@@ -284,7 +280,7 @@ input.small-input {
 	position: fixed;
 	height: 100%;
 	width: 50%;
-	right: -50%;
+	right: 0%;
 	top: 0;
 /*	border-left: 3px solid #f90;*/
 	overflow-y: scroll;
@@ -318,7 +314,14 @@ input.small-input {
 	margin-left: 0;
 	width: 20%;
 	text-align: center;
+	background-color: #333;
 	padding: 10px 0;
+	position: relative;
+	border-right: 1px solid #000;
+}
+
+.tabs .tab-item:last-of-type {
+	border-right: 0;
 }
 
 .tabs .tab-item:hover {
@@ -407,6 +410,10 @@ span {
 
 .specification .subset.active {
 	display: block;
+}
+
+.action-title {
+	cursor: pointer;
 }
 
 .action-details {

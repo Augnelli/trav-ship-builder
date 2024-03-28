@@ -485,17 +485,18 @@ $(document).ready(function(){
 		});
 
 		$('.action-title').on('click', function(){
-			$(this).next('.action-details').show('fast');
-			if ($(this).next('.action-details').hasClass('expanded') == true) {
+			if ($(this).hasClass('expanded') == true) {
 				$(this).find('.action-status').text('+');	
+				$(this).next('.action-details').hide();
 				$(this).removeClass('expanded');
 			} else {
 				$(this).find('.action-status').text('-');	
 				$(this).addClass('expanded');
+				$(this).next('.action-details').show();
 			}
 		});
 
-		let sidebar_status = false;
+		let sidebar_status = true;
 		// Sidebar Show/Hide
 		$('#sidebar-controls').on('click', function(){
 			if (sidebar_status == false) {
@@ -529,6 +530,7 @@ $(document).ready(function(){
 				$('.shape').removeClass('distributed-shape streamlined-shape').addClass('standard-shape');
 				$('.shape-description').removeClass('active');
 				$('#standard-shape-description').addClass('active');
+				$('#layout-modifier').text('- 2')
 			} else if (layout_type == 'Streamlined') {
 				layout_cost_mod = 1.2;
 				layout_agility_mod = 1.2;
@@ -537,6 +539,7 @@ $(document).ready(function(){
 				$('.shape').removeClass('distributed-shape standard-shape').addClass('streamlined-shape');
 				$('.shape-description').removeClass('active');
 				$('#streamlined-shape-description').addClass('active');
+				$('#layout-modifier').text('+ 0');
 			} else if  (layout_type == 'Distributed') {
 				layout_cost_mod = 0.8;
 				layout_agility_mod = 0.8;
@@ -545,6 +548,7 @@ $(document).ready(function(){
 				$('.shape').removeClass('standard-shape streamlined-shape').addClass('distributed-shape');
 				$('.shape-description').removeClass('active');
 				$('#distributed-shape-description').addClass('active');
+				$('#layout-modifier').text('- 6');
 			}
 
 			// console.log('layout_type: ' + layout_type);
@@ -849,13 +853,13 @@ $(document).ready(function(){
 			jump_fuel_cost = Math.round(tonnage/10) * max_jump_distance;
 			jump_drive_cost = max_jump_distance * (max_jump_distance + 1) * 10000;
 			jump_heat_generation = (tonnage/25) * max_jump_distance;
-			console.log('max jump distancce: ' + max_jump_distance);
-			console.log('jump tonnage: ' + jump_tonnage);
-			console.log('jump power cost: ' + jump_power_cost);
-			console.log('jump fuel cost: ' + jump_fuel_cost);
-			console.log('jump heat generation: ' + jump_heat_generation);
-			console.log('jump drive cost: ' + jump_drive_cost);
-			console.log(' ');
+			// console.log('max jump distancce: ' + max_jump_distance);
+			// console.log('jump tonnage: ' + jump_tonnage);
+			// console.log('jump power cost: ' + jump_power_cost);
+			// console.log('jump fuel cost: ' + jump_fuel_cost);
+			// console.log('jump heat generation: ' + jump_heat_generation);
+			// console.log('jump drive cost: ' + jump_drive_cost);
+			// console.log(' ');
 
 		// Heat Management
 			heat_sink_count = $('#heat-sink-count').val();
@@ -912,77 +916,81 @@ $(document).ready(function(){
 				cargo_bay_count = parseInt($('#cargo-bay').val());
 				cargo_bay_tonnage = cargo_bay_count * 1;
 				cargo_bay_cost = cargo_bay_count * 100;
-				cargo_bay_count > 0 ? $('#cargo-bay-output').show():$('#cargo-bay-output').hide();
+				cargo_bay_count > 0 ? $('#cargo-bay-output').show() : $('#cargo-bay-output').hide();
 			// Ships Locker
 				ships_locker_count = parseInt($('#ships-locker').val());
 				ships_locker_tonnage = ships_locker_count * 2;
 				ships_locker_cost = ships_locker_count * 5000;
-				cargo_bay_count > 0 ? $('#ships-locker-output').show():$('#ships-locker-output').hide();
+				ships_locker_count > 0 ? $('#ships-locker-output').show() : $('#ships-locker-output').hide();
 			// Common Area
 				common_area_count = parseInt($('#common-area').val());
 				common_area_tonnage = common_area_count * 4;
 				common_area_cost = common_area_count * 1000;
-				cargo_bay_count > 0 ? $('#common-area-output').show():$('#common-area-output').hide();
+				common_area_count > 0 ? $('#common-area-output').show() : $('#common-area-output').hide();
 			// State Room
 				state_room_count = parseInt($('#state-room').val());
 				state_room_tonnage = state_room_count * 4;
 				state_room_cost = state_room_count * 1000;
-				cargo_bay_count > 0 ? $('#state-room-output').show():$('#state-room-output').hide();
+				state_room_count > 0 ? $('#state-room-output').show() : $('#state-room-output').hide();
 			// Drone Bay
 				drone_bay_count = parseInt($('#drone-bay').val());
 				drone_bay_tonnage = drone_bay_count * 5;
 				drone_bay_cost = drone_bay_count * 12000;
-				cargo_bay_count > 0 ? $('#drone-bay-output').show():$('#drone-bay-output').hide();
+				drone_bay_count > 0 ? $('#drone-bay-output').show() : $('#drone-bay-output').hide();
 			// Barracks
 				barracks_count = parseInt($('#barracks').val());
 				barracks_tonnage = barracks_count * 6;
 				barracks_cost = barracks_count * 200;
-				cargo_bay_count > 0 ? $('#barracks-output').show():$('#barracks-output').hide();
+				barracks_count > 0 ? $('#barracks-output').show() : $('#barracks-output').hide();
 			// Medical Bay
 				medical_bay_count = parseInt($('#medical-bay').val());
 				medical_bay_tonnage = medical_bay_count * 6;
 				medical_bay_cost = medical_bay_count * 10000;
-				cargo_bay_count > 0 ? $('#medical-bay-output').show():$('#medical-bay-output').hide();
+				medical_bay_count > 0 ? $('#medical-bay-output').show() : $('#medical-bay-output').hide();
 			// Science Bay
 				science_bay_count = parseInt($('#science-bay').val());
 				science_bay_tonnage = science_bay_count * 6;
 				science_bay_cost = science_bay_count * 10000;
-				cargo_bay_count > 0 ? $('#science-bay-output').show():$('#science-bay-output').hide();
+				science_bay_count > 0 ? $('#science-bay-output').show() : $('#science-bay-output').hide();
 			// Technical Bay
 				technical_bay_count = parseInt($('#technical-bay').val());
 				technical_bay_tonnage = technical_bay_count * 6;
 				technical_bay_cost = technical_bay_count * 10000;
-				cargo_bay_count > 0 ? $('#technical-bay-output').show():$('#technical-bay-output').hide();
+				technical_bay_count > 0 ? $('#technical-bay-output').show() : $('#technical-bay-output').hide();
 			// Weapons Bay
 				weapons_bay_count = parseInt($('#weapons-bay').val());
 				weapons_bay_tonnage = weapons_bay_count * 8;
 				weapons_bay_cost = weapons_bay_count * 10000;
-				cargo_bay_count > 0 ? $('#weapons-bay-output').show():$('#weapons-bay-output').hide();
+				weapons_bay_count > 0 ? $('#weapons-bay-output').show() : $('#weapons-bay-output').hide();
 			// Launch Bay
 				launch_bay_count = parseInt($('#launch-bay').val());
 				launch_bay_tonnage = launch_bay_count * 10;
 				launch_bay_cost = launch_bay_count * 25000;
-				cargo_bay_count > 0 ? $('#launch-bay-output').show():$('#launch-bay-output').hide();
+				launch_bay_count > 0 ? $('#launch-bay-output').show() : $('#launch-bay-output').hide();
 			// Low Berths
 				low_berths_count = parseInt($('#low-berths').val());
 				low_berths_tonnage = low_berths_count;
 				low_berths_cost = low_berths_count * 6500;
-				cargo_bay_count > 0 ? $('#low-berth-output').show():$('#low-berth-output').hide();
+				low_berths_count > 0 ? $('#low-berths-output').show() : $('#low-berths-output').hide();
 			// Escape Pods
 				escape_pod_count =  parseInt($('#escape-pods').val());
 				escape_pod_tonnage = escape_pod_count * 2;
 				escape_pod_cost = escape_pod_count * 5000;
-				cargo_bay_count > 0 ? $('#escape-pods-output').show():$('#escape-pods-output').hide();
+				escape_pod_count > 0 ? $('#escape-pods-output').show() : $('#escape-pods-output').hide();
 			// Conservatory
 				conservatory_count =  parseInt($('#conservatories').val());
 				conservatory_tonnage = conservatory_count * 9;
 				conservatory_cost = conservatory_count * 20000;
-				cargo_bay_count > 0 ? $('#conservatory-output').show():$('#conservatory-output').hide();
+				conservatory_count > 0 ? $('#conservatory-output').show() : $('#conservatory-output').hide();
 
 			crew_space = (state_room_count * 2) + (barracks_count * 6);
 			room_total_cost = cargo_bay_cost + ships_locker_cost + common_area_cost + state_room_cost + drone_bay_cost + barracks_cost + medical_bay_cost + science_bay_cost + technical_bay_cost + weapons_bay_cost + launch_bay_cost + low_berths_cost + escape_pod_cost + garden_cost + conservatory_cost;
 			// console.log(cargo_bay_cost + ' ' + ships_locker_cost + ' ' + common_area_cost + ' ' + state_room_cost + ' ' + drone_bay_cost + ' ' + barracks_cost + ' ' + medical_bay_cost + ' ' + science_bay_cost + ' ' + technical_bay_cost + ' ' + weapons_bay_cost + ' ' + launch_bay_cost + ' ' + low_berths_cost);
 			room_total_tonnage = cargo_bay_tonnage + ships_locker_tonnage + common_area_tonnage + state_room_tonnage + drone_bay_tonnage + barracks_tonnage + medical_bay_tonnage + science_bay_tonnage + technical_bay_tonnage + weapons_bay_tonnage + launch_bay_tonnage + low_berths_tonnage + escape_pod_tonnage + garden_tonnage + conservatory_tonnage;
+			console.log('barracks count: ' + barracks_count);
+			console.log('barracks tonnage: ' + barracks_tonnage);
+			console.log('barracks cost: ' + barracks_cost);
+			console.log(' ');
 
 		// Bridge
 			bridge_type = $('#bridge-type').val();
@@ -1012,6 +1020,7 @@ $(document).ready(function(){
 				bridge_seats = 12;
 				bridge_description = '1 Commander<br>2 Pilots<br>2 Comms<br>2 Sensors<br>2 Defenses<br>1 Navigation<br>1 Advisor<br>1 Technician';
 			}
+			crew_size < bridge_seats ? $('#bridge-warning').show() : $('#bridge-warning').hide();
 
 		// Computer
 			computer_type = $('#computer-type').val();
@@ -1759,20 +1768,20 @@ $(document).ready(function(){
 
 
 			// Rooms Output
-				$('#cargo-bay-count-output').text(cargo_bay_count);
-				$('#ships-locker-count-output').text(ships_locker_count);
-				$('#common-area-count-output').text(common_area_count);
-				$('#state-room-count-output').text(state_room_count);
-				$('#barracks-count-output').text(barracks_count);
-				$('#low-berth-count-output').text(low_berths_count);
-				$('#medical-bay-count-output').text(medical_bay_count);
-				$('#science-bay-count-output').text(science_bay_count);
-				$('#technical-bay-count-output').text(technical_bay_count);
-				$('#weapons-bay-count-output').text(weapons_bay_count);
-				$('#launch-bay-count-output').text(launch_bay_count);
-				$('#drone-bay-count-output').text(drone_bay_count);
-				$('#escape-pod-count-output').text(escape_pod_count);
-				$('#conservatory-count-output').text(conservatory_count);
+				$('#cargo-bay-tonnage-output').text(cargo_bay_tonnage);
+				$('#ships-locker-tonnage-output').text(ships_locker_tonnage);
+				$('#common-area-tonnage-output').text(common_area_tonnage);
+				$('#state-room-tonnage-output').text(state_room_tonnage);
+				$('#barracks-tonnage-output').text(barracks_tonnage);
+				$('#low-berth-tonnage-output').text(low_berths_tonnage);
+				$('#medical-bay-tonnage-output').text(medical_bay_tonnage);
+				$('#science-bay-tonnage-output').text(science_bay_tonnage);
+				$('#technical-bay-tonnage-output').text(technical_bay_tonnage);
+				$('#weapons-bay-tonnage-output').text(weapons_bay_tonnage);
+				$('#launch-bay-tonnage-output').text(launch_bay_tonnage);
+				$('#drone-bay-tonnage-output').text(drone_bay_tonnage);
+				$('#escape-pod-tonnage-output').text(escape_pod_tonnage);
+				$('#conservatory-tonnage-output').text(conservatory_tonnage);
 
 			// Armor Finals
 				$('#armor-type-output').text(armor_type);
@@ -1840,9 +1849,11 @@ $(document).ready(function(){
 			// Reset Save Text
 				$('#save-data').text('Save');
 
+		// Accept Warnings Options
+
 
 		// Warning Updates
-			if ($('#processor-warning').css('display') != 'none') {
+			if (($('#processor-warning').css('display') != 'none') || ($('#bridge-warning').css('display') != 'none')) {
 				$('#bridge-alert').show();
 			} else {
 				$('#bridge-alert').hide();
@@ -1852,6 +1863,12 @@ $(document).ready(function(){
 				$('#engineering-alert').show();
 			} else {
 				$('#engineering-alert').hide();
+			}
+
+			if ($('#crew-warning').css('display') != 'none') {
+				$('#crew-alert').show();
+			} else {
+				$('#crew-alert').hide();
 			}
 
 	});
