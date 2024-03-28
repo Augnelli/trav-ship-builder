@@ -12,6 +12,27 @@
 
 body {
 /*	background-color: #efefef;*/
+transition: all ease 0.3s;
+}
+
+body#infinite-horizons {
+
+}
+
+body#atlas {
+
+}
+
+body#conglomerate {
+
+}
+
+body#imperial-designs {
+
+}
+
+body#raider {
+	
 }
 
 header {

@@ -63,7 +63,7 @@
 	var mDrive_type = 'Directed Fusion',
 			mDrive_count = 1,
 			mDrive_cost = 20000,
-			mDrive_tonnage = 2,
+			mDrive_tonnage = 3,
 			mDrive_power_use = 1,
 			mDrive_fuel_use = 1,
 			mDrive_agility_raw = 1.5,
@@ -1706,6 +1706,7 @@ $(document).ready(function(){
 					mDrive_thrust_fixed = 0;
 				}
 				mDrive_tonnage == 0 ? $('#m-drive-warning').show() : $('#m-drive-warning').hide();
+				$('#m-drive-tonnage-output').text(mDrive_tonnage);
 				$('#speed-raw-output').text(mDrive_thrust_raw);
 				$('#speed-output').text(mDrive_thrust_fixed);
 				$('#agility-raw-output').text(mDrive_agility_raw);
@@ -1713,6 +1714,7 @@ $(document).ready(function(){
 
 			// Jump
 				jump_tonnage == 0 ? $('#j-drive-warning').show() : $('#j-drive-warning').hide();
+				$('#jump-tonnage-output').text(jump_tonnage);
 				$('#jump-distances-output').text(max_jump_distance);
 				$('#jump-fuel-output').text(jump_fuel_cost);
 				$('#jump-power-output').text(jump_power_cost);
@@ -1731,6 +1733,7 @@ $(document).ready(function(){
 			// Power
 				power = base_power + (capacitance_module_count * 2);
 				// console.log('power: ' + power);
+				$('#power-tonnage-output').text(power_total_tonnage);
 				$('#power-capacity-output').text(power);
 				$('#power-regen-output').text(power_regen);
 
