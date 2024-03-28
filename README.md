@@ -1,6 +1,6 @@
 # trav-ship-builder
 
-Version: 0.9.23 (Release Candidate)
+Version: 0.10.1 (Release Candidate)
 Source: Mongoose Traveller, jQuery 3.7.1
 Copyright: None
 
