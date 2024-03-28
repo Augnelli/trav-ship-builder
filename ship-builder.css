@@ -32,7 +32,7 @@ body#imperial-designs {
 }
 
 body#raider {
-	
+
 }
 
 header {
@@ -405,7 +405,7 @@ input.small-input {
 img.icon-image,
 img.small-image {
 	filter: invert(1);
-	background-color: #ccc;
+	background-color: #ddd;
 }
 
 img.icon-image {

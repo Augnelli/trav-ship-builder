@@ -41,6 +41,10 @@
 						<!-- ----- Section 1 Start ----- -->
 						<!-- <h4><span class="section-status">-</span> Basic Information <span class="section-status">-</span></h4> -->
 						<div class="section section-group active" id="basic-info-group">
+							<div class="item full-width-item">
+								<label>Mods</label>
+								<label class="associated-label" for="cyber-traveller"><input type="checkbox" id="cyber-traveller" value="Cyber Traveller" name="cyber-traveller">Cyber Traveller</label>
+							</div>
 							<div class="item basic">
 								<!-- Tonnage -->
 								<label>Tonnage</label>
@@ -80,6 +84,7 @@
 								<label>Tech Level</label>
 								<input type="number" name="tech-level" id="tech-level" value="9" step="1" max="16" min="9">
 								<p class="advice">The average tech level of the ship. Starts at rank 9 and each additional rank GREATLY increases costs and benefits.</p>
+								<p class="warning" id="tl-warning">Tech Level out of bounds!</p>
 							</div>
 						</div>
 						<!-- ----- Section 1 End ----- -->
@@ -301,13 +306,14 @@
 								</select>
 							</div>
 							<div class="item basic">
-								<label>Comms Type</label>
+								<label>Standard Comms Type</label>
 								<select id="comms-type">
 									<option value="Civilian" selected="selected">Civilian</option>
 									<option value="Military">Military</option>
 									<option value="Advanced">Advanced</option>
 									<option value="Expert">Expert</option>
 								</select>
+								<label class="associated-label" for="long-range-comms"><input type="checkbox" id="long-range-comms" value="Long Range Comms" name="long-range-comms">Long Range Comms</label>
 							</div>
 							<div class="item basic">
 								<label>Computer Type</label>
@@ -579,7 +585,7 @@
 				<div class="output">
 					<div class="output-section">
 						<h4>Output for <span id="designation-output">100 dTon TL 9 Standard Infinite Horizons Civilian Ship</span></h4>
-						<p>Cost: <span id="cost-output">1,324,000</span></p>
+						<p>Cost: <span id="cost-output">1,329,000</span></p>
 						<p>Upkeep: <span id="upkeep-output">265</span></p>
 						<p>Mortgage: <span id="monthly-output">3,648</span></p>
 						<p>Tonnage: <span id="tonnage-used-output">62</span>/<span id="tonnage-output">100</span> <span id="tonnage-warning" class="warning">Insufficient tonnage</span></p>
@@ -605,28 +611,28 @@
 							<p><strong>Manufacturer</strong></p>
 							<div class="subset manufacturer-subset active" id="infinite-subset">
 								<img src="images/infinite-horizons.png">
-								<h5>Infininte Horizons</h5>
-								<p>Explore the unknown.</p>
+								<h5 class="listed-item">Infininte Horizons</h5>
+								<p class="advice">Explore the unknown.</p>
 							</div>
 							<div class="subset manufacturer-subset" id="atlas-subset">
 								<img src="images/atlas-industries.png">
-								<h5>Atlas Industries</h5>
-								<p>Raising civilization.</p>
+								<h5 class="listed-item">Atlas Industries</h5>
+								<p class="advice">Raising civilization.</p>
 							</div>
 							<div class="subset manufacturer-subset" id="conglomerate-subset">
 								<img src="images/conglomerate-inc.png">
-								<h5>Conglomerate Inc.</h5>
-								<p>Synonymous with value!</p>
+								<h5 class="listed-item">Conglomerate Inc.</h5>
+								<p class="advice">Synonymous with value!</p>
 							</div>
 							<div class="subset manufacturer-subset" id="raider-subset">
 								<img src="images/raider-corp.png">
-								<h5>Raider Corp.</h5>
-								<p>No quarter given.</p>
+								<h5 class="listed-item">Raider Corp.</h5>
+								<p class="advice">No quarter given.</p>
 							</div>
 							<div class="subset manufacturer-subset" id="imperial-subset">
 								<img src="images/imperial-designs.png">
-								<h5>Imperial Designs</h5>
-								<p>Perfection.</p>
+								<h5 class="listed-item">Imperial Designs</h5>
+								<p class="advice">Perfection.</p>
 							</div>
 						</div>
 						<div class="specification">
@@ -671,14 +677,15 @@
 							<p>Type: <span id="comms-type-output">Civilian</span></p>
 							<p>Security: DC <span id="comms-security-output">7</span></p>
 							<p>Range: <span id="comms-range-output">25000</span> km</p>
-							<p class="lited-item hidden" id="comms-local-network-output">Networked Locally</p>
+							<p class="listed-item hidden" id="comms-local-network-output">Networked Locally</p>
+							<p class="listed-item hidden" id="long-range-comms-output">Long Range Comms Availalbe</p>
 							<img src="images/antenna.png" class="icon-image">
 						</div>
 						<div class="specification">
 							<p><strong>Computer</strong></p>
 							<img src="images/cpu.png" class="icon-image">
 							<p>Processors: <span id="total-processor-output">5</span></p>
-							<p>Required: <span id="used-processor-output">2</span></p>
+							<p>Required: <span id="used-processor-output">3</span></p>
 							<p id="processor-warning" class="warning">Insufficient processors.</p>
 							<p class="listed-item visible" id="database-software-output">Database Software
 								<br><span class="advice">Basic computer function, includes a wide array of detailed information.</span></p>
@@ -721,7 +728,11 @@
 							<p><strong>Fuel</strong></p>
 							<img src="images/hydrogen.png" class="icon-image">
 							<p>Total Fuel: <span id="fuel-tonnage-output">30</span></p>
-							<p>Fuel/Week Total: <span id="fuel-used-total-output">4</span></p>
+							<p>Fuel per Week: <span id="fuel-used-total-output">4</span></p>
+							<p>&rdsh; Power: <span id="power-fuel-use-output">2</span></p>
+							<p>&rdsh; M-Drive: <span id="mDrive-fuel-use-output">2</span></p>
+							<p>&rdsh; Fuel/Jump: <span id="jump-fuel-output">10</span></p>
+							<p>&rdsh; Fuel/Evade: <span id="fuel-evasion-cost-output">1</span></p>
 							<p class="listed-item hidden" id="fuel-collector-output">Collector</p>
 							<p class="listed-item hidden" id="fuel-partitions-output">Partitions</p>
 							<p class="listed-item hidden" id="fuel-refinery-output">Refinery</p>
@@ -729,10 +740,14 @@
 						<div class="specification">
 							<p><strong>Power</strong></p>
 							<img src="images/power.png" class="icon-image">
-							<p>Tonnage: <span id="power-tonnage-output">2</span></p>
-							<p>Maximum Power: <span id="power-capacity-output">5</span></p>
+							<p>Maximum Power: <span id="power-capacity-output">6</span></p>
 							<p>Power Regen: <span id="power-regen-output">2</span> per turn</p>
-							<p>Fuel: <span id="power-fuel-use-output">2</span> per week</p>
+							<p>&rdsh; Power/Jump: <span id="jump-power-output">5</span></p>
+							<p>&rdsh; Power/Manuever: <span class="listed-item">1</span></p>
+							<p>&rdsh; Basic Operations: <span class="listed-item" id="power-operations-output">2</span></p>
+							<p>Capacitance Count: <span id="capacitance-count-output">0</span></p>
+							<p>Tonnage: <span id="power-tonnage-output">2</span></p>
+							<p id="power-warning" class="warning">Insufficient Power!</p>
 						</div>
 						<div class="specification">
 							<p><strong>M-Drive</strong></p>
@@ -740,7 +755,6 @@
 							<p>Tonnage: <span id="m-drive-tonnage-output">3</span></p>
 							<p>Speed: <span id="speed-output">3</span></p>
 							<p>Reactions: <span id="agility-output">2</span></p>
-							<p>Fuel: <span id="mDrive-fuel-use-output">2</span> per week</p>
 							<p id="m-drive-warning" class="warning">Ship can not maneuver!</p>
 						</div>
 						<div class="specification">
@@ -748,8 +762,7 @@
 							<img src="images/teleportation.png" class="icon-image">
 							<p>Tonnage: <span id="jump-tonnage-output">3</span></p>
 							<p>Max Jump Distances: <span id="jump-distances-output">1</span></p>
-							<p>Jump Fuel Cost: <span id="jump-fuel-output">10</span> per Jump</p>
-							<p>Jump Power Use: <span id="jump-power-output">5</span> per Jump</p>
+							<p>Jump Prep Time: <span id="jump-time-output">2 hour(s)</span></p>
 							<p id="j-drive-warning" class="warning">Ship can not jump!</p>
 						</div>
 						<div class="specification full-width-specification">
@@ -757,9 +770,9 @@
 							<img src="images/thermometer.png" class="icon-image">
 							<p>Heat Capacity: <span id="total-heat-generation">7</span>/<span id="heat-capacity-output">7</span></p>
 							<p id="heat-warning" class="warning">Insufficient heat management.</p>
-							<p>Power Plant: <span id="power-heat-output">1</span></p>
-							<p>M-Drive: <span id="m-drive-heat-output">2</span></p>
-							<p>J-Drive: <span id="jump-heat-output">4</span></p>
+							<p>&rdsh; Power Plant: <span id="power-heat-output">1</span></p>
+							<p>&rdsh; M-Drive: <span id="m-drive-heat-output">2</span></p>
+							<p>&rdsh; J-Drive: <span id="jump-heat-output">4</span></p>
 						</div>
 						<div class="specification full-width-specification">
 							<p class="action-title"><strong>Engineering Actions</strong> <span class="action-status">+</span></p>

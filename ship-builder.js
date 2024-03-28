@@ -59,7 +59,8 @@
 			power_total_capacity,
 			power_total_cost,
 			power_total_tonnage,
-			power_heat_generation = 1;
+			power_heat_generation = 1,
+			power_operations = 1;
 	var mDrive_type = 'Directed Fusion',
 			mDrive_count = 1,
 			mDrive_cost = 20000,
@@ -187,8 +188,13 @@
 	var comms_type = 'Civilian',
 			comms_cost = 5000,
 			comms_security = 6,
-			comms_network = false
-			comms_range = 25000;
+			comms_network = false,
+			comms_range = 25000,
+			comms_processor = 1,
+			long_range_comms = false,
+			lr_comms_cost = 0,
+			lr_comms_processor = 0,
+			comms_total_power = 0;
 	var multispectrum = true,
 			multispectrum_cost = 1000
 			multispectrum_power = 0,
@@ -441,6 +447,11 @@
 			rad_dr,
 			explosive_dr;
 
+	// Mods
+	var cyber_traveller,
+				jump_cost_mod,
+				tech_limit;
+
 $(document).ready(function(){
 
 // Functions
@@ -448,7 +459,6 @@ $(document).ready(function(){
 	// Output Tab Switcher
 		$('#output-tabs .tab-item').on('click', function(){
 			let category = '#' + $(this).attr('id') + '-group';
-			// console.log(category);
 			if ($(this).hasClass('active') == false) {
 				$('.output-section').removeClass('active');
 				$('#output-tabs .tab-item').removeClass('active');
@@ -461,7 +471,6 @@ $(document).ready(function(){
 
 		$('#input-tabs .tab-item').on('click', function(){
 			let info_group = '#' + $(this).attr('id') + '-group';
-			// console.log(info_group);
 			if ($(this).hasClass('active') == false) {
 				$('#ship-builder-form .section-group').removeClass('active');
 				$('#input-tabs .tab-item').removeClass('active');
@@ -476,13 +485,13 @@ $(document).ready(function(){
 			})
 		}
 
-		$('h4').on('click', function(){
-			$(this).next().slideToggle(300, function(){
-			});
-			$(this).find('.section-status').text(function(){
-				$(this).text() == '-' ? $(this).text('+') : $(this).text('-');
-			});
-		});
+		// $('h4').on('click', function(){
+		// 	$(this).next().slideToggle(300, function(){
+		// 	});
+		// 	$(this).find('.section-status').text(function(){
+		// 		$(this).text() == '-' ? $(this).text('+') : $(this).text('-');
+		// 	});
+		// });
 
 		$('.action-title').on('click', function(){
 			if ($(this).hasClass('expanded') == true) {
@@ -515,10 +524,24 @@ $(document).ready(function(){
 // Form Changes
 	$('#ship-builder-form').on('load change', function(){
 
+		// Mods
+			cyber_traveller = $('#cyber-traveller');
+			if (cyber_traveller.is(':checked')) {
+				
+				jump_cost_mod = 100;
+				tech_limit = 12;
+				$('#tech-level').attr('max', '12');
+				console.log('cyber traveller only');
+			} else {
+				jump_basis = 1;
+				jump_cost_mod = 1;
+				tech_limit = 16;
+				$('#tech-level').attr('max', '16');
+				console.log('regular traveller ships');
+			}
+
 		// Tonnage
 			tonnage = parseInt($('#tonnage').val());
-
-			// console.log(tonnage);
 
 		// Layout
 			layout_type = $('#layout-type').val();
@@ -551,16 +574,9 @@ $(document).ready(function(){
 				$('#layout-modifier').text('- 6');
 			}
 
-			// console.log('layout_type: ' + layout_type);
-			// console.log('layout_cost_mod: ' + layout_cost_mod);
-			// console.log('layout_agility_mod: ' + layout_agility_mod);
-			// console.log('layout_speed_mod: ' + layout_speed_mod);
-			// console.log('layout_hull_mod: ' + layout_hull_mod);
-
 		// Manufacturer
 			manufacturer_type = $('#manufacturer-type').val();
 			manufacturer_style = manufacturer_type.replace(/\s+/g, '-').toLowerCase().replaceAll("[^A-Za-z0-9]","");
-			// console.log(manufacturer_style);
 			$('body').attr('id', manufacturer_style);
 			if (manufacturer_type == 'Atlas') {
 				manufacturer_cost_mod = 1.15;
@@ -669,18 +685,10 @@ $(document).ready(function(){
 				$('#raider-subset').addClass('active');
 			}
 
-			// console.log('manufacturer_type: ' + manufacturer_type);
-			// console.log('manufacturer_cost_mod: ' + manufacturer_cost_mod);
-			// console.log('manufacturer_speed_mod: ' + manufacturer_speed_mod);
-			// console.log('manufacturer_hull_mod: ' + manufacturer_hull_mod);
-
 		// Tech Level
 			tech_level = parseInt($('#tech-level').val());
 			tech_mod = (1 + (((tech_level - 9) ** 2 ) / 5)).toFixed(2);
-			
-
-			// console.log('tech_level: ' + tech_level);
-			// console.log('tech_mod: ' + tech_mod);
+			tech_level > tech_limit ? $('#tl-warning').show() : $('#tl-warning').hide();
 
 		// Fuel
 			fuel_tonnage = parseInt($('#fuel-tonnage').val());
@@ -716,29 +724,20 @@ $(document).ready(function(){
 				$('#fuel-refinery-output').hide();
 			}
 
-			// console.log('fuel_tonnage: ' + fuel_tonnage);
-			// console.log('fuel_cost: ' + fuel_cost);
-			// console.log('fc_cost: ' + fc_cost);
-			// console.log('fc_tonnage: ' + fc_tonnage);
-			// console.log('fp_cost: ' + fp_cost);
-			// console.log('fp_tonnage: ' + fp_tonnage);
-			// console.log('fr_cost: ' + fr_cost);
-			// console.log('fr_tonnage: ' + fr_tonnage);
-
 		// Power
 			power_size = parseInt($('#power-size').val());
 			power_count = parseInt($('#power-count').val());
 			capacitance_module_count = parseInt($('#capacitance-module-count').val());
 			power_type = $('#power-type').val();
 			if (power_type == 'Fusion Generator') {
-				base_power = 5 * power_count * power_size;
+				base_power = 6 * power_count * power_size;
 				power_regen = 4 * (power_size/2) * power_count;
 				power_tonnage = 2 * power_size * power_count;
 				power_cost = 20000 * power_size * power_count;
 				power_fuel_per_week = 2 * power_size * power_count;
 				power_heat_generation = 1 * power_size * power_count;
 			} else if (power_type == 'Antimatter Collider') {
-				base_power = 5 * power_count * power_size;
+				base_power = 6 * power_count * power_size;
 				power_regen = 6 * (power_size/2) * power_count;
 				power_tonnage = 3 * power_size * power_count;
 				power_cost = 50000 * power_size * power_count;
@@ -752,7 +751,7 @@ $(document).ready(function(){
 				power_fuel_per_week = 4 * power_size * power_count;
 				power_heat_generation = 4 * power_size * power_count;
 			} else if (power_type == 'Warp Field Collector') {
-				base_power = 5 * power_count * power_size;
+				base_power = 6 * power_count * power_size;
 				power_regen = 4 * (power_size/2) * power_count;
 				power_tonnage = 1 * power_size * power_count;
 				power_cost = 1000000 * power_size * power_count;
@@ -762,20 +761,6 @@ $(document).ready(function(){
 			power_total_capacity = base_power + (capacitance_module_count * 3);
 			power_total_cost = power_cost + (capacitance_module_count * 10000);
 			power_total_tonnage = power_tonnage + capacitance_module_count;
-
-			// console.log('power_size: ' + power_size);
-			// console.log('power_count: ' + power_count);
-			// console.log('capacitance_modules: ' + capacitance_module_count);
-			// console.log('power_type: ' + power_type);
-			// console.log('base_power: ' + base_power);
-			// console.log('power_regen: ' + power_regen);
-			// console.log('power_tonnage: ' + power_tonnage);
-			// console.log('power_cost: ' + power_cost);
-			// console.log('power_fuel_per_week: ' + power_fuel_per_week);
-			// console.log('power_total_capacity: ' + power_total_capacity);
-			// console.log('power_total_cost: ' + power_total_cost);
-			// console.log('power_fuel_per_week: ' + power_fuel_per_week);
-			// console.log('     ');
 
 		// M-Drive
 			mDrive_type = $('#mDrive-type').val();
@@ -831,35 +816,14 @@ $(document).ready(function(){
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #photon-rocket-details').removeClass('hidden');
 			}
-
-			// console.log('type: ' + mDrive_type);
-			// console.log('count: ' + mDrive_count);
-			// console.log('cost: ' + mDrive_cost);
-			// console.log('tons: ' + mDrive_tonnage);
-			// console.log('power: ' + mDrive_power_use);
-			// console.log('fuel: ' + mDrive_fuel_use);
-			// console.log('agility raw: ' + mDrive_agility_raw);
-			// console.log('agility fixed: ' + mDrive_agility_fixed);
-			// console.log('thrust raw: ' + mDrive_thrust_raw);
-			// console.log('thrust fixed: ' + mDrive_thrust_fixed);
-			// console.log(' ');
-
-			// console.log(1/tech_mod);
-		
+	
 		// J-Drive
 			max_jump_distance = parseInt($('#max-jump-distance').val());
 			jump_tonnage = Math.round(((tonnage/30) + ((max_jump_distance - 1) * (max_jump_distance + 1) * (1/tech_mod))) * max_jump_distance);
-			jump_power_cost = Math.round(tonnage/20) * max_jump_distance;
+			jump_power_cost = (Math.round(tonnage/20) * max_jump_distance);
 			jump_fuel_cost = Math.round(tonnage/10) * max_jump_distance;
-			jump_drive_cost = max_jump_distance * (max_jump_distance + 1) * 10000;
+			jump_drive_cost = max_jump_distance * (max_jump_distance + 1) * 10000  * jump_cost_mod;
 			jump_heat_generation = (tonnage/25) * max_jump_distance;
-			// console.log('max jump distancce: ' + max_jump_distance);
-			// console.log('jump tonnage: ' + jump_tonnage);
-			// console.log('jump power cost: ' + jump_power_cost);
-			// console.log('jump fuel cost: ' + jump_fuel_cost);
-			// console.log('jump heat generation: ' + jump_heat_generation);
-			// console.log('jump drive cost: ' + jump_drive_cost);
-			// console.log(' ');
 
 		// Heat Management
 			heat_sink_count = $('#heat-sink-count').val();
@@ -890,22 +854,13 @@ $(document).ready(function(){
 				interior_structure_mod = 1.2;
 			}
 
-			// console.log('interior_type: ' + interior_type);
-			// console.log('interior_cost_mod: ' + interior_cost_mod);
-			// console.log('interior_tonnage: ' + interior_tonnage);
-			// console.log('interior_structure_mod: ' + interior_structure_mod);
-
 		// Air Locks
 			air_lock_count = parseInt($('#air-lock-count').val());
 			air_lock_tonnage = air_lock_count * 2;
 
-			// console.log('air_lock_count: ' + air_lock_count);
-			// console.log('air_lock_tonnage: ' + air_lock_tonnage);
-
 		// Life Support
 			crew_size = $('#crew-size').val();
 			additional_life_support = parseInt($('#additional-life-support').val());
-
 			life_support_tonnage = Math.floor((tonnage / 50) + (additional_life_support/5));
 			life_support_cost = life_support_tonnage * 1000;
 			life_support_value = (tonnage/10) + (additional_life_support);
@@ -985,12 +940,7 @@ $(document).ready(function(){
 
 			crew_space = (state_room_count * 2) + (barracks_count * 6);
 			room_total_cost = cargo_bay_cost + ships_locker_cost + common_area_cost + state_room_cost + drone_bay_cost + barracks_cost + medical_bay_cost + science_bay_cost + technical_bay_cost + weapons_bay_cost + launch_bay_cost + low_berths_cost + escape_pod_cost + garden_cost + conservatory_cost;
-			// console.log(cargo_bay_cost + ' ' + ships_locker_cost + ' ' + common_area_cost + ' ' + state_room_cost + ' ' + drone_bay_cost + ' ' + barracks_cost + ' ' + medical_bay_cost + ' ' + science_bay_cost + ' ' + technical_bay_cost + ' ' + weapons_bay_cost + ' ' + launch_bay_cost + ' ' + low_berths_cost);
 			room_total_tonnage = cargo_bay_tonnage + ships_locker_tonnage + common_area_tonnage + state_room_tonnage + drone_bay_tonnage + barracks_tonnage + medical_bay_tonnage + science_bay_tonnage + technical_bay_tonnage + weapons_bay_tonnage + launch_bay_tonnage + low_berths_tonnage + escape_pod_tonnage + garden_tonnage + conservatory_tonnage;
-			console.log('barracks count: ' + barracks_count);
-			console.log('barracks tonnage: ' + barracks_tonnage);
-			console.log('barracks cost: ' + barracks_cost);
-			console.log(' ');
 
 		// Bridge
 			bridge_type = $('#bridge-type').val();
@@ -1042,9 +992,6 @@ $(document).ready(function(){
 			}
 			total_processor = computer_processor + (additional_processors * 2);
 			computer_total_cost = computer_cost + additional_processor_cost;
-			// console.log(computer_cost);
-			// console.log(additional_processor_cost);
-			// console.log(computer_total_cost);
 
 		// Software
 			// Security Tracking Software
@@ -1066,7 +1013,7 @@ $(document).ready(function(){
 				autopilot_software = $('#autopilot-software');
 				if (autopilot_software.is(':checked')) {
 					autopilot_cost = 30000;
-					autopilot_processor = 2;
+					autopilot_processor = 1;
 					$('#autopilot-software-output').show();
 				} else {
 					autopilot_cost = 0;
@@ -1077,7 +1024,7 @@ $(document).ready(function(){
 				combat_automation_software = $('#combat-automation-software');
 				if (combat_automation_software.is(':checked')) {
 					combat_automation_cost = 100000;
-					combat_automation_processor = 3;
+					combat_automation_processor = 2;
 					$('#combat-automation-software-output').show();
 				} else {
 					combat_automation_cost = 0;
@@ -1099,7 +1046,7 @@ $(document).ready(function(){
 				intrusion_software = $('#intrusion-software');
 				if (intrusion_software.is(':checked')) {
 					intrusion_cost = 100000;
-					intrusion_processor = 4;
+					intrusion_processor = 2;
 					$('#intrusion-software-output').show();
 				} else {
 					intrusion_cost = 0;
@@ -1110,7 +1057,7 @@ $(document).ready(function(){
 				network_software = $('#network-software');
 				if (network_software.is(':checked')) {
 					network_cost = 50000;
-					network_processor = 2;
+					network_processor = 1;
 					$('#network-software-output').show();
 					$('#comms-local-network-output').show();
 				} else {
@@ -1123,7 +1070,7 @@ $(document).ready(function(){
 				expert_software = $('#expert-software');
 				if (expert_software.is(':checked')) {
 					expert_cost = 50000;
-					expert_processor = 2;
+					expert_processor = 1;
 					$('#expert-software-output').show();
 				} else {
 					expert_cost = 0;
@@ -1145,7 +1092,7 @@ $(document).ready(function(){
 				diagnostics_software = $('#diagnostics-software');
 				if (diagnostics_software.is(':checked')) {
 					diagnostics_cost = 50000;
-					diagnostics_processor = 2;
+					diagnostics_processor = 3;
 					$('#diagnostics-software-output').show();
 				} else {
 					diagnostics_cost = 0;
@@ -1154,27 +1101,49 @@ $(document).ready(function(){
 				}
 			software_total_cost = security_tracking_cost + autopilot_cost + combat_automation_cost + jump_control_cost + intrusion_cost + network_cost + expert_cost + virtual_intelligence_cost + diagnostics_cost;
 			software_total_processor = security_tracking_processor + autopilot_processor + network_processor + combat_automation_processor + jump_control_processor + intrusion_processor + expert_processor + virtual_intelligence_processor + diagnostics_processor;
-			// console.log(security_tracking_cost + ' ' + autopilot_cost + ' ' + combat_automation_cost + ' ' + jump_control_cost + ' ' + intrusion_cost + ' ' + expert_cost + ' ' + virtual_intelligence_cost);
 
 		// Comms
 			comms_type = $('#comms-type').val();
 			if (comms_type == 'Civilian') {
 				comms_cost = 5000;
 				comms_security = 7;
+				comms_processor = 1;
+				comms_power = 0;
 				comms_range = 25000;
 			} else if (comms_type == 'Military') {
 				comms_cost = 15000;
 				comms_security = 10;
+				comms_processor = 2;
+				comms_power = 1;
 				comms_range = 25000;
 			} else if (comms_type == 'Advanced') {
 				comms_cost = 18000;
 				comms_security = 8;
+				comms_processor = 2;
+				comms_power = 1;
 				comms_range = 50000;
 			} else if (comms_type == 'Expert') {
 				comms_cost = 3000;
-				comms_security = 9;
+				comms_security = 10;
+				comms_processor = 4;
+				comms_power = 2;
 				comms_range = 50000;
 			}
+			long_range_comms = $('#long-range-comms');
+			if (long_range_comms.is(':checked')) {
+				lr_comms_cost = 20000;
+				lr_comms_processor = 3;
+				lr_comms_power = 4;
+				$('#long-range-comms-output').show();
+			} else {
+				lr_comms_cost = 0;
+				lr_comms_processor = 0;
+				lr_comms_power = 0;
+				$('#long-range-comms-output').hide();
+			}
+			comms_total_cost = comms_cost + lr_comms_cost;
+			comms_total_processor = comms_processor + lr_comms_processor;
+			comms_total_power = comms_power + lr_comms_power;
 			
 		// Sensors
 			// Multispectrum
@@ -1312,8 +1281,6 @@ $(document).ready(function(){
 				armor_rad_dr = 4;
 				armor_explosive_dr = 4;
 			}
-			// console.log(armor_type);
-			// console.log(armor_cost);
 
 			reinforce_kinetic_dr = parseInt($('#reinforce-kinetic-dr').val());
 			reinforce_energy_dr = parseInt($('#reinforce-energy-dr').val());
@@ -1321,12 +1288,6 @@ $(document).ready(function(){
 			reinforce_explosive_dr = parseInt( $('#reinforce-explosive-dr').val());
 			reinforce_cost = (reinforce_kinetic_dr * 1000 * (tonnage / 5)) + (reinforce_energy_dr * 1000 * (tonnage / 5)) + (reinforce_rad_dr * 1000 * (tonnage / 5)) + (reinforce_explosive_dr * 1000 * (tonnage / 5));
 			reinforce_tonnage = (reinforce_kinetic_dr * (tonnage / 100)) + (reinforce_energy_dr * (tonnage / 100)) + (reinforce_rad_dr * (tonnage / 100)) + (reinforce_explosive_dr * (tonnage / 100));
-			// console.log(reinforce_tonnage);
-			// console.log('kinetic: ' + reinforce_kinetic_dr);
-			// console.log('energy: ' + reinforce_energy_dr);
-			// console.log('radiation: ' + reinforce_rad_dr);
-			// console.log('reinforce: ' + reinforce_explosive_dr);
-			// console.log('cost: ' + reinforce_cost);
 
 		// Coatings
 			coating_type = $('#coating-type').val();
@@ -1618,11 +1579,7 @@ $(document).ready(function(){
 				lpdl_tonnage = lpdl_count * 2;
 				lpdl_power = lpdl_count * 3;
 			weapon_total_tonnage = ac2_tonnage + ac5_tonnage + ac10_tonnage + ac20_tonnage + rg1_tonnage + rg3_tonnage + rg5_tonnage + rg8_tonnage + or4_tonnage + or8_tonnage + or16_tonnage + or32_tonnage + spl_tonnage + mpl_tonnage + lpl_tonnage + sil_tonnage + mil_tonnage + lil_tonnage + sel_tonnage + mel_tonnage + lel_tonnage + pb_tonnage + pba_tonnage + srm2_tonnage + srm4_tonnage + srm6_tonnage + srm8_tonnage + lrm5_tonnage + lrm10_tonnage + lrm15_tonnage + lrm20_tonnage + tt_tonnage + tta_tonnage + sc_tonnage + rsc_tonnage + spdl_tonnage + mpdl_tonnage + lpdl_tonnage;
-			// console.log(weapon_total_tonnage);
-			// console.log(ac2_tonnage + ' ' + ac5_tonnage + ' ' + ac10_tonnage + ' ' + ac20_tonnage + ' ' + rg1_tonnage + ' ' + rg3_tonnage + ' ' + rg5_tonnage + ' ' + rg8_tonnage + ' ' + or4_tonnage + ' ' + or8_tonnage + ' ' + or16_tonnage + ' ' + or32_tonnage + ' ' + spl_tonnage + ' ' + mpl_tonnage + ' ' + lpl_tonnage + ' ' + sil_tonnage + ' ' + mil_tonnage + ' ' + lil_tonnage + ' ' + sel_tonnage + ' ' + mel_tonnage + ' ' + lel_tonnage + ' ' + pb_tonnage + ' ' + pba_tonnage + ' ' + lrm5_tonnage + ' ' + lrm10_tonnage + ' ' + lrm15_tonnage + ' ' + lrm20_tonnage + ' ' + tt_tonnage + ' ' + tta_tonnage + ' ' + sc_tonnage + ' ' + rsc_tonnage + ' ' + spdl_tonnage + ' ' + mpdl_tonnage + ' ' + lpdl_tonnage);
 			weapon_total_cost = ac2_cost + ac5_cost + ac10_cost + ac20_cost + rg1_cost + rg3_cost + rg5_cost + rg8_cost + or4_cost + or8_cost + or16_cost + or32_cost + spl_cost + mpl_cost + lpl_cost + sil_cost + mil_cost + lil_cost + sel_cost + mel_cost + lel_cost + pb_cost + pba_cost + srm2_cost + srm4_cost + srm6_cost + srm8_cost + lrm5_cost + lrm10_cost + lrm15_cost + lrm20_cost + tt_cost + tta_cost + sc_cost + rsc_cost + spdl_cost + mpdl_cost + lpdl_cost;
-			// console.log(weapon_total_cost);
-			// console.log(ac2_cost + ' ' + ac5_cost + ' ' + ac10_cost + ' ' + ac20_cost + ' ' + rg1_cost + ' ' + rg3_cost + ' ' + rg5_cost + ' ' + rg8_cost + ' ' + cr4_cost + ' ' + or8_cost + ' ' + or16_cost + ' ' + or32_cost + ' ' + spl_cost + ' ' + mpl_cost + ' ' + lpl_cost + ' ' + sil_cost + ' ' + mil_cost + ' ' + lil_cost + ' ' + sel_cost + ' ' + mel_cost + ' ' + lel_cost + ' ' + pb_cost + ' ' + pba_cost + ' ' + lrm5_cost + ' ' + lrm10_cost + ' ' + lrm15_cost + ' ' + lrm20_cost + ' ' + tt_cost + ' ' + tta_cost + ' ' + sc_cost + ' ' + rsc_cost + ' ' + spdl_cost + ' ' + mpdl_cost + ' ' + lpdl_cost);
 			weapon_total_tonnage == 0 ? $('#no-weapons').show() : $('#no-weapons').hide();
 
 		// Final Outputs and Values
@@ -1632,22 +1589,17 @@ $(document).ready(function(){
 				} else {
 					average_type = 'Modified';
 				}
-
 				designation = tonnage + ' dTon TL ' + tech_level + ' ' + layout_type + ' ' + manufacturer_type + ' ' + average_type + ' Ship';
 				$('#designation-output').text(designation);
 
 			// Cost/Upkeep/Monthly Payments
-				cost = Math.round(((5000 + interior_cost_mod) * tonnage * (1 + (tonnage / 100)) * layout_cost_mod * manufacturer_cost_mod * tech_mod) + fuel_cost + (air_lock_count * 25000) + power_total_cost + (fc_cost + fp_cost + fr_cost) + jump_drive_cost + room_total_cost + coating_cost + sensor_total_cost + weapon_total_cost + armor_cost + reinforce_cost + computer_total_cost + software_total_cost + heat_sink_cost + life_support_cost);
-				// console.log(interior_cost_mod + ' ' + tonnage + ' ' + layout_cost_mod + ' ' + manufacturer_cost_mod + ' ' + tech_mod + ' ' + fuel_cost + ' ' + air_lock_count + ' ' + power_total_cost + ' ' + (fc_cost + ' ' + fp_cost + ' ' + fr_cost) + ' ' + room_total_cost + ' ' + coating_cost + ' ' + weapon_total_cost + ' ' + armor_cost + ' ' + computer_total_cost + ' ' + software_total_cost);
-				// console.log('cost: ' + cost);
+				cost = Math.round(((5000 + interior_cost_mod) * tonnage * (1 + (tonnage / 100)) * layout_cost_mod * manufacturer_cost_mod * tech_mod) + fuel_cost + (air_lock_count * 25000) + power_total_cost + (fc_cost + fp_cost + fr_cost) + jump_drive_cost + room_total_cost + coating_cost  + sensor_total_cost + weapon_total_cost + armor_cost + reinforce_cost + computer_total_cost + software_total_cost + comms_total_cost + heat_sink_cost + life_support_cost);
 				$('#cost-output').text(cost).digits();
 
 				upkeep = Math.round(cost/5000);
-				// console.log('upkeep: ' + upkeep);
 				$('#upkeep-output').text(upkeep).digits();
 
 				monthly = Math.round(cost/360);
-				// console.log("monthly: " + monthly);
 				$('#monthly-output').text(monthly).digits();
 
 			// Tonnage Output
@@ -1656,33 +1608,13 @@ $(document).ready(function(){
 				$('#tonnage-output, #tonnage-focused-output').text(tonnage)
 				$('#tonnage-used-output, #tonnage-focused-used-output').text(tonnage_used);
 				tonnage < tonnage_used ? $('#tonnage-warning').show() :	$('#tonnage-warning').hide();
-				// console.log('tonnage: ' + tonnage);
-				// console.log('tonnage_used: ' + tonnage_used);
-				// console.log('remaining_tonnage: ' + remaining_tonnage);
-
-				// console.log(interior_tonnage);
-				// console.log(air_lock_tonnage);
-				// console.log(fuel_tonnage);
-				// console.log(fr_tonnage);
-				// console.log(fp_tonnage);
-				// console.log(fc_tonnage);
-				// console.log(mDrive_tonnage);
-				// console.log(power_total_tonnage);
-				// console.log(jump_tonnage);
-				// console.log(room_total_tonnage);
-				// console.log(bridge_tonnage);
-				// console.log(armor_tonnage);
-				// console.log(weapon_total_tonnage);
-				// console.log(life_support_tonnage);
 
 			// Hull Output
 				hull = Math.round((tonnage/10) * manufacturer_hull_mod * layout_hull_mod * tech_mod);
-				// console.log('hull: ' + hull);
 				$('#hull-output').text(hull);
 
 			// Structure Output
 				structure = Math.round((tonnage/20) * interior_structure_mod * tech_mod);
-				// console.log('structure: ' + structure);
 				$('#structure-output').text(structure);
 
 			// Communications Output
@@ -1697,11 +1629,9 @@ $(document).ready(function(){
 			// Mobility
 				mDrive_agility_fixed = Math.floor(mDrive_agility_raw);
 				mDrive_thrust_fixed = Math.floor(mDrive_thrust_raw);
-
 				if ((mDrive_agility_fixed < 0) || (mDrive_tonnage == 0)) {
 					mDrive_agility_fixed = 0;
 				}
-
 				if ((mDrive_thrust_fixed < 0) || (mDrive_tonnage == 0)) {
 					mDrive_thrust_fixed = 0;
 				}
@@ -1713,7 +1643,13 @@ $(document).ready(function(){
 				$('#agility-output').text(mDrive_agility_fixed);
 
 			// Jump
-				jump_tonnage == 0 ? $('#j-drive-warning').show() : $('#j-drive-warning').hide();
+				if (cyber_traveller.is(':checked')) {
+					console.log('jump 0 allowed');
+				} else {
+					jump_tonnage == 0 ? $('#j-drive-warning').show() : $('#j-drive-warning').hide();
+				}
+				let jump_time = Math.round(2 + (tonnage/100) - (tech_mod));
+				jump_time > 0 ? $('#jump-time-output').text(jump_time + ' hour(s)') : $('#jump-time-output').text('Instant');;
 				$('#jump-tonnage-output').text(jump_tonnage);
 				$('#jump-distances-output').text(max_jump_distance);
 				$('#jump-fuel-output').text(jump_fuel_cost);
@@ -1722,7 +1658,6 @@ $(document).ready(function(){
 			// Life Support Output 
 				$('#life-support-units-output').text(life_support_value);
 				$('#life-support-output').text(stamina);
-				// console.log('stamina: ' + stamina);
 				stamina <= 0 ? $('#life-support-warning').show() : $('#life-support-warning').hide();
 
 			// Crew Space Output
@@ -1732,10 +1667,13 @@ $(document).ready(function(){
 
 			// Power
 				power = base_power + (capacitance_module_count * 2);
-				// console.log('power: ' + power);
+				power_operations = comms_total_power + sensor_total_power + mDrive_power_use;
 				$('#power-tonnage-output').text(power_total_tonnage);
 				$('#power-capacity-output').text(power);
 				$('#power-regen-output').text(power_regen);
+				$('#capacitance-count-output').text(capacitance_module_count);
+				$('#power-operations-output').text(power_operations);
+				power < power_operations ? $('#power-warning').show() : $('#power-warning').hide();
 
 			// Fuel
 				$('#fuel-tonnage-output').text(fuel_tonnage);
@@ -1743,7 +1681,8 @@ $(document).ready(function(){
 				$('#mDrive-fuel-use-output').text(mDrive_fuel_use);
 				$('#jump-fuel-cost-output').text(jump_fuel_cost);
 				fuel_use_total = mDrive_fuel_use + power_fuel_per_week;
-				$('#fuel-used-total-output').text(fuel_use_total)
+				$('#fuel-used-total-output').text(fuel_use_total);
+				$('#fuel-evasion-cost-output').text(tonnage/100);
 
 			// Heat Output
 				heat_capacity = coating_heat_reduction + (tonnage / 20) + (heat_sink_count * 1);
@@ -1754,21 +1693,12 @@ $(document).ready(function(){
 				$('#m-drive-heat-output').text(mDrive_heat_generation);
 				$('#jump-heat-output').text(jump_heat_generation);
 				$('#total-heat-generation').text(total_heat_generation);
-				// console.log('heat capacity: ' + heat_capacity);
-				// console.log('power heat: ' + power_heat_generation);
-				// console.log('m-drive heat: ' + mDrive_heat_generation);
-				// console.log('j-drive heat: ' + jump_heat_generation);
-				// console.log('combined heat: ' + power_heat_generation + ' ' + mDrive_heat_generation + ' ' + jump_heat_generation);
-				// console.log('total heat: ' + total_heat_generation);
 
 			// Computer 
-				processor_used = software_total_processor + sensor_total_processor;
+				processor_used = software_total_processor + sensor_total_processor + comms_total_processor;
 				processor_used > total_processor ? $('#processor-warning').show() : $('#processor-warning').hide();
 				$('#used-processor-output').text(processor_used);
 				$('#total-processor-output').text(total_processor);
-				// console.log('processor used: ' + processor_used);
-				// console.log('total processor: ' + total_processor);
-
 
 			// Rooms Output
 				$('#cargo-bay-tonnage-output').text(cargo_bay_tonnage);
@@ -1794,13 +1724,6 @@ $(document).ready(function(){
 				$('#explosive-dr-output').text(armor_explosive_dr + reinforce_explosive_dr);
 
 			// Coating Finals
-				// console.log(coating_type);
-				// console.log(coating_kinetic_dr);
-				// console.log(coating_energy_dr);
-				// console.log(coating_rad_dr);
-				// console.log(coating_explosive_dr);
-				// console.log(coating_rad_dr);
-
 				$('#coating-type-output').text(coating_type);
 				$('#coating-kinetic-output').text(coating_kinetic_dr);
 				$('#coating-energy-output').text(coating_energy_dr);
@@ -1856,13 +1779,19 @@ $(document).ready(function(){
 
 
 		// Warning Updates
+			if ($('#tl-warning').css('display') != 'none') {
+				$('#basics-alert').show();
+			} else {
+				$('#basics-alert').hide();
+			}
+
 			if (($('#processor-warning').css('display') != 'none') || ($('#bridge-warning').css('display') != 'none')) {
 				$('#bridge-alert').show();
 			} else {
 				$('#bridge-alert').hide();
 			}
 
-			if (($('#m-drive-warning').css('display') != 'none') || ($('#j-drive-warning').css('display') != 'none') || ($('#heat-warning').css('display') != 'none')) {
+			if (($('#m-drive-warning').css('display') != 'none') || ($('#j-drive-warning').css('display') != 'none') || ($('#heat-warning').css('display') != 'none') || ($('#power-warning').css('display') != 'none')) {
 				$('#engineering-alert').show();
 			} else {
 				$('#engineering-alert').hide();
@@ -1878,7 +1807,6 @@ $(document).ready(function(){
 
 	// Save
 	$('#save-data').on('click', function(){
-		//console.log('save clicked');
 		var all_values = [];
 		all_values.push(tonnage, layout_type, layout_cost_mod, layout_agility_mod,
 		                layout_speed_mod, layout_hull_mod, manufacturer_type, manufacturer_cost_mod,
@@ -1947,7 +1875,6 @@ $(document).ready(function(){
 		                lpdl_count, lpdl_cost, lpdl_tonnage, lpdl_power, designation, average_type, cost, upkeep, monthly,
 		                tonnage_used, remaining_tonnage, power, hull, structure, agility, kinetic_dr, energy_dr, rad_dr,
 		                explosive_dr);
-		//console.log(all_values);
 		localStorage.setItem('ShipData', all_values);
 		$('#loading.warning').hide();
 		$('#save-data').text('Success')
@@ -1955,9 +1882,7 @@ $(document).ready(function(){
 
 	// Load
 	$('#load-data').on('click', function(){
-		//console.log('load clicked');
 		if ((localStorage.getItem('ShipData')) != undefined) {
-			//console.log(localStorage.getItem('ShipData'));
 			$('#loading.warning').hide();
 		} else {
 			$('#loading.warning').show();
