@@ -1,7 +1,6 @@
 
 
 // Presets
-	// Single Choice Only
 	var tonnage = 100;
 	var layout_type = 'Standard',
 			layout_cost_mod = 1,
@@ -480,6 +479,7 @@ $(document).ready(function(){
 			}
 		});
 
+	// Comma Separated Digits
 		$.fn.digits = function(){ 
 		return this.each(function(){ 
 				$(this).text( $(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") ); 
@@ -494,6 +494,7 @@ $(document).ready(function(){
 		// 	});
 		// });
 
+	// Action Show/Hide
 		$('.action-title').on('click', function(){
 			if ($(this).hasClass('expanded') == true) {
 				$(this).find('.action-status').text('+');	
@@ -506,8 +507,8 @@ $(document).ready(function(){
 			}
 		});
 
+	// Sidebar Show/Hide
 		let sidebar_status = true;
-		// Sidebar Show/Hide
 		$('#sidebar-controls').on('click', function(){
 			if (sidebar_status == false) {
 				sidebar_status = true;
@@ -732,28 +733,28 @@ $(document).ready(function(){
 			power_type = $('#power-type').val();
 			if (power_type == 'Fusion Generator') {
 				base_power = 6 * power_count * power_size;
-				power_regen = 4 * (power_size/2) * power_count;
+				power_regen = 12 * (power_size/2) * power_count;
 				power_tonnage = 2 * power_size * power_count;
 				power_cost = 20000 * power_size * power_count;
 				power_fuel_per_week = 2 * power_size * power_count;
 				power_heat_generation = 1 * power_size * power_count;
 			} else if (power_type == 'Antimatter Collider') {
-				base_power = 6 * power_count * power_size;
-				power_regen = 6 * (power_size/2) * power_count;
+				base_power = 8 * power_count * power_size;
+				power_regen = 12 * (power_size/2) * power_count;
 				power_tonnage = 3 * power_size * power_count;
 				power_cost = 50000 * power_size * power_count;
 				power_fuel_per_week = 2 * power_size * power_count;
 				power_heat_generation = 2 * power_size * power_count;
 			} else if (power_type == 'Quark Fusion Generator') {
 				base_power = 10 * power_count * power_size;
-				power_regen = 10 * (power_size/2) * power_count;
+				power_regen = 12 * (power_size/2) * power_count;
 				power_tonnage = 5 * power_size * power_count;
 				power_cost = 90000 * power_size * power_count;
 				power_fuel_per_week = 4 * power_size * power_count;
 				power_heat_generation = 4 * power_size * power_count;
 			} else if (power_type == 'Warp Field Collector') {
 				base_power = 6 * power_count * power_size;
-				power_regen = 4 * (power_size/2) * power_count;
+				power_regen = 12 * (power_size/2) * power_count;
 				power_tonnage = 1 * power_size * power_count;
 				power_cost = 1000000 * power_size * power_count;
 				power_fuel_per_week = 0;
@@ -1153,7 +1154,7 @@ $(document).ready(function(){
 				multispectrum = $('#multispectrum');
 				if (multispectrum.is(':checked')) {
 					multispectrum_cost = 10000;
-					multispectrum_power = 1;
+					multispectrum_power = 0;
 					multispectrum_processor = 1;
 					$('#multispectrum-output').show();
 				} else {
@@ -1180,7 +1181,7 @@ $(document).ready(function(){
 				if (lidar.is(':checked')) {
 					lidar_cost = 10000;
 					lidar_power = 1;
-					lidar_processor = 2;
+					lidar_processor = 1;
 					$('#lidar-output').show();
 				} else {
 					lidar_cost = 0;
@@ -1676,7 +1677,7 @@ $(document).ready(function(){
 				$('#power-regen-output').text(power_regen);
 				$('#capacitance-count-output').text(capacitance_module_count);
 				$('#power-operations-output').text(power_operations);
-				power < power_operations ? $('#power-warning').show() : $('#power-warning').hide();
+				power_regen < power_operations ? $('#power-warning').show() : $('#power-warning').hide();
 
 			// Fuel
 				$('#fuel-tonnage-output').text(fuel_tonnage);
@@ -1778,9 +1779,6 @@ $(document).ready(function(){
 			// Reset Save Text
 				$('#save-data').text('Save');
 
-		// Accept Warnings Options
-
-
 		// Warning Updates
 			if ($('#tl-warning').css('display') != 'none') {
 				$('#basics-alert').show();
@@ -1794,7 +1792,7 @@ $(document).ready(function(){
 				$('#bridge-alert').hide();
 			}
 
-			if (($('#m-drive-warning').css('display') != 'none') || ($('#j-drive-warning').css('display') != 'none') || ($('#heat-warning').css('display') != 'none') || ($('#power-warning').css('display') != 'none')) {
+			if (($('#m-drive-warning').css('display') != 'none') || (($('#j-drive-warning').css('display') != 'none') && (cyber_traveller.is(':checked') == false)) || ($('#heat-warning').css('display') != 'none') || ($('#power-warning').css('display') != 'none')) {
 				$('#engineering-alert').show();
 			} else {
 				$('#engineering-alert').hide();
