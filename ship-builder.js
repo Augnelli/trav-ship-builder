@@ -194,6 +194,7 @@
 			long_range_comms = false,
 			lr_comms_cost = 0,
 			lr_comms_processor = 0,
+			lr_comms_tonnage = 0,
 			comms_total_power = 0;
 	var multispectrum = true,
 			multispectrum_cost = 1000
@@ -1131,14 +1132,16 @@ $(document).ready(function(){
 			}
 			long_range_comms = $('#long-range-comms');
 			if (long_range_comms.is(':checked')) {
-				lr_comms_cost = 20000;
+				lr_comms_cost = 100000;
 				lr_comms_processor = 3;
 				lr_comms_power = 4;
+				lr_comms_tonnage = 6;
 				$('#long-range-comms-output').show();
 			} else {
 				lr_comms_cost = 0;
 				lr_comms_processor = 0;
 				lr_comms_power = 0;
+				lr_comms_tonnage = 0;
 				$('#long-range-comms-output').hide();
 			}
 			comms_total_cost = comms_cost + lr_comms_cost;
@@ -1603,7 +1606,7 @@ $(document).ready(function(){
 				$('#monthly-output').text(monthly).digits();
 
 			// Tonnage Output
-				tonnage_used = interior_tonnage + air_lock_tonnage + fuel_tonnage + (fr_tonnage + fp_tonnage + fc_tonnage) + heat_sink_tonnage + mDrive_tonnage + power_total_tonnage + jump_tonnage + room_total_tonnage + bridge_tonnage + armor_tonnage + weapon_total_tonnage + life_support_tonnage + reinforce_tonnage;
+				tonnage_used = interior_tonnage + air_lock_tonnage + fuel_tonnage + (fr_tonnage + fp_tonnage + fc_tonnage) + heat_sink_tonnage + mDrive_tonnage + power_total_tonnage + jump_tonnage + room_total_tonnage + bridge_tonnage + armor_tonnage + weapon_total_tonnage + life_support_tonnage + reinforce_tonnage + lr_comms_tonnage;
 				remaining_tonnage = tonnage - tonnage_used;
 				$('#tonnage-output, #tonnage-focused-output').text(tonnage)
 				$('#tonnage-used-output, #tonnage-focused-used-output').text(tonnage_used);
