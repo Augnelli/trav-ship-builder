@@ -733,20 +733,20 @@ $(document).ready(function(){
 			power_type = $('#power-type').val();
 			if (power_type == 'Fusion Generator') {
 				base_power = 6 * power_count * power_size;
-				power_regen = 12 * (power_size/2) * power_count;
+				power_regen = 10 * (power_size/2) * power_count;
 				power_tonnage = 2 * power_size * power_count;
 				power_cost = 20000 * power_size * power_count;
 				power_fuel_per_week = 2 * power_size * power_count;
 				power_heat_generation = 1 * power_size * power_count;
 			} else if (power_type == 'Antimatter Collider') {
 				base_power = 8 * power_count * power_size;
-				power_regen = 12 * (power_size/2) * power_count;
+				power_regen = 10 * (power_size/2) * power_count;
 				power_tonnage = 3 * power_size * power_count;
 				power_cost = 50000 * power_size * power_count;
 				power_fuel_per_week = 2 * power_size * power_count;
 				power_heat_generation = 2 * power_size * power_count;
 			} else if (power_type == 'Quark Fusion Generator') {
-				base_power = 10 * power_count * power_size;
+				base_power = 6 * power_count * power_size;
 				power_regen = 12 * (power_size/2) * power_count;
 				power_tonnage = 5 * power_size * power_count;
 				power_cost = 90000 * power_size * power_count;
