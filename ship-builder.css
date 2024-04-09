@@ -270,6 +270,31 @@ input.small-input {
 	background-color: #c034;
 }
 
+.sub-field-group {
+	position: relative;
+	width: 340px;
+}
+
+.sub-label,
+.sub-field {
+	width: 60px;
+	position: absolute;
+	right: 20px;
+}
+
+.sub-label {
+	top: 0;
+}
+
+.sub-field {
+	top: 24px;
+}
+
+.sub-label[disabled="disabled"],
+.sub-field[disabled="disabled"] {
+	color: #666;
+}
+
 #sidebar-controls {
 	position: fixed;
 	left: 0;

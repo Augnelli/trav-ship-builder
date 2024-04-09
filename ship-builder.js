@@ -246,61 +246,73 @@
 				ac2_cost = 0,
 				ac2_tonnage = 0,
 				ac2_power = 0,
+				ac2_ammo = 0,
 			// AC 5
 				ac5_count = 0,
 				ac5_cost = 0,
 				ac5_tonnage = 0,
 				ac5_power = 0,
+				ac5_ammo = 0,
 			// AC 10
 				ac10_count = 0,
 				ac10_cost = 0,
 				ac10_tonnage = 0,
 				ac10_power = 0,
+				ac10_ammo = 0,
 			// AC 20
 				ac20_count = 0,
 				ac20_cost = 0,
 				ac20_tonnage = 0,
 				ac20_power = 0,
+				ac20_ammo = 0,
 			// RG 1
 				rg1_count = 0,
 				rg1_cost = 0,
 				rg1_tonnage = 0,
 				rg1_power = 0,
+				rg1_ammo = 0,
 			// RG 3
 				rg3_count = 0,
 				rg3_cost = 0,
 				rg3_tonnage = 0,
 				rg3_power = 0,
+				rg3_ammo = 0,
 			// RG 5
 				rg5_count = 0,
 				rg5_cost = 0,
 				rg5_tonnage = 0,
 				rg5_power = 0,
+				rg5_ammo = 0,
 			// RG 8
 				rg8_count = 0,
 				rg8_cost = 0,
 				rg8_tonnage = 0,
 				rg8_power = 0,
+				rg8_ammo = 0,
 			// OR 4
 				or4_count = 0,
 				or4_cost = 0,
 				or4_tonnage = 0,
 				or4_power = 0,
+				or4_ammo = 0,
 			// OR 8
 				or8_count = 0,
 				or8_cost = 0,
 				or8_tonnage = 0,
 				or8_power = 0,
+				or8_ammo = 0,
 			// OR 16
 				or16_count = 0,
 				or16_cost = 0,
 				or16_tonnage = 0,
 				or16_power = 0,
+				or16_ammo = 0,
 			// OR 32
 				or32_count = 0,
 				or32_cost = 0,
 				or32_tonnage = 0,
 				or32_power = 0,
+				or32_ammo = 0,
 			// SPL
 				spl_count = 0,
 				spl_cost = 0,
@@ -361,61 +373,73 @@
 				srm2_cost = 0,
 				srm2_tonnage = 0,
 				srm2_power = 0,
+				srm2_ammo = 0,
 			// SRM 4
 				srm4_count = 0,
 				srm4_cost = 0,
 				srm4_tonnage = 0,
 				srm4_power = 0,
+				srm4_ammo = 0,
 			// SRM 6
 				srm6_count = 0,
 				srm6_cost = 0,
 				srm6_tonnage = 0,
 				srm6_power = 0,
+				srm6_ammo = 0,
 			// SRM 8
 				srm8_count = 0,
 				srm8_cost = 0,
 				srm8_tonnage = 0,
 				srm8_power = 0,
+				srm8_ammo = 0,
 			// LRM 5
 				lrm5_count = 0,
 				lrm5_cost = 0,
 				lrm5_tonnage = 0,
 				lrm5_power = 0,
+				lrm5_ammo = 0,
 			// LRM 10
 				lrm10_count = 0,
 				lrm10_cost = 0,
 				lrm10_tonnage = 0,
 				lrm10_power = 0,
+				lrm10_ammo = 0,
 			// LRM 15
 				lrm15_count = 0,
 				lrm15_cost = 0,
 				lrm15_tonnage = 0,
 				lrm15_power = 0,
+				lrm15_ammo = 0,
 			// LRM 20
 				lrm20_count = 0,
 				lrm20_cost = 0,
 				lrm20_tonnage = 0,
 				lrm20_power = 0,
+				lrm20_ammo = 0,
 			// TT
 				tt_count = 0,
 				tt_cost = 0,
 				tt_tonnage = 0,
 				tt_power = 0,
+				tt_ammo = 0,
 			// TTA
 				tta_count = 0,
 				tta_cost = 0,
 				tta_tonnage = 0,
 				tta_power = 0,
+				tta_ammo = 0,
 			// SC
 				sc_count = 0,
 				sc_cost = 0,
 				sc_tonnage = 0,
 				sc_power = 0,
+				sc_ammo = 0,
 			// SCA
 				sca_count = 0,
 				sca_cost = 0,
 				sca_tonnage = 0,
 				sca_power = 0,
+				sca_ammo = 0,
 			// SPDL
 				spdl_count = 0,
 				spdl_cost = 0,
@@ -533,13 +557,13 @@ $(document).ready(function(){
 				jump_cost_mod = 100;
 				tech_limit = 12;
 				$('#tech-level').attr('max', '12');
-				console.log('cyber traveller only');
+				// console.log('cyber traveller only');
 			} else {
 				jump_basis = 1;
 				jump_cost_mod = 1;
 				tech_limit = 16;
 				$('#tech-level').attr('max', '16');
-				console.log('regular traveller ships');
+				// console.log('regular traveller ships');
 			}
 
 		// Tonnage
@@ -727,40 +751,52 @@ $(document).ready(function(){
 			}
 
 		// Power
-			power_size = parseInt($('#power-size').val());
+			// power_size = parseInt($('#power-size').val());
+			// power_count = parseInt($('#power-count').val());
+			// capacitance_module_count = parseInt($('#capacitance-module-count').val());
+			// power_type = $('#power-type').val();
+			// if (power_type == 'Fusion Generator') {
+			// 	base_power = (2 * power_count * power_size) + power_size;
+			// 	power_regen = power_size * power_size * power_count;
+			// 	power_tonnage = power_size * power_size * power_count;
+			// 	power_cost = 20000 * power_size * power_count;
+			// 	power_fuel_per_week = 2 * power_size * power_count;
+			// 	power_heat_generation = 1 * power_size * power_count;
+			// } else if (power_type == 'Antimatter Collider') {
+			// 	base_power = 8 * power_count * power_size;
+			// 	power_regen = 10 * (power_size/2) * power_count;
+			// 	power_tonnage = 3 * power_size * power_count;
+			// 	power_cost = 50000 * power_size * power_count;
+			// 	power_fuel_per_week = 2 * power_size * power_count;
+			// 	power_heat_generation = 2 * power_size * power_count;
+			// } else if (power_type == 'Quark Fusion Generator') {
+			// 	base_power = 6 * power_count * power_size;
+			// 	power_regen = 12 * (power_size/2) * power_count;
+			// 	power_tonnage = 5 * power_size * power_count;
+			// 	power_cost = 90000 * power_size * power_count;
+			// 	power_fuel_per_week = 4 * power_size * power_count;
+			// 	power_heat_generation = 4 * power_size * power_count;
+			// } else if (power_type == 'Warp Field Collector') {
+			// 	base_power = 6 * power_count * power_size;
+			// 	power_regen = 12 * (power_size/2) * power_count;
+			// 	power_tonnage = 1 * power_size * power_count;
+			// 	power_cost = 1000000 * power_size * power_count;
+			// 	power_fuel_per_week = 0;
+			// 	power_heat_generation = 1 * power_size * power_count;
+			// }	
+			// power_total_capacity = base_power + (capacitance_module_count * 3);
+			// power_total_cost = power_cost + (capacitance_module_count * 10000);
+			// power_total_tonnage = power_tonnage + capacitance_module_count;
+
 			power_count = parseInt($('#power-count').val());
 			capacitance_module_count = parseInt($('#capacitance-module-count').val());
-			power_type = $('#power-type').val();
-			if (power_type == 'Fusion Generator') {
-				base_power = 6 * power_count * power_size;
-				power_regen = 10 * (power_size/2) * power_count;
-				power_tonnage = 2 * power_size * power_count;
-				power_cost = 20000 * power_size * power_count;
-				power_fuel_per_week = 2 * power_size * power_count;
-				power_heat_generation = 1 * power_size * power_count;
-			} else if (power_type == 'Antimatter Collider') {
-				base_power = 8 * power_count * power_size;
-				power_regen = 10 * (power_size/2) * power_count;
-				power_tonnage = 3 * power_size * power_count;
-				power_cost = 50000 * power_size * power_count;
-				power_fuel_per_week = 2 * power_size * power_count;
-				power_heat_generation = 2 * power_size * power_count;
-			} else if (power_type == 'Quark Fusion Generator') {
-				base_power = 6 * power_count * power_size;
-				power_regen = 12 * (power_size/2) * power_count;
-				power_tonnage = 5 * power_size * power_count;
-				power_cost = 90000 * power_size * power_count;
-				power_fuel_per_week = 4 * power_size * power_count;
-				power_heat_generation = 4 * power_size * power_count;
-			} else if (power_type == 'Warp Field Collector') {
-				base_power = 6 * power_count * power_size;
-				power_regen = 12 * (power_size/2) * power_count;
-				power_tonnage = 1 * power_size * power_count;
-				power_cost = 1000000 * power_size * power_count;
-				power_fuel_per_week = 0;
-				power_heat_generation = 1 * power_size * power_count;
-			}	
-			power_total_capacity = base_power + (capacitance_module_count * 3);
+			base_power = power_count * 2;
+			power_regen = power_count * 2;
+			power_fuel_per_week = power_count;
+			power_tonnage = power_count * (tonnage/100);
+			power_cost = power_count * 10000;
+			power_heat_generation = Math.ceil(power_count/4);
+			power_total_capacity = base_power + (capacitance_module_count * 2);
 			power_total_cost = power_cost + (capacitance_module_count * 10000);
 			power_total_tonnage = power_tonnage + capacitance_module_count;
 
@@ -769,51 +805,61 @@ $(document).ready(function(){
 			mDrive_count = parseInt($('#mDrive-count').val());
 			if (mDrive_type == 'Directed Fusion Drive') {
 				mDrive_cost = mDrive_count * 20000;
-				mDrive_tonnage = mDrive_count * 3;
-				mDrive_power_use = mDrive_count * 2;
-				mDrive_fuel_use = mDrive_count * 2;
-				mDrive_agility_raw = Math.round(((mDrive_count * 1.5) - ((tonnage / 100) - 1) - (mDrive_count - 1)) * layout_agility_mod);
-				mDrive_thrust_raw = Math.round((mDrive_count * 3) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
+				mDrive_tonnage = mDrive_count * 1 * (tonnage/100);
+				mDrive_power_use = mDrive_count * 1 * (tonnage/100);
+				mDrive_fuel_use = mDrive_count * 1 * (tonnage/100);
+				// mDrive_agility_raw = Math.round(((mDrive_count * 1.5) - ((tonnage / 100) - 1) - (mDrive_count - 1)) * layout_agility_mod);
+				// mDrive_thrust_raw = Math.round((mDrive_count * 3) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
+				mDrive_agility_raw = mDrive_count * 0.25;
+				mDrive_thrust_raw = mDrive_count * 1;
 				mDrive_heat_generation = mDrive_count * 2;
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #directed-fusion-details').removeClass('hidden');
 			} else if (mDrive_type == 'Pulsed Fusion Drive') {
-				mDrive_cost = mDrive_count * 25000;
-				mDrive_tonnage = mDrive_count * 4;
-				mDrive_power_use = mDrive_count * 2;
-				mDrive_fuel_use = mDrive_count * 3;
-				mDrive_agility_raw = Math.round((mDrive_count * 2) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * layout_agility_mod);
-				mDrive_thrust_raw = Math.round((mDrive_count * 4) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
-				mDrive_heat_generation = mDrive_count * 3;
+				mDrive_cost = mDrive_count * 50000;
+				mDrive_tonnage = mDrive_count * 1.2 * (tonnage/100);
+				mDrive_power_use = mDrive_count * 1.2 * (tonnage/100);
+				mDrive_fuel_use = mDrive_count * 1.2 * (tonnage/100);
+				// mDrive_agility_raw = Math.round((mDrive_count * 2) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * layout_agility_mod);
+				// mDrive_thrust_raw = Math.round((mDrive_count * 4) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
+				mDrive_agility_raw = mDrive_count * 0.5;
+				mDrive_thrust_raw = mDrive_count * 1;
+				mDrive_heat_generation = mDrive_count * 4;
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #pulsed-fusion-details').removeClass('hidden');
 			} else if (mDrive_type == 'Ion Accelerator') {
-				mDrive_cost = mDrive_count * 50000;
-				mDrive_tonnage = mDrive_count * 3;
-				mDrive_power_use = mDrive_count * 3;
-				mDrive_fuel_use = mDrive_count * 2;
-				mDrive_agility_raw = Math.round((mDrive_count * 1) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * layout_agility_mod);
-				mDrive_thrust_raw = Math.round((mDrive_count * 2) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
+				mDrive_cost = mDrive_count * 25000;
+				mDrive_tonnage = mDrive_count * 1.2 * (tonnage/100);
+				mDrive_power_use = mDrive_count * 1 * (tonnage/100);
+				mDrive_fuel_use = mDrive_count * 0.8 * (tonnage/100);
+				// mDrive_agility_raw = Math.round((mDrive_count * 1) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * layout_agility_mod);
+				// mDrive_thrust_raw = Math.round((mDrive_count * 2) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
+				mDrive_agility_raw = mDrive_count * 0.2;
+				mDrive_thrust_raw = mDrive_count * 1.2;
 				mDrive_heat_generation = mDrive_count * 3;
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #ion-accelerator-details').removeClass('hidden');
 			} else if (mDrive_type == 'Slipstream Rocket') {
-				mDrive_cost = mDrive_count * 22000;
-				mDrive_tonnage = mDrive_count * 1;
-				mDrive_power_use = mDrive_count * 4;
-				mDrive_fuel_use = mDrive_count * 1;
-				mDrive_agility_raw = Math.round((mDrive_count * 1.5) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * layout_agility_mod);
-				mDrive_thrust_raw = Math.round((mDrive_count * 1) - Math.round((tonnage / 150) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
+				mDrive_cost = mDrive_count * 25000;
+				mDrive_tonnage = mDrive_count * 1.2 * (tonnage/100);
+				mDrive_power_use = mDrive_count * 0.5 * (tonnage/100);
+				mDrive_fuel_use = mDrive_count * 0.5 * (tonnage/100);
+				// mDrive_agility_raw = Math.round((mDrive_count * 1.5) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * layout_agility_mod);
+				// mDrive_thrust_raw = Math.round((mDrive_count * 1) - Math.round((tonnage / 150) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
+				mDrive_agility_raw = mDrive_count * 0.3;
+				mDrive_thrust_raw = mDrive_count * 1;
 				mDrive_heat_generation = mDrive_count * 4;
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #slipstream-rocket-details').removeClass('hidden');
 			} else if (mDrive_type == 'Photon Rocket') {
-				mDrive_cost = mDrive_count * 20000;
-				mDrive_tonnage = mDrive_count * 2;
-				mDrive_power_use = mDrive_count * 3;
-				mDrive_fuel_use = mDrive_count * 2;
-				mDrive_agility_raw = Math.round((mDrive_count * 2) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * layout_agility_mod);
-				mDrive_thrust_raw = Math.round((mDrive_count * 3) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
+				mDrive_cost = mDrive_count * 10000;
+				mDrive_tonnage = mDrive_count * 0.5 * (tonnage/100);
+				mDrive_power_use = mDrive_count * 0.5 * (tonnage/100);
+				mDrive_fuel_use = mDrive_count * 0.5 * (tonnage/100);
+				// mDrive_agility_raw = Math.round((mDrive_count * 2) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * layout_agility_mod);
+				// mDrive_thrust_raw = Math.round((mDrive_count * 3) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
+				mDrive_agility_raw = mDrive_count * 0.1;
+				mDrive_thrust_raw = mDrive_count * 0.8;
 				mDrive_heat_generation = mDrive_count * 1;
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #photon-rocket-details').removeClass('hidden');
@@ -1354,75 +1400,107 @@ $(document).ready(function(){
 			}
 
 		// Weapons
+
+			$('.sub-field-group').each(function() {
+				if ($(this).find('.primary-field').val() > 0) {
+					$(this).find('.sub-field').removeAttr('disabled');
+				} else {
+					$(this).find('.sub-field').attr('disabled', 'disabled').val(0);
+				}
+			});
 			// autocannon_2
 				ac2_count = parseInt($('#autocannon-2').val());
 				ac2_count ? $('#ac2-output').show() : $('#ac2-output').hide();
+				ac2_ammo = parseInt($('#autocannon-2-ammo').val());
+				ac2_ammo ? $('#autocannon-2-ammo-output').show() : $('#autocannon-2-ammo-output').hide();
 				ac2_cost = ac2_count * 2500;
 				ac2_tonnage = ac2_count * 3;
 				ac2_power = ac2_count * 0;
 			// autocannon_5
 				ac5_count = parseInt($('#autocannon-5').val());
 				ac5_count ? $('#ac5-output').show() : $('#ac5-output').hide();
+				ac5_ammo = parseInt($('#autocannon-5-ammo').val());
+				ac5_ammo ? $('#autocannon-5-ammo-output').show() : $('#autocannon-5-ammo-output').hide();
 				ac5_cost = ac5_count * 4000;
 				ac5_tonnage = ac5_count * 4;
 				ac5_power = ac5_count * 0;
 			// autocannon_10
 				ac10_count = parseInt($('#autocannon-10').val());
 				ac10_count ? $('#ac10-output').show() : $('#ac10-output').hide();
+				ac10_ammo = parseInt($('#autocannon-10-ammo').val());
+				ac10_ammo ? $('#autocannon-10-ammo-output').show() : $('#autocannon-10-ammo-output').hide();
 				ac10_cost = ac10_count * 7500;
 				ac10_tonnage = ac10_count * 5;
 				ac10_power = ac10_count * 0;
 			// autocannon_20
 				ac20_count = parseInt($('#autocannon-20').val());
 				ac20_count ? $('#ac20-output').show() : $('#ac20-output').hide();
+				ac20_ammo = parseInt($('#autocannon-20-ammo').val());
+				ac20_ammo ? $('#autocannon-20-ammo-output').show() : $('#autocannon-20-ammo-output').hide();
 				ac20_cost = ac20_count * 10000;
 				ac20_tonnage = ac20_count * 6;
 				ac20_power = ac20_count * 0;
 			// railgun_1
 				rg1_count = parseInt($('#railgun-1').val());
 				rg1_count ? $('#rg1-output').show() : $('#rg1-output').hide();
+				rg1_ammo = parseInt($('#railgun-1-ammo').val());
+				rg1_ammo ? $('#railgun-1-ammo-output').show() : $('#railgun-1-ammo-output').hide();
 				rg1_cost = rg1_count * 5000;
 				rg1_tonnage = rg1_count * 3;
 				rg1_power = rg1_count * 1;
 			// railgun_3
 				rg3_count = parseInt($('#railgun-3').val());
 				rg3_count ? $('#rg3-output').show() : $('#rg3-output').hide();
+				rg3_ammo = parseInt($('#railgun-3-ammo').val());
+				rg3_ammo ? $('#railgun-3-ammo-output').show() : $('#railgun-3-ammo-output').hide();
 				rg3_cost = rg3_count * 12000;
 				rg3_tonnage = rg3_count * 4;
 				rg3_power = rg3_count * 2;
 			// railgun_5
 				rg5_count = parseInt($('#railgun-5').val());
 				rg5_count ? $('#rg5-output').show() : $('#rg5-output').hide();
+				rg5_ammo = parseInt($('#railgun-5-ammo').val());
+				rg5_ammo ? $('#railgun-5-ammo-output').show() : $('#railgun-5-ammo-output').hide();
 				rg5_cost = rg5_count * 20000;
 				rg5_tonnage = rg5_count * 5;
 				rg5_power = rg5_count * 3;
 			// railgun_8
 				rg8_count = parseInt($('#railgun-8').val());
 				rg8_count ? $('#rg8-output').show() : $('#rg8-output').hide();
+				rg8_ammo = parseInt($('#railgun-8-ammo').val());
+				rg8_ammo ? $('#railgun-8-ammo-output').show() : $('#railgun-8-ammo-output').hide();
 				rg8_cost = rg8_count * 32000;
 				rg8_tonnage = rg8_count * 6;
 				rg8_power = rg8_count * 4;
 			// ortillery_4
 				or4_count = parseInt($('#ortillery-4').val());
 				or4_count ? $('#or4-output').show() : $('#or4-output').hide();
+				or4_ammo = parseInt($('#ortillery-4-ammo').val());
+				or4_ammo ? $('#ortillery-4-ammo-output').show() : $('#ortillery-4-ammo-output').hide();
 				or4_cost = or4_count * 2000;
 				or4_tonnage = or4_count * 6;
 				or4_power = or4_count * 0;
 			// ortillery_8
 				or8_count = parseInt($('#ortillery-8').val());
 				or8_count ? $('#or8-output').show() : $('#or8-output').hide();
+				or8_ammo = parseInt($('#ortillery-8-ammo').val());
+				or8_ammo ? $('#ortillery-8-ammo-output').show() : $('#ortillery-8-ammo-output').hide();
 				or8_cost = or8_count * 2000;
 				or8_tonnage = or8_count * 6;
 				or8_power = or8_count * 0;
 			// ortillery_16
 				or16_count = parseInt($('#ortillery-16').val());
 				or16_count ? $('#or16-output').show() : $('#or16-output').hide();
+				or16_ammo = parseInt($('#ortillery-16-ammo').val());
+				or16_ammo ? $('#ortillery-16-ammo-output').show() : $('#ortillery-16-ammo-output').hide();
 				or16_cost = or16_count * 5000;
 				or16_tonnage = or16_count * 8;
 				or16_power = or16_count * 0;
 			// ortillery_32
 				or32_count = parseInt($('#ortillery-32').val());
 				or32_count ? $('#or32-output').show() : $('#or32-output').hide();
+				or32_ammo = parseInt($('#ortillery-32-ammo').val());
+				or32_ammo ? $('#ortillery-32-ammo-output').show() : $('#ortillery-32-ammo-output').hide();
 				or32_cost = or32_count * 10000;
 				or32_tonnage = or32_count * 10;
 				or32_power = or32_count * 0;
@@ -1495,72 +1573,96 @@ $(document).ready(function(){
 			// short_range_missile_2
 				srm2_count = parseInt($('#short-range-missile-2').val());
 				srm2_count ? $('#srm2-output').show() : $('#srm2-output').hide();
+				srm2_ammo = parseInt($('#short-range-missile-2-ammo').val());
+				srm2_ammo ? $('#srm-2-ammo-output').show() : $('#srm-2-ammo-output').hide();
 				srm2_cost = srm2_count * 1200;
 				srm2_tonnage = srm2_count * 1;
 				srm2_power = srm2_count * 0;
 			// short_range_missile_4
 				srm4_count = parseInt($('#short-range-missile-4').val());
 				srm4_count ? $('#srm4-output').show() : $('#srm4-output').hide();
+				srm4_ammo = parseInt($('#short-range-missile-4-ammo').val());
+				srm4_ammo ? $('#srm-4-ammo-output').show() : $('#srm-4-ammo-output').hide();
 				srm4_cost = srm4_count * 1200;
 				srm4_tonnage = srm4_count * 1;
 				srm4_power = srm4_count * 0;
 			// short_range_missile_6
 				srm6_count = parseInt($('#short-range-missile-6').val());
 				srm6_count ? $('#srm6-output').show() : $('#srm6-output').hide();
+				srm6_ammo = parseInt($('#short-range-missile-6-ammo').val());
+				srm6_ammo ? $('#srm-6-ammo-output').show() : $('#srm-6-ammo-output').hide();
 				srm6_cost = srm6_count * 1200;
 				srm6_tonnage = srm6_count * 1;
 				srm6_power = srm6_count * 0;
 			// short_range_missile_8
 				srm8_count = parseInt($('#short-range-missile-8').val());
 				srm8_count ? $('#srm8-output').show() : $('#srm8-output').hide();
+				srm8_ammo = parseInt($('#short-range-missile-8-ammo').val());
+				srm8_ammo ? $('#srm-8-ammo-output').show() : $('#srm-8-ammo-output').hide();
 				srm8_cost = srm8_count * 1200;
 				srm8_tonnage = srm8_count * 1;
 				srm8_power = srm8_count * 0;
 			//long_range_missile_5
 				lrm5_count = parseInt($('#long-range-missile-5').val());
 				lrm5_count ? $('#lrm5-output').show() : $('#lrm5-output').hide();
+				lrm5_ammo = parseInt($('#long-range-missile-5-ammo').val());
+				lrm5_ammo ? $('#lrm-5-ammo-output').show() : $('#lrm-5-ammo-output').hide();
 				lrm5_cost = lrm5_count * 1200;
 				lrm5_tonnage = lrm5_count * 2;
 				lrm5_power = lrm5_count * 0;
 			//long_range_missile_10
 				lrm10_count = parseInt($('#long-range-missile-10').val());
 				lrm10_count ? $('#lrm10-output').show() : $('#lrm10-output').hide();
+				lrm10_ammo = parseInt($('#long-range-missile-10-ammo').val());
+				lrm10_ammo ? $('#lrm-10-ammo-output').show() : $('#lrm-10-ammo-output').hide();
 				lrm10_cost = lrm10_count * 2500;
 				lrm10_tonnage = lrm10_count * 4;
 				lrm10_power = lrm10_count * 0;
 			//long_range_missile_15
 				lrm15_count = parseInt($('#long-range-missile-15').val());
 				lrm15_count ? $('#lrm15-output').show() : $('#lrm15-output').hide();
+				lrm15_ammo = parseInt($('#long-range-missile-15-ammo').val());
+				lrm15_ammo ? $('#lrm-15-ammo-output').show() : $('#lrm-15-ammo-output').hide();
 				lrm15_cost = lrm15_count * 6000;
 				lrm15_tonnage = lrm15_count * 6;
 				lrm15_power = lrm15_count * 0;
 			//long_range_missile_20
 				lrm20_count = parseInt($('#long-range-missile-20').val());
 				lrm20_count ? $('#lrm20-output').show() : $('#lrm20-output').hide();
+				lrm20_ammo = parseInt($('#long-range-missile-20-ammo').val());
+				lrm20_ammo ? $('#lrm-20-ammo-output').show() : $('#lrm-20-ammo-output').hide();
 				lrm20_cost = lrm20_count * 13500;
 				lrm20_tonnage = lrm20_count * 8;
 				lrm20_power = lrm20_count * 0;
 			// torpedo_tube
 				tt_count = parseInt($('#torpedo-tube').val());
 				tt_count ? $('#tt-output').show() : $('#tt-output').hide();
+				tt_ammo = parseInt($('#torpedo-tube-ammo').val());
+				tt_ammo ? $('#torpedo-tube-ammo-output').show() : $('#torpedo-tube-ammo-output').hide();
 				tt_cost = tt_count * 5000;
 				tt_tonnage = tt_count * 3;
 				tt_power = tt_count * 1;
 			// torpedo_tube_array
 				tta_count = parseInt($('#torpedo-tube-array').val());
 				tta_count ? $('#tta-output').show() : $('#tta-output').hide();
+				tta_ammo = parseInt($('#torpedo-tube-array-ammo').val());
+				tta_ammo ? $('#torpedo-tube-array-ammo-output').show() : $('#torpedo-tube-array-ammo-output').hide();
 				tta_cost = tta_count * 18000;
 				tta_tonnage = tta_count * 9;
 				tta_power = tta_count * 3;
 			// sandcaster
 				sc_count = parseInt($('#sandcaster').val());
 				sc_count ? $('#sc-output').show() : $('#sc-output').hide();
+				sc_ammo = parseInt($('#sandcaster-ammo').val());
+				sc_ammo ? $('#sandcaster-ammo-output').show() : $('#sandcaster-ammo-output').hide();
 				sc_cost = sc_count * 600;
 				sc_tonnage = sc_count * 1;
 				sc_power = sc_count * 0;
 			// rapid_sandcaster
 				rsc_count = parseInt($('#rapid-sandcaster').val());
 				rsc_count ? $('#rsc-output').show() : $('#rsc-output').hide();
+				rsc_ammo = parseInt($('#rapid-sandcaster-ammo').val());
+				rsc_ammo ? $('#rapid-sandcaster-ammo-output').show() : $('#rapid-sandcaster-ammo-output').hide();
 				rsc_cost = rsc_count * 2000;
 				rsc_tonnage = rsc_count * 3;
 				rsc_power = rsc_count * 0;
@@ -1648,7 +1750,6 @@ $(document).ready(function(){
 
 			// Jump
 				if (cyber_traveller.is(':checked')) {
-					console.log('jump 0 allowed');
 				} else {
 					jump_tonnage == 0 ? $('#j-drive-warning').show() : $('#j-drive-warning').hide();
 				}
@@ -1737,18 +1838,31 @@ $(document).ready(function(){
 				$('#coating-description-output').text(coating_description);
 
 			// Weapon Count Finals
+				$('#cargo-bay-capacity-output').text(cargo_bay_tonnage);
 				$('#autocannon-2-count-output').text(ac2_count);
 				$('#autocannon-5-count-output').text(ac5_count);
 				$('#autocannon-10-count-output').text(ac10_count);
 				$('#autocannon-20-count-output').text(ac20_count);
+				$('#autocannon-2-ammo-count-output').text(ac2_ammo);
+				$('#autocannon-5-ammo-count-output').text(ac5_ammo);
+				$('#autocannon-10-ammo-count-output').text(ac10_ammo);
+				$('#autocannon-20-ammo-count-output').text(ac20_ammo);
 				$('#railgun-1-count-output').text(rg1_count);
 				$('#railgun-3-count-output').text(rg3_count);
 				$('#railgun-5-count-output').text(rg5_count);
 				$('#railgun-8-count-output').text(rg8_count);
+				$('#railgun-1-ammo-count-output').text(rg1_ammo);
+				$('#railgun-3-ammo-count-output').text(rg3_ammo);
+				$('#railgun-5-ammo-count-output').text(rg5_ammo);
+				$('#railgun-8-ammo-count-output').text(rg8_ammo);
 				$('#ortillery-4-count-output').text(or4_count);
 				$('#ortillery-8-count-output').text(or8_count);
 				$('#ortillery-16-count-output').text(or16_count);
 				$('#ortillery-32-count-output').text(or32_count);
+				$('#ortillery-4-ammo-count-output').text(or4_ammo);
+				$('#ortillery-8-ammo-count-output').text(or8_ammo);
+				$('#ortillery-16-ammo-count-output').text(or16_ammo);
+				$('#ortillery-32-ammo-count-output').text(or32_ammo);
 				$('#small-pulse-laser-count-output').text(spl_count);
 				$('#medium-pulse-laser-count-output').text(mpl_count);
 				$('#large-pulse-laser-count-output').text(lpl_count);
@@ -1764,17 +1878,31 @@ $(document).ready(function(){
 				$('#srm-4-count-output').text(srm4_count);
 				$('#srm-6-count-output').text(srm6_count);
 				$('#srm-8-count-output').text(srm8_count);
+				$('#srm-2-ammo-count-output').text(srm2_ammo);
+				$('#srm-2-ammo-count-output').text(srm2_ammo);
+				$('#srm-2-ammo-count-output').text(srm2_ammo);
+				$('#srm-2-ammo-count-output').text(srm2_ammo);
 				$('#lrm-5-count-output').text(lrm5_count);
 				$('#lrm-10-count-output').text(lrm10_count);
 				$('#lrm-15-count-output').text(lrm15_count);
 				$('#lrm-20-count-output').text(lrm20_count);
+				$('#lrm-5-ammo-count-output').text(lrm5_ammo);
+				$('#lrm-10-ammo-count-output').text(lrm5_ammo);
+				$('#lrm-15-ammo-count-output').text(lrm5_ammo);
+				$('#lrm-20-ammo-count-output').text(lrm5_ammo);
 				$('#torpedo-tube-count-output').text(tt_count);
 				$('#torpedo-tube-array-count-output').text(tta_count);
+				$('#torpedo-tube-ammo-count-output').text(tt_ammo);
+				$('#torpedo-tube-array-ammo--count-output').text(tta_ammo);
 				$('#sandcaster-count-output').text(sc_count);
 				$('#sandcaster-array-count-output').text(sca_count);
+				$('#sandcaster-ammo-count-output').text(sc_ammo);
+				$('#sandcaster-array-ammo-count-output').text(sca_ammo);
 				$('#spdl-count-output').text(spdl_count);
 				$('#mpdl-count-output').text(mpdl_count);
 				$('#lpdl-count-output').text(lpdl_count);
+
+
 	
 			// Reset Save Text
 				$('#save-data').text('Save');
