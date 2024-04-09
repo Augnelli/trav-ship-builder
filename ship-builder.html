@@ -109,15 +109,14 @@
 								<label class="associated-label" for="fuel-refinery"><input type="checkbox" id="fuel-refinery" value="Fuel Refinery" name="fuel-refinery">Automatic Refinery</label>
 								<p class="advice">Converts tainted raw fuel to clean fuel.</p>
 							</div>
-							<div class="item basic">
-								<!-- Power Plant Size -->
+							<!-- <div class="item basic">
 								<label>Power Plant Size</label>
 								<select id="power-size">
-									<option value="1" selected>A</option>
-									<option value="2">B</option>
-									<option value="3">C</option>
-									<option value="4">D</option>
-									<option value="5">E</option>
+									<option value="1" selected>1%</option>
+									<option value="2">2%</option>
+									<option value="3">Ave</option>
+									<option value="4">Large</option>
+									<option value="5">Huge</option>
 									<option value="6">F</option>
 									<option value="7">G</option>
 									<option value="8">H</option>
@@ -125,23 +124,22 @@
 									<option value="10">J</option>
 								</select>
 								<p class="advice">The size of your power plant, larger systems output more power.</p>
-							</div>
-							<div class="item basic">
-								<!-- Power Plant Type -->
-								<label>Power Plant Type</label>
-								<select id="power-type">
-									<option value="Fusion Generator" selected>Fusion Generator</option>
-									<option value="Antimatter Collider">Antimatter Collider</option>
-									<option value="Quark Fusion Generator">Quark Fusion Generator</option>
-									<option value="Warp Field Collector">Warp Field Generator</option>
-								</select>
-								<p class="advice">How the power plant system generates power.</p>
-							</div>
+								</div>
+								<div class="item basic">
+									<label>Power Plant Type</label>
+									<select id="power-type">
+										<option value="Fusion Generator" selected>Fusion Generator</option>
+										<option value="Antimatter Collider">Antimatter Collider</option>
+										<option value="Quark Fusion Generator">Quark Fusion Generator</option>
+										<option value="Warp Field Collector">Warp Field Generator</option>
+									</select>
+									<p class="advice">How the power plant system generates power.</p>
+							</div> -->
 							<div class="item basic">
 								<!-- Power Plant Count -->
-								<label>Power Plant Count</label>
+								<label>Power Plant Size</label>
 								<input type="number" name="power-count" id="power-count" min="1" value="1">
-								<p class="advice">Redundanct or additional Power Source improves survivability but greatly increase fuel usage. Ship can not operate without at least 1 Power Source.</p>
+								<p class="advice">1 ton of power plant provides 2 power capacity and 2 power regen per turn and 0.25 heat.</p>
 							</div>
 							<div class="item basic">
 								<!-- Capacitance Count -->
@@ -421,14 +419,30 @@
 							<div class="item full-width-item category-items">
 								<div class="category-item">
 									<div class="category-list">
-										<label>Autocannon 20mm (AC2)</label>
-										<input type="number" name="Autocannon 2" id="autocannon-2" min="0" value="0" class="start-zero">
-										<label>Autocannon 50mm (AC5)</label>
-										<input type="number" name="Autocannon 5" id="autocannon-5" min="0" value="0" class="start-zero">
-										<label>Autocannon 100mm (AC10)</label>
-										<input type="number" name="Autocannon 10" id="autocannon-10" min="0" value="0" class="start-zero">
-										<label>Autocannon 200mm (AC20)</label>
-										<input type="number" name="Autocannon 20" id="autocannon-20" min="0" value="0" class="start-zero">
+										<div class="sub-field-group">
+											<label class="primary-label">Autocannon 20mm (AC2)</label>
+											<input type="number" name="Autocannon 2" id="autocannon-2" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Autocannon 2 Ammo" id="autocannon-2-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Autocannon 50mm (AC5)</label>
+											<input type="number" name="Autocannon 5" id="autocannon-5" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Autocannon 5 Ammo" id="autocannon-5-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Autocannon 100mm (AC10)</label>
+											<input type="number" name="Autocannon 10" id="autocannon-10" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Autocannon 10 Ammo" id="autocannon-10-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Autocannon 200mm (AC20)</label>
+											<input type="number" name="Autocannon 20" id="autocannon-20" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Autocannon 20 Ammo" id="autocannon-20-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
 									</div>
 									<div class="category-description">
 										<p>Chemical propellent accelerates an explosive projectile to high speed, causing significant kinetic and explosive damage to the target. Effective at short to medium ranges.</p>
@@ -436,14 +450,30 @@
 								</div>
 								<div class="category-item">
 									<div class="category-list">
-										<label>Railgun 10mm (RG1)</label>
-										<input type="number" name="Railgun 1" id="railgun-1" min="0" value="0" class="start-zero">
-										<label>Railgun 30mm (RG3)</label>
-										<input type="number" name="Railgun 3" id="railgun-3" min="0" value="0" class="start-zero">
-										<label>Railgun 50mm (RG5)</label>
-										<input type="number" name="Railgun 5" id="railgun-5" min="0" value="0" class="start-zero">
-										<label>Railgun 80mm (RG8)</label>
-										<input type="number" name="Railgun 80" id="railgun-8" min="0" value="0" class="start-zero">
+										<div class="sub-field-group">
+											<label class="primary-label">Railgun 10mm (RG1)</label>
+											<input type="number" name="Railgun 1" id="railgun-1" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Railgun 1 Ammo" id="railgun-1-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Railgun 30mm (RG3)</label>
+											<input type="number" name="Railgun 3" id="railgun-3" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Railgun 3 Ammo" id="railgun-3-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Railgun 50mm (RG5)</label>
+											<input type="number" name="Railgun 5" id="railgun-5" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Railgun 5 Ammo" id="railgun-5-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Railgun 80mm (RG8)</label>
+											<input type="number" name="Railgun 80" id="railgun-8" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Railgun 8 Ammo" id="railgun-8-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
 									</div>
 									<div class="category-description">
 										<p>By accelerating a smaller projectile to higher speeds, a railgun can cause tremendous damage to distant targets without the energy requirements of an energy weapon.</p>
@@ -451,14 +481,30 @@
 								</div>
 								<div class="category-item">
 									<div class="category-list">
-										<label>Ortillery 40mm (OR4)</label>
-										<input type="number" name="Ortillery 4" id="ortillery-4" min="0" value="0" class="start-zero">
-										<label>Ortillery 80mm (OR8)</label>
-										<input type="number" name="Ortillery 8" id="ortillery-8" min="0" value="0" class="start-zero">
-										<label>Ortillery 160mm (OR16)</label>
-										<input type="number" name="Ortillery 16" id="ortillery-16" min="0" value="0" class="start-zero">
-										<label>Ortillery 320mm (OR32)</label>
-										<input type="number" name="Ortillery 32" id="ortillery-32" min="0" value="0" class="start-zero">
+										<div class="sub-field-group">
+											<label class="primary-label">Ortillery 40mm (OR4)</label>
+											<input type="number" name="Ortillery 4" id="ortillery-4" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Ortillery 4 Ammo" id="ortillery-4-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Ortillery 80mm (OR8)</label>
+											<input type="number" name="Ortillery 8" id="ortillery-8" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Ortillery 8 Ammo" id="ortillery-8-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Ortillery 160mm (OR16)</label>
+											<input type="number" name="Ortillery 16" id="ortillery-16" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Ortillery 16 Ammo" id="ortillery-16-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Ortillery 320mm (OR32)</label>
+											<input type="number" name="Ortillery 32" id="ortillery-32" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Ortillery 32 Ammo" id="ortillery-32-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
 									</div>
 									<div class="category-description">
 										<p>Similar to an autocannon, but substantially larger in caliber. This weapon is designed to target slower or stationary terrestrial objects from orbit.</p>
@@ -466,14 +512,30 @@
 								</div>
 								<div class="category-item">
 									<div class="category-list">
-										<label>Short Range Missile 2 (SRM2)</label>
-										<input type="number" name="Short Missile 2" id="short-range-missile-2" min="0" value="0" class="start-zero">
-										<label>Short Range Missile 4 (SRM4)</label>
-										<input type="number" name="Short Missile 4" id="short-range-missile-4" min="0" value="0" class="start-zero">
-										<label>Short Range Missile 6 (SRM6)</label>
-										<input type="number" name="Short Missile 6" id="short-range-missile-6" min="0" value="0" class="start-zero">
-										<label>Short Range Missile 8 (SRM8)</label>
-										<input type="number" name="Short Missile 8" id="short-range-missile-8" min="0" value="0" class="start-zero">
+										<div class="sub-field-group">
+											<label class="primary-label">Short Range Missile 2 (SRM2)</label>
+											<input type="number" name="Short Missile 2" id="short-range-missile-2" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Short Missile 2 Ammo" id="short-range-missile-2-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Short Range Missile 4 (SRM4)</label>
+											<input type="number" name="Short Missile 4" id="short-range-missile-4" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Short Missile 4 Ammo" id="short-range-missile-4-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Short Range Missile 6 (SRM6)</label>
+											<input type="number" name="Short Missile 6" id="short-range-missile-6" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Short Missile 6 Ammo" id="short-range-missile-6-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Short Range Missile 8 (SRM8)</label>
+											<input type="number" name="Short Missile 8" id="short-range-missile-8" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Short Missile 8 Ammo" id="short-range-missile-8-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
 									</div>
 									<div class="category-description">
 										<p>Fires a grouping of powerful missiles that burn out after a short distance. They pack a powerful warhead but lack sophisticated tracking systems.</p>
@@ -481,14 +543,30 @@
 								</div>
 								<div class="category-item">
 									<div class="category-list">
-										<label>Long Range Missile 5 (LRM5)</label>
-										<input type="number" name="Long Missile 5" id="long-range-missile-5" min="0" value="0" class="start-zero">
-										<label>Long Range Missile 10 (LRM10)</label>
-										<input type="number" name="Long Missile 10" id="long-range-missile-10" min="0" value="0" class="start-zero">
-										<label>Long Range Missile 15 (LRM15)</label>
-										<input type="number" name="Long Missile 15" id="long-range-missile-15" min="0" value="0" class="start-zero">
-										<label>Long Range Missile 20 (LRM20)</label>
-										<input type="number" name="Long Missile 20" id="long-range-missile-20" min="0" value="0" class="start-zero">
+										<div class="sub-field-group">
+											<label class="primary-label">Long Range Missile 5 (LRM5)</label>
+											<input type="number" name="Long Missile 5" id="long-range-missile-5" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Long Missile 5 Ammo" id="long-range-missile-5-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Long Range Missile 10 (LRM10)</label>
+											<input type="number" name="Long Missile 10" id="long-range-missile-10" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Long Missile 10 Ammo" id="long-range-missile-10-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Long Range Missile 15 (LRM15)</label>
+											<input type="number" name="Long Missile 15" id="long-range-missile-15" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Long Missile 15 Ammo" id="long-range-missile-15-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Long Range Missile 20 (LRM20)</label>
+											<input type="number" name="Long Missile 20" id="long-range-missile-20" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Long Missile 20 Ammo" id="long-range-missile-20-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
 									</div>
 									<div class="category-description">
 										<p>Fires a swarm of small guided missiles that accelerate toward their distant target. Fired in groups to overcome any point defense systems the enemy ship may have.</p>
@@ -496,10 +574,18 @@
 								</div>
 								<div class="category-item">
 									<div class="category-list">
-										<label>Torpedo Tube (TT)</label>
-										<input type="number" name="Torpdeo Tube" id="torpedo-tube" min="0" value="0" class="start-zero">
-										<label>Torpedo Tube Array (TTA)</label>
-										<input type="number" name="Torpedo Tube Array" id="torpedo-tube-array" min="0" value="0" class="start-zero">
+										<div class="sub-field-group">
+											<label class="primary-label">Torpedo Tube (TT)</label>
+											<input type="number" name="Torpdeo Tube" id="torpedo-tube" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Torpdeo Tube Ammo" id="torpedo-tube-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Torpedo Tube Array (TTA)</label>
+											<input type="number" name="Torpedo Tube Array" id="torpedo-tube-array" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Torpdeo Tube Array Ammo" id="torpedo-tube-array-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
 									</div>
 									<div class="category-description">
 										<p>A single nuclear missile that can disable a ship with a single hit. This weapon is highly vulnerable to point defense systems as it is large and slow.</p>
@@ -557,10 +643,18 @@
 								</div>
 								<div class="category-item">
 									<div class="category-list">
-										<label>Sand Caster (SC)</label>
-										<input type="number" name="Sandcaster" id="sandcaster" min="0" value="0" class="start-zero">
-										<label>Rapid Sand Caster (SCA)</label>
-										<input type="number" name="Rapid Sandcaster" id="rapid-sandcaster" min="0" value="0" class="start-zero">
+										<div class="sub-field-group">
+											<label class="primary-label">Sand Caster (SC)</label>
+											<input type="number" name="Sandcaster" id="sandcaster" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Sandcaster Ammo" id="sandcaster-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
+										<div class="sub-field-group">
+											<label class="primary-label">Rapid Sand Caster (SCA)</label>
+											<input type="number" name="Rapid Sandcaster" id="rapid-sandcaster" min="0" value="0" class="start-zero primary-field">
+											<label class="sub-label">Ammo</label>
+											<input class="sub-field" type="number" name="Rapid Sandcaster Ammo" id="rapid-sandcaster-ammo" min="0" value="0" class="start-zero" disabled="disabled">
+										</div>
 									</div>
 									<div class="category-description">
 										<p>A defensive weapon that disrupts beam weapons, such as particle beams and lasers, by creating a field of reflective and negtively charged particulate.</p>
@@ -746,9 +840,9 @@
 							<p><strong>Power</strong></p>
 							<img src="images/power.png" class="icon-image">
 							<p>Max: <span id="power-capacity-output">6</span></p>
-							<p>Regen: <span id="power-regen-output">2</span> per turn</p>
-							<p>&rdsh; Constant Drain: <span class="listed-item" id="power-operations-output">2</span></p>
-							<p class="advice">From engines, sensors, and comms</p>
+							<p>Regen: <span id="power-regen-output">5</span> per turn</p>
+							<p>&rdsh; Constant Drain: <span class="listed-item" id="power-operations-output">3</span></p>
+							<!-- <p class="advice">From engines, sensors, and comms</p> -->
 							<p>&rdsh; Power/Jump: <span id="jump-power-output">5</span></p>
 							<p>&rdsh; Power/Manuever: <span class="listed-item">1</span></p>
 							<br>
@@ -759,9 +853,9 @@
 						<div class="specification">
 							<p><strong>M-Drive</strong></p>
 							<img src="images/directions.png" class="icon-image">
-							<p>Tonnage: <span id="m-drive-tonnage-output">3</span></p>
-							<p>Speed: <span id="speed-output">3</span></p>
-							<p>Reactions: <span id="agility-output">2</span></p>
+							<p>Tonnage: <span id="m-drive-tonnage-output">1</span></p>
+							<p>Speed: <span id="speed-output">1</span> (<span class="advice" id="speed-raw-output">1</span>)</p>
+							<p>Reactions: <span id="agility-output">0</span> (<span class="advice" id="agility-raw-output">.25</span>)</p>
 							<p id="m-drive-warning" class="warning">Ship can not maneuver!</p>
 						</div>
 						<div class="specification">
@@ -922,7 +1016,7 @@
 							<p>Heat Modifier: <span id="coating-heat-output">0</span></p>
 							<p class="advice" id="coating-description-output">No coating applied.</p>
 						</div>
-						<div class="specification full-width-specification">
+						<div class="specification">
 							<p class="action-title"><strong>Defense Actions</strong> <span class="action-status">+</span></p>
 							<div class="action-details">
 								<p>Fire Kinetic Weapon: <span class="listed-item">Gunner (Turret) + Dexterity</span></p>
@@ -932,6 +1026,34 @@
 								<p>Repel Boarders: <span class="listed-item">Any Combat Skill + Strength or Dexterity</span></p>
 								<p>Brace for Impact: <span class="listed-item">Athletics (Endurance) + Endurance</span></p>
 							</div>
+						</div>
+						<div class="specification">
+							<p><strong>Ammo/Power</strong></p>
+							<img src="images/distribution.png" class="icon-image">
+							<p>Cargo Space: <span id="cargo-bay-capacity-output">10</span></p>
+							<p class="hidden" id="autocannon-2-ammo-output">&rdsh; AC 2: <span id="autocannon-2-ammo-count-output">0</span></p>
+							<p class="hidden" id="autocannon-5-ammo-output">&rdsh; AC 5: <span id="autocannon-5-ammo-count-output">0</span></p>
+							<p class="hidden" id="autocannon-10-ammo-output">&rdsh; AC 10: <span id="autocannon-10-ammo-count-output">0</span></p>
+							<p class="hidden" id="autocannon-20-ammo-output">&rdsh; AC 20: <span id="autocannon-20-ammo-count-output">0</span></p>
+							<p class="hidden" id="railgun-1-ammo-output">&rdsh; RG 1: <span id="railgun-1-ammo-count-output">0</span></p>
+							<p class="hidden" id="railgun-3-ammo-output">&rdsh; RG 3: <span id="railgun-3-ammo-count-output">0</span></p>
+							<p class="hidden" id="railgun-5-ammo-output">&rdsh; RG 5: <span id="railgun-5-ammo-count-output">0</span></p>
+							<p class="hidden" id="railgun-8-ammo-output">&rdsh; RG 8: <span id="railgun-8-ammo-count-output">0</span></p>
+							<p class="hidden" id="ortillery-4-ammo-output">&rdsh; OR 4: <span id="ortillery-4-ammo-count-output">0</span></p>
+							<p class="hidden" id="ortillery-8-ammo-output">&rdsh; OR 8: <span id="ortillery-8-ammo-count-output">0</span></p>
+							<p class="hidden" id="ortillery-16-ammo-output">&rdsh; OR 16: <span id="ortillery-16-ammo-count-output">0</span></p>
+							<p class="hidden" id="srm-2-ammo-output">&rdsh; SRM 2: <span id="srm-2-ammo-count-output">0</span></p>
+							<p class="hidden" id="srm-4-ammo-output">&rdsh; SRM 4: <span id="srm-4-ammo-count-output">0</span></p>
+							<p class="hidden" id="srm-6-ammo-output">&rdsh; SRM 6: <span id="srm-6-ammo-count-output">0</span></p>
+							<p class="hidden" id="srm-8-ammo-output">&rdsh; SRM 8: <span id="srm-8-ammo-count-output">0</span></p>
+							<p class="hidden" id="lrm-5-ammo-output">&rdsh; LRM 5: <span id="lrm-5-ammo-count-output">0</span></p>
+							<p class="hidden" id="lrm-10-ammo-output">&rdsh; LRM 10: <span id="lrm-10-ammo-count-output">0</span></p>
+							<p class="hidden" id="lrm-15-ammo-output">&rdsh; LRM 15: <span id="lrm-15-ammo-count-output">0</span></p>
+							<p class="hidden" id="lrm-20-ammo-output">&rdsh; LRM 20: <span id="lrm-20-ammo-count-output">0</span></p>
+							<p class="hidden" id="torpedo-tube-ammo-output">&rdsh; TT: <span id="torpedo-tube-ammo-count-output">0</span></p>
+							<p class="hidden" id="torpedo-tube-array-ammo-output">&rdsh; TTA: <span id="torpedo-tube-array-ammo-count-output">0</span></p>
+							<p class="hidden" id="sandcaster-ammo-output">&rdsh; SC: <span id="sandcaster-ammo-count-output">0</span></p>
+							<p class="hidden" id="sandcaster-array-ammo-output">&rdsh; RSC: <span id="sandcaster-array-ammo-count-output">0</span></p>
 						</div>
 						<div class="specification full-width-specification">
 							<p><strong>Weapons</strong></p>
