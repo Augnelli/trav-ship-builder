@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Ship Builder | 1.0.0</title>
+		<title>Ship Builder | 1.0.1</title>
 		<link rel="icon" type="image/x-icon" href="images/shuttle.png">
 
 		<!-- jQuery 3.7.1 -->
@@ -21,9 +21,9 @@
 	</head>
 	<body class="infinite-horizons">
 		<div class="core">
-			<div id="sidebar-controls" class="right-sidebar">
+		<!-- <div id="sidebar-controls" class="right-sidebar">
 				<p id="sidebar-status">||</p>
-			</div>
+			</div> -->
 			<header class="half-width">
 				<h1>Ship Builder</h1>
 			</header>
@@ -49,7 +49,7 @@
 								<!-- Tonnage -->
 								<label>Tonnage</label>
 								<input type="number" name="tonnage" id="tonnage" min="100" max="2000" step="100" value="100">
-								<p class="advice">The displacement tonnage of your ship. Each ton roughly represents a 5x5x5 foot square.</p>
+								<p class="advice">The displacement tonnage of your ship. Each ton represents a roughly 5x5x5 foot square.</p>
 							</div>
 							<div class="item basic">
 								<!-- Layout -->
@@ -139,7 +139,7 @@
 								<!-- Power Plant Count -->
 								<label>Power Plant Size</label>
 								<input type="number" name="power-count" id="power-count" min="1" value="1">
-								<p class="advice">1 ton of power plant provides 2 power capacity and 2 power regen per turn and 0.25 heat.</p>
+								<p class="advice">Ships tonnage determiens power output</p>
 							</div>
 							<div class="item basic">
 								<!-- Capacitance Count -->
@@ -758,6 +758,15 @@
 							<img src="images/steering.png" class="icon-image">
 						</div>
 						<div class="specification">
+							<p><strong>Comms</strong></p>
+							<p>Type: <span id="comms-type-output">Civilian</span></p>
+							<p>Security: DC <span id="comms-security-output">7</span></p>
+							<p>Range: <span id="comms-range-output">25000</span> km</p>
+							<p class="listed-item hidden" id="comms-local-network-output">Networked Locally</p>
+							<p class="listed-item hidden" id="long-range-comms-output">Long Range Comms Availalbe</p>
+							<img src="images/antenna.png" class="icon-image">
+						</div>
+						<div class="specification">
 							<p><strong>Sensors</strong></p>
 							<img src="images/radar.png" class="icon-image">
 							<p class="listed-item visible" id="multispectrum-output">Multispectrum Scope<br><span class="advice">Passively detects visible, infrared, and ultraviolet light.</span></p>
@@ -766,15 +775,6 @@
 							<p class="listed-item hidden" id="densitrometer-output">Densitrometer<br><span class="advice">Actively creates 3d projection map of an object.</span></p>
 							<p class="listed-item hidden" id="bioscanner-output">Bioscanner<br><span class="advice">Passively detects electrical signals in brain activity.</span></p>
 							<p class="listed-item hidden" id="jammer-output">Sensor Jammer<br><span class="advice">Imposes penalties to detection and interrupts locks.</span></p>
-						</div>
-						<div class="specification">
-							<p><strong>Comms</strong></p>
-							<p>Type: <span id="comms-type-output">Civilian</span></p>
-							<p>Security: DC <span id="comms-security-output">7</span></p>
-							<p>Range: <span id="comms-range-output">25000</span> km</p>
-							<p class="listed-item hidden" id="comms-local-network-output">Networked Locally</p>
-							<p class="listed-item hidden" id="long-range-comms-output">Long Range Comms Availalbe</p>
-							<img src="images/antenna.png" class="icon-image">
 						</div>
 						<div class="specification">
 							<p><strong>Computer</strong></p>
