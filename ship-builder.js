@@ -806,24 +806,24 @@ $(document).ready(function(){
 			if (mDrive_type == 'Directed Fusion Drive') {
 				mDrive_cost = mDrive_count * 20000;
 				mDrive_tonnage = mDrive_count * 1 * (tonnage/100);
-				mDrive_power_use = mDrive_count * 1 * (tonnage/100);
+				mDrive_power_use = mDrive_count * 0.8 * (tonnage/100);
 				mDrive_fuel_use = mDrive_count * 1 * (tonnage/100);
 				// mDrive_agility_raw = Math.round(((mDrive_count * 1.5) - ((tonnage / 100) - 1) - (mDrive_count - 1)) * layout_agility_mod);
 				// mDrive_thrust_raw = Math.round((mDrive_count * 3) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
-				mDrive_agility_raw = mDrive_count * 0.25;
-				mDrive_thrust_raw = mDrive_count * 1;
+				mDrive_agility_raw = mDrive_count * 0.25 * layout_agility_mod;
+				mDrive_thrust_raw = mDrive_count * 1 * manufacturer_speed_mod;
 				mDrive_heat_generation = mDrive_count * 2;
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #directed-fusion-details').removeClass('hidden');
 			} else if (mDrive_type == 'Pulsed Fusion Drive') {
 				mDrive_cost = mDrive_count * 50000;
 				mDrive_tonnage = mDrive_count * 1.2 * (tonnage/100);
-				mDrive_power_use = mDrive_count * 1.2 * (tonnage/100);
+				mDrive_power_use = mDrive_count * 1 * (tonnage/100);
 				mDrive_fuel_use = mDrive_count * 1.2 * (tonnage/100);
 				// mDrive_agility_raw = Math.round((mDrive_count * 2) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * layout_agility_mod);
 				// mDrive_thrust_raw = Math.round((mDrive_count * 4) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
-				mDrive_agility_raw = mDrive_count * 0.5;
-				mDrive_thrust_raw = mDrive_count * 1;
+				mDrive_agility_raw = mDrive_count * 0.35 * layout_agility_mod;
+				mDrive_thrust_raw = mDrive_count * 1 * manufacturer_speed_mod;
 				mDrive_heat_generation = mDrive_count * 4;
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #pulsed-fusion-details').removeClass('hidden');
@@ -834,8 +834,8 @@ $(document).ready(function(){
 				mDrive_fuel_use = mDrive_count * 0.8 * (tonnage/100);
 				// mDrive_agility_raw = Math.round((mDrive_count * 1) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * layout_agility_mod);
 				// mDrive_thrust_raw = Math.round((mDrive_count * 2) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
-				mDrive_agility_raw = mDrive_count * 0.2;
-				mDrive_thrust_raw = mDrive_count * 1.2;
+				mDrive_agility_raw = mDrive_count * 0.2 * layout_agility_mod;
+				mDrive_thrust_raw = mDrive_count * 1.2 * manufacturer_speed_mod;
 				mDrive_heat_generation = mDrive_count * 3;
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #ion-accelerator-details').removeClass('hidden');
@@ -846,8 +846,8 @@ $(document).ready(function(){
 				mDrive_fuel_use = mDrive_count * 0.5 * (tonnage/100);
 				// mDrive_agility_raw = Math.round((mDrive_count * 1.5) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * layout_agility_mod);
 				// mDrive_thrust_raw = Math.round((mDrive_count * 1) - Math.round((tonnage / 150) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
-				mDrive_agility_raw = mDrive_count * 0.3;
-				mDrive_thrust_raw = mDrive_count * 1;
+				mDrive_agility_raw = mDrive_count * 0.3 * layout_agility_mod;
+				mDrive_thrust_raw = mDrive_count * 1 * manufacturer_speed_mod;
 				mDrive_heat_generation = mDrive_count * 4;
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #slipstream-rocket-details').removeClass('hidden');
@@ -858,8 +858,8 @@ $(document).ready(function(){
 				mDrive_fuel_use = mDrive_count * 0.5 * (tonnage/100);
 				// mDrive_agility_raw = Math.round((mDrive_count * 2) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * layout_agility_mod);
 				// mDrive_thrust_raw = Math.round((mDrive_count * 3) - ((tonnage / 100) - 1) - ((mDrive_count - 1)) * manufacturer_speed_mod);
-				mDrive_agility_raw = mDrive_count * 0.1;
-				mDrive_thrust_raw = mDrive_count * 0.8;
+				mDrive_agility_raw = mDrive_count * 0.1 * layout_agility_mod;
+				mDrive_thrust_raw = mDrive_count * 0.8 * manufacturer_speed_mod;
 				mDrive_heat_generation = mDrive_count * 1;
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #photon-rocket-details').removeClass('hidden');
