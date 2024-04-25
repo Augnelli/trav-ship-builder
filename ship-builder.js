@@ -18,10 +18,10 @@
 			manufacturer_software_cost_mod = 1,
 			manufacturer_room_cost_mod = 1,
 			manufacturer_armor_cost_mod = 1,
-			manufacturer_room_cost_mod = 1,
 			manufacturer_mDrive_cost_mod = 0.8,
 			manufacturer_kinetic_dr_mod = 0,
 			manufacturer_energy_dr_mod = 0,
+			manufacturer_rad_dr_mod  = 0,
 			manufacturer_explosive_dr_mod = 0;
 			$('body').attr('id', manufacturer_style);
 	var tech_level = 9,
@@ -603,7 +603,7 @@ $(document).ready(function(){
 			manufacturer_style = manufacturer_type.replace(/\s+/g, '-').toLowerCase().replaceAll("[^A-Za-z0-9]","");
 			$('body').attr('id', manufacturer_style);
 			if (manufacturer_type == 'Atlas') {
-				manufacturer_cost_mod = 1.15;
+				manufacturer_cost_mod = 1;
 				manufacturer_speed_mod = 1;
 				manufacturer_hull_mod = 1.1;
 				manufacturer_weapon_cost_mod = 1;
@@ -613,7 +613,6 @@ $(document).ready(function(){
 				manufacturer_software_cost_mod = 0.8;
 				manufacturer_room_cost_mod = 0.8;
 				manufacturer_armor_cost_mod = 1;
-				manufacturer_room_cost_mod = 1;
 				manufacturer_mDrive_cost_mod = 1;
 				manufacturer_kinetic_dr_mod = 0;
 				manufacturer_rad_dr_mod = 0;
@@ -624,7 +623,7 @@ $(document).ready(function(){
 				$('.specification .manufacturer-subset').removeClass('active');
 				$('#atlas-subset').addClass('active');
 			} else if (manufacturer_type == 'Infinite Horizons') {
-				manufacturer_cost_mod = 1.1;
+				manufacturer_cost_mod = 1;
 				manufacturer_speed_mod = 1.1;
 				manufacturer_hull_mod = 1;
 				manufacturer_weapon_cost_mod = 1;
@@ -634,7 +633,6 @@ $(document).ready(function(){
 				manufacturer_software_cost_mod = 1;
 				manufacturer_room_cost_mod = 1;
 				manufacturer_armor_cost_mod = 1;
-				manufacturer_room_cost_mod = 1;
 				manufacturer_mDrive_cost_mod = 0.8;
 				manufacturer_kinetic_dr_mod = 0;
 				manufacturer_rad_dr_mod = 1;
@@ -655,7 +653,6 @@ $(document).ready(function(){
 				manufacturer_software_cost_mod = 1;
 				manufacturer_room_cost_mod = 1;
 				manufacturer_armor_cost_mod = 1;
-				manufacturer_room_cost_mod = 1;
 				manufacturer_mDrive_cost_mod = 1;
 				manufacturer_kinetic_dr_mod = 0;
 				manufacturer_rad_dr_mod = 0;
@@ -676,7 +673,6 @@ $(document).ready(function(){
 				manufacturer_software_cost_mod = 1;
 				manufacturer_room_cost_mod = 1;
 				manufacturer_armor_cost_mod = 1;
-				manufacturer_room_cost_mod = 1;
 				manufacturer_mDrive_cost_mod = 1;
 				manufacturer_kinetic_dr_mod = 1;
 				manufacturer_rad_dr_mod = 0;
@@ -697,7 +693,6 @@ $(document).ready(function(){
 				manufacturer_software_cost_mod = 1;
 				manufacturer_room_cost_mod = 1;
 				manufacturer_armor_cost_mod = 0.8;
-				manufacturer_room_cost_mod = 1;
 				manufacturer_mDrive_cost_mod = 1;
 				manufacturer_kinetic_dr_mod = 1;
 				manufacturer_rad_dr_mod = 0;
@@ -792,7 +787,7 @@ $(document).ready(function(){
 			power_regen = power_count * 2;
 			power_fuel_per_week = power_count;
 			power_tonnage = power_count;
-			power_cost = power_count * 10000;
+			power_cost = (power_count * 10000) * manufacturer_power_cost_mod;
 			power_heat_generation = Math.ceil(power_count/4);
 			power_total_capacity = base_power + (capacitance_module_count * 2);
 			power_total_cost = power_cost + (capacitance_module_count * 10000);
@@ -802,7 +797,7 @@ $(document).ready(function(){
 			mDrive_type = $('#mDrive-type').val();
 			mDrive_count = parseInt($('#mDrive-count').val());
 			if (mDrive_type == 'Directed Fusion Drive') {
-				mDrive_cost = mDrive_count * 20000;
+				mDrive_cost = (mDrive_count * 20000) * manufacturer_mDrive_cost_mod;
 				mDrive_tonnage = mDrive_count;
 				mDrive_power_use = Math.floor(mDrive_count * 0.5);
 				mDrive_fuel_use = Math.floor(mDrive_count * 0.5);
@@ -812,7 +807,7 @@ $(document).ready(function(){
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #directed-fusion-details').removeClass('hidden');
 			} else if (mDrive_type == 'Pulsed Fusion Drive') {
-				mDrive_cost = mDrive_count * 50000;
+				mDrive_cost = (mDrive_count * 50000) * manufacturer_mDrive_cost_mod;
 				mDrive_tonnage = mDrive_count;
 				mDrive_power_use = Math.floor(mDrive_count * 0.75);
 				mDrive_fuel_use = Math.floor(mDrive_count * 0.75);
@@ -822,7 +817,7 @@ $(document).ready(function(){
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #pulsed-fusion-details').removeClass('hidden');
 			} else if (mDrive_type == 'Ion Accelerator') {
-				mDrive_cost = mDrive_count * 10000;
+				mDrive_cost = (mDrive_count * 10000) * manufacturer_mDrive_cost_mod;
 				mDrive_tonnage = mDrive_count;
 				mDrive_power_use = Math.floor(mDrive_count * 0.333333);
 				mDrive_fuel_use = Math.floor(mDrive_count * 0.333333);
@@ -832,7 +827,7 @@ $(document).ready(function(){
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #ion-accelerator-details').removeClass('hidden');
 			} else if (mDrive_type == 'Slipstream Rocket') {
-				mDrive_cost = mDrive_count * 25000;
+				mDrive_cost = (mDrive_count * 25000) * manufacturer_mDrive_cost_mod;
 				mDrive_tonnage = mDrive_count;
 				mDrive_power_use = Math.floor(mDrive_count * 0.8);
 				mDrive_fuel_use = Math.floor(mDrive_count * 0.1);
@@ -842,7 +837,7 @@ $(document).ready(function(){
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #slipstream-rocket-details').removeClass('hidden');
 			} else if (mDrive_type == 'Photon Rocket') {
-				mDrive_cost = mDrive_count * 25000;
+				mDrive_cost = (mDrive_count * 25000) * manufacturer_mDrive_cost_mod;
 				mDrive_tonnage = mDrive_count;
 				mDrive_power_use = Math.floor(mDrive_count * 0.1);
 				mDrive_fuel_use = Math.floor(mDrive_count * 0.8);
@@ -975,7 +970,7 @@ $(document).ready(function(){
 				conservatory_count > 0 ? $('#conservatory-output').show() : $('#conservatory-output').hide();
 
 			crew_space = (state_room_count * 2) + (barracks_count * 6);
-			room_total_cost = cargo_bay_cost + ships_locker_cost + common_area_cost + state_room_cost + drone_bay_cost + barracks_cost + medical_bay_cost + science_bay_cost + technical_bay_cost + weapons_bay_cost + launch_bay_cost + low_berths_cost + escape_pod_cost + garden_cost + conservatory_cost;
+			room_total_cost = (cargo_bay_cost + ships_locker_cost + common_area_cost + state_room_cost + drone_bay_cost + barracks_cost + medical_bay_cost + science_bay_cost + technical_bay_cost + weapons_bay_cost + launch_bay_cost + low_berths_cost + escape_pod_cost + garden_cost + conservatory_cost) * manufacturer_room_cost_mod;
 			room_total_tonnage = cargo_bay_tonnage + ships_locker_tonnage + common_area_tonnage + state_room_tonnage + drone_bay_tonnage + barracks_tonnage + medical_bay_tonnage + science_bay_tonnage + technical_bay_tonnage + weapons_bay_tonnage + launch_bay_tonnage + low_berths_tonnage + escape_pod_tonnage + garden_tonnage + conservatory_tonnage;
 
 		// Bridge
@@ -1135,7 +1130,7 @@ $(document).ready(function(){
 					diagnostics_processor = 0;
 					$('#diagnostics-software-output').hide();
 				}
-			software_total_cost = security_tracking_cost + autopilot_cost + combat_automation_cost + jump_control_cost + intrusion_cost + network_cost + expert_cost + virtual_intelligence_cost + diagnostics_cost;
+			software_total_cost = (security_tracking_cost + autopilot_cost + combat_automation_cost + jump_control_cost + intrusion_cost + network_cost + expert_cost + virtual_intelligence_cost + diagnostics_cost) * manufacturer_software_cost_mod;
 			software_total_processor = security_tracking_processor + autopilot_processor + network_processor + combat_automation_processor + jump_control_processor + intrusion_processor + expert_processor + virtual_intelligence_processor + diagnostics_processor;
 
 		// Comms
@@ -1179,7 +1174,7 @@ $(document).ready(function(){
 				lr_comms_tonnage = 0;
 				$('#long-range-comms-output').hide();
 			}
-			comms_total_cost = comms_cost + lr_comms_cost;
+			comms_total_cost = (comms_cost + lr_comms_cost) * manufacturer_comms_cost_mod;
 			comms_total_processor = comms_processor + lr_comms_processor;
 			comms_total_power = comms_power + lr_comms_power;
 			
@@ -1270,7 +1265,7 @@ $(document).ready(function(){
 					$('#bridge-output').addClass('warning');
 				}
 
-			sensor_total_cost = multispectrum_cost + radar_cost + lidar_cost + densitrometer_cost + bioscanner_cost + jammer_cost;
+			sensor_total_cost = (multispectrum_cost + radar_cost + lidar_cost + densitrometer_cost + bioscanner_cost + jammer_cost) * manufacturer_sensor_cost_mod;
 			sensor_total_power = multispectrum_power + radar_power + lidar_power + densitrometer_power + bioscanner_power + jammer_power;
 			sensor_total_processor = multispectrum_processor + radar_processor + lidar_processor + densitrometer_processor + bioscanner_processor + jammer_processor;
 
@@ -1279,45 +1274,45 @@ $(document).ready(function(){
 			if (armor_type == 'None') {
 				armor_tonnage = 0;
 				armor_cost = 0;
-				armor_kinetic_dr = 0;
-				armor_energy_dr = 0;
-				armor_rad_dr = 0;
-				armor_explosive_dr = 0;
+				armor_kinetic_dr = 0 + manufacturer_kinetic_dr_mod;
+				armor_energy_dr = 0 + manufacturer_energy_dr_mod;
+				armor_rad_dr = 0 + manufacturer_rad_dr_mod ;
+				armor_explosive_dr = 0 + manufacturer_explosive_dr_mod;
 			} else if (armor_type == 'Titanium') {
 				armor_tonnage = Math.round(tonnage/50);
-				armor_cost = tonnage * 100;
-				armor_kinetic_dr = 2;
-				armor_energy_dr = 2;
-				armor_rad_dr = 0;
-				armor_explosive_dr = 2;
+				armor_cost = (tonnage * 100) * manufacturer_armor_cost_mod;
+				armor_kinetic_dr = 2 + manufacturer_kinetic_dr_mod;
+				armor_energy_dr = 2 + manufacturer_energy_dr_mod;
+				armor_rad_dr = 0 + manufacturer_rad_dr_mod ;
+				armor_explosive_dr = 2 + manufacturer_explosive_dr_mod;
 			} else if (armor_type == 'Crystaliron') {
 				armor_tonnage = Math.round(tonnage/50);
-				armor_cost = tonnage * 150;
-				armor_kinetic_dr = 2;
-				armor_energy_dr = 2;
-				armor_rad_dr = 2;
-				armor_explosive_dr = 0;
+				armor_cost = (tonnage * 150) * manufacturer_armor_cost_mod;
+				armor_kinetic_dr = 2 + manufacturer_kinetic_dr_mod;
+				armor_energy_dr = 2 + manufacturer_energy_dr_mod;
+				armor_rad_dr = 2 + manufacturer_rad_dr_mod ;
+				armor_explosive_dr = 0 + manufacturer_explosive_dr_mod;
 			} else if (armor_type == 'Carbide') {
 				armor_tonnage = Math.round(tonnage/40);
-				armor_cost = tonnage * 200;
-				armor_kinetic_dr = 3;
-				armor_energy_dr = 1;
-				armor_rad_dr = 0;
-				armor_explosive_dr = 3;
+				armor_cost = (tonnage * 200) * manufacturer_armor_cost_mod;
+				armor_kinetic_dr = 3 + manufacturer_kinetic_dr_mod;
+				armor_energy_dr = 1 + manufacturer_energy_dr_mod;
+				armor_rad_dr = 0 + manufacturer_rad_dr_mod ;
+				armor_explosive_dr = 3 + manufacturer_explosive_dr_mod;
 			} else if (armor_type == 'Ablative') {
 				armor_tonnage = Math.round(tonnage/60);
-				armor_cost = tonnage * 50;
-				armor_kinetic_dr = 0;
-				armor_energy_dr = 5;
-				armor_rad_dr = 0;
-				armor_explosive_dr = 0;
+				armor_cost = (tonnage * 50) * manufacturer_armor_cost_mod;
+				armor_kinetic_dr = 0 + manufacturer_kinetic_dr_mod;
+				armor_energy_dr = 5 + manufacturer_energy_dr_mod;
+				armor_rad_dr = 0 + manufacturer_rad_dr_mod ;
+				armor_explosive_dr = 0 + manufacturer_explosive_dr_mod;
 			} else if (armor_type == 'Bonded Superdense') {
 				armor_tonnage = Math.round(tonnage/20);
-				armor_cost = tonnage * 500;
-				armor_kinetic_dr = 4;
-				armor_energy_dr = 4;
-				armor_rad_dr = 4;
-				armor_explosive_dr = 4;
+				armor_cost = (tonnage * 500) * manufacturer_armor_cost_mod;
+				armor_kinetic_dr = 4 + manufacturer_kinetic_dr_mod;
+				armor_energy_dr = 4 + manufacturer_energy_dr_mod;
+				armor_rad_dr = 4 + manufacturer_rad_dr_mod ;
+				armor_explosive_dr = 4 + manufacturer_explosive_dr_mod;
 			}
 
 			reinforce_kinetic_dr = parseInt($('#reinforce-kinetic-dr').val());
@@ -1673,7 +1668,7 @@ $(document).ready(function(){
 				lpdl_tonnage = lpdl_count * 2;
 				lpdl_power = lpdl_count * 3;
 			weapon_total_tonnage = ac2_tonnage + ac5_tonnage + ac10_tonnage + ac20_tonnage + rg1_tonnage + rg3_tonnage + rg5_tonnage + rg8_tonnage + or4_tonnage + or8_tonnage + or16_tonnage + or32_tonnage + spl_tonnage + mpl_tonnage + lpl_tonnage + sil_tonnage + mil_tonnage + lil_tonnage + sel_tonnage + mel_tonnage + lel_tonnage + pb_tonnage + pba_tonnage + srm2_tonnage + srm4_tonnage + srm6_tonnage + srm8_tonnage + lrm5_tonnage + lrm10_tonnage + lrm15_tonnage + lrm20_tonnage + tt_tonnage + tta_tonnage + sc_tonnage + rsc_tonnage + spdl_tonnage + mpdl_tonnage + lpdl_tonnage;
-			weapon_total_cost = ac2_cost + ac5_cost + ac10_cost + ac20_cost + rg1_cost + rg3_cost + rg5_cost + rg8_cost + or4_cost + or8_cost + or16_cost + or32_cost + spl_cost + mpl_cost + lpl_cost + sil_cost + mil_cost + lil_cost + sel_cost + mel_cost + lel_cost + pb_cost + pba_cost + srm2_cost + srm4_cost + srm6_cost + srm8_cost + lrm5_cost + lrm10_cost + lrm15_cost + lrm20_cost + tt_cost + tta_cost + sc_cost + rsc_cost + spdl_cost + mpdl_cost + lpdl_cost;
+			weapon_total_cost = (ac2_cost + ac5_cost + ac10_cost + ac20_cost + rg1_cost + rg3_cost + rg5_cost + rg8_cost + or4_cost + or8_cost + or16_cost + or32_cost + spl_cost + mpl_cost + lpl_cost + sil_cost + mil_cost + lil_cost + sel_cost + mel_cost + lel_cost + pb_cost + pba_cost + srm2_cost + srm4_cost + srm6_cost + srm8_cost + lrm5_cost + lrm10_cost + lrm15_cost + lrm20_cost + tt_cost + tta_cost + sc_cost + rsc_cost + spdl_cost + mpdl_cost + lpdl_cost) * manufacturer_weapon_cost_mod;
 			weapon_total_tonnage == 0 ? $('#no-weapons').show() : $('#no-weapons').hide();
 
 		// Final Outputs and Values
@@ -1708,7 +1703,7 @@ $(document).ready(function(){
 				$('#hull-output').text(hull);
 
 			// Structure Output
-				structure = Math.round((tonnage/20) * interior_structure_mod * tech_mod);
+				structure = Math.round((tonnage/20) * interior_structure_mod * tech_mod * manufacturer_structure_mod);
 				$('#structure-output').text(structure);
 
 			// Communications Output
@@ -1721,8 +1716,8 @@ $(document).ready(function(){
 				$('#bridge-description-output').html(bridge_description);
 
 			// Mobility
-				mDrive_agility_fixed = Math.floor(mDrive_agility_raw);
-				mDrive_thrust_fixed = Math.floor(mDrive_thrust_raw);
+				mDrive_agility_fixed = Math.floor(mDrive_agility_raw * manufacturer_speed_mod);
+				mDrive_thrust_fixed = Math.floor(mDrive_thrust_raw * manufacturer_speed_mod);
 				if ((mDrive_agility_fixed < 0) || (mDrive_tonnage == 0)) {
 					mDrive_agility_fixed = 0;
 				}
