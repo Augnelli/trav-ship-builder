@@ -15,26 +15,6 @@ body {
 transition: all ease 0.3s;
 }
 
-body#infinite-horizons {
-
-}
-
-body#atlas {
-
-}
-
-body#conglomerate {
-
-}
-
-body#imperial-designs {
-
-}
-
-body#raider {
-
-}
-
 header {
 	padding: 20px;
 	width: 100%;
@@ -292,7 +272,7 @@ input.small-input {
 
 .sub-label[disabled="disabled"],
 .sub-field[disabled="disabled"] {
-	color: #666;
+	color: #666 !important;
 }
 
 #sidebar-controls {
@@ -547,4 +527,81 @@ span {
 .button:hover {
 	transition: all ease 250ms;
 	background-color: #050;
+}
+
+/* Mod Styles */
+.cyber-traveller {
+	display: none;
+}
+
+/* Manufacturer Specific Styles */
+
+body#infinite-horizons .tabs .tab-item.active {
+	background-color: #090;
+}
+
+body#infinite-horizons input,
+body#infinite-horizons select {
+	color: #3f3;
+}
+
+body#infinite-horizons .listed-item,
+body#infinite-horizons span {
+	color: #090;
+}
+
+body#atlas .tabs .tab-item.active {
+	background-color: #900;
+}
+
+body#atlas input,
+body#atlas select {
+	color: #f55;
+}
+
+body#atlas .listed-item,
+body#atlas span {
+	color: #f90;
+}
+
+body#conglomerate-inc .tabs .tab-item.active {
+	background-color: #666;
+}
+
+body#conglomerate-inc input,
+body#conglomerate-inc select {
+	color: #fff;
+}
+
+body#conglomerate-inc .listed-item,
+body#conglomerate-inc span {
+	color: #ccc;
+}
+
+body#imperial-designs .tabs .tab-item.active {
+	background-color: #660;
+}
+
+body#imperial-designs input,
+body#imperial-designs select {
+	color: #ff3;
+}
+
+body#imperial-designs .listed-item,
+body#imperial-designs span {
+	color: #ff3;
+}
+
+body#raider .tabs .tab-item.active {
+	background-color: #707;
+}
+
+body#raider input,
+body#raider select {
+	color: #f3f;
+}
+
+body#raider .listed-item,
+body#raider span {
+	color: #f9f;
 }
