@@ -432,12 +432,12 @@
 				sc_tonnage = 0,
 				sc_power = 0,
 				sc_ammo = 0,
-			// SCA
-				sca_count = 0,
-				sca_cost = 0,
-				sca_tonnage = 0,
-				sca_power = 0,
-				sca_ammo = 0,
+			// RSC
+				rsc_count = 0,
+				rsc_cost = 0,
+				rsc_tonnage = 0,
+				rsc_power = 0,
+				rsc_ammo = 0,
 			// SPDL
 				spdl_count = 0,
 				spdl_cost = 0,
@@ -551,17 +551,17 @@ $(document).ready(function(){
 		// Mods
 			cyber_traveller = $('#cyber-traveller');
 			if (cyber_traveller.is(':checked')) {
-				
+				$('.cyber-traveller').css('display', 'block');
 				jump_cost_mod = 100;
 				tech_limit = 12;
 				$('#tech-level').attr('max', '12');
-				// console.log('cyber traveller only');
 			} else {
 				jump_basis = 1;
 				jump_cost_mod = 1;
 				tech_limit = 16;
 				$('#tech-level').attr('max', '16');
-				// console.log('regular traveller ships');
+				$('#manufacturer_type').val('Infinite Horizons').trigger('change');
+				$('.cyber-traveller').css('display', 'none');
 			}
 
 		// Tonnage
@@ -622,6 +622,7 @@ $(document).ready(function(){
 				$('#manufacturer-details #atlas-industries-details').removeClass('hidden');
 				$('.specification .manufacturer-subset').removeClass('active');
 				$('#atlas-subset').addClass('active');
+
 			} else if (manufacturer_type == 'Infinite Horizons') {
 				manufacturer_cost_mod = 1;
 				manufacturer_speed_mod = 1.1;
@@ -642,6 +643,7 @@ $(document).ready(function(){
 				$('#manufacturer-details #infinite-horizons-details').removeClass('hidden');
 				$('.specification .manufacturer-subset').removeClass('active');
 				$('#infinite-subset').addClass('active');
+
 			} else if (manufacturer_type == 'Conglomerate Inc') {
 				manufacturer_cost_mod = 0.8;
 				manufacturer_speed_mod = 0.8;
@@ -662,6 +664,7 @@ $(document).ready(function(){
 				$('#manufacturer-details #conglomerate-inc-details').removeClass('hidden');
 				$('.specification .manufacturer-subset').removeClass('active');
 				$('#conglomerate-subset').addClass('active');
+
 			} else if (manufacturer_type == 'Imperial Designs') {
 				manufacturer_cost_mod = 1.3;
 				manufacturer_speed_mod = 1.2;
@@ -682,6 +685,7 @@ $(document).ready(function(){
 				$('#manufacturer-details #imperial-designs-details').removeClass('hidden');
 				$('.specification .manufacturer-subset').removeClass('active');
 				$('#imperial-subset').addClass('active');
+
 			} else if (manufacturer_type == 'Raider') {
 				manufacturer_cost_mod = 1;
 				manufacturer_speed_mod = 1;
@@ -702,6 +706,69 @@ $(document).ready(function(){
 				$('#manufacturer-details #raider-corp-details').removeClass('hidden');
 				$('.specification .manufacturer-subset').removeClass('active');
 				$('#raider-subset').addClass('active');
+
+			} else if (manufacturer_type == 'Mars Core') {
+				manufacturer_cost_mod = 1;
+				manufacturer_speed_mod = 1;
+				manufacturer_hull_mod = 1.1;
+				manufacturer_weapon_cost_mod = 0.8;
+				manufacturer_power_cost_mod = 1;
+				manufacturer_sensor_cost_mod = 1;
+				manufacturer_comms_cost_mod = 1;
+				manufacturer_software_cost_mod = 1;
+				manufacturer_room_cost_mod = 1;
+				manufacturer_armor_cost_mod = 0.8;
+				manufacturer_mDrive_cost_mod = 1;
+				manufacturer_kinetic_dr_mod = 1;
+				manufacturer_rad_dr_mod = 0;
+				manufacturer_energy_dr_mod = 0;
+				manufacturer_explosive_dr_mod = 0;
+				$('#manufacturer-details .advice').addClass('hidden');
+				$('#manufacturer-details #mars-core-details').removeClass('hidden');
+				$('.specification .manufacturer-subset').removeClass('active');
+				$('#mars-core-subset').addClass('active');
+			} else if (manufacturer_type == 'Terra Firma') {
+				manufacturer_cost_mod = 1;
+				manufacturer_speed_mod = 1;
+				manufacturer_hull_mod = 1.1;
+				manufacturer_weapon_cost_mod = 0.8;
+				manufacturer_power_cost_mod = 1;
+				manufacturer_sensor_cost_mod = 1;
+				manufacturer_comms_cost_mod = 1;
+				manufacturer_software_cost_mod = 1;
+				manufacturer_room_cost_mod = 1;
+				manufacturer_armor_cost_mod = 0.8;
+				manufacturer_mDrive_cost_mod = 1;
+				manufacturer_kinetic_dr_mod = 1;
+				manufacturer_rad_dr_mod = 0;
+				manufacturer_energy_dr_mod = 0;
+				manufacturer_explosive_dr_mod = 0;
+				$('#manufacturer-details .advice').addClass('hidden');
+				$('#manufacturer-details #terra-firma-details').removeClass('hidden');
+				$('.specification .manufacturer-subset').removeClass('active');
+				$('#terra-firma-subset').addClass('active');
+
+			} else if (manufacturer_type == 'Future Industries') {
+				manufacturer_cost_mod = 1;
+				manufacturer_speed_mod = 1;
+				manufacturer_hull_mod = 1.1;
+				manufacturer_weapon_cost_mod = 0.8;
+				manufacturer_power_cost_mod = 1;
+				manufacturer_sensor_cost_mod = 1;
+				manufacturer_comms_cost_mod = 1;
+				manufacturer_software_cost_mod = 1;
+				manufacturer_room_cost_mod = 1;
+				manufacturer_armor_cost_mod = 0.8;
+				manufacturer_mDrive_cost_mod = 1;
+				manufacturer_kinetic_dr_mod = 1;
+				manufacturer_rad_dr_mod = 0;
+				manufacturer_energy_dr_mod = 0;
+				manufacturer_explosive_dr_mod = 0;
+				$('#manufacturer-details .advice').addClass('hidden');
+				$('#manufacturer-details #future-industries-details').removeClass('hidden');
+				$('.specification .manufacturer-subset').removeClass('active');
+				$('#future-industries-subset').addClass('active');
+
 			}
 
 		// Tech Level
@@ -783,8 +850,8 @@ $(document).ready(function(){
 
 			power_count = parseInt($('#power-count').val());
 			capacitance_module_count = parseInt($('#capacitance-module-count').val());
-			base_power = power_count * 2;
-			power_regen = power_count * 2;
+			base_power = power_count * 3;
+			power_regen = power_count * 3;
 			power_fuel_per_week = power_count;
 			power_tonnage = power_count;
 			power_cost = (power_count * 10000) * manufacturer_power_cost_mod;
@@ -801,8 +868,8 @@ $(document).ready(function(){
 				mDrive_tonnage = mDrive_count;
 				mDrive_power_use = Math.floor(mDrive_count * 0.5);
 				mDrive_fuel_use = Math.floor(mDrive_count * 0.5);
-				mDrive_agility_raw = (mDrive_count * 0.25)/(tonnage/100);
-				mDrive_thrust_raw = (mDrive_count * 0.5)/(tonnage/100);
+				mDrive_agility_raw = (mDrive_count * 0.3)/(tonnage/100);
+				mDrive_thrust_raw = (mDrive_count * 0.6)/(tonnage/100);
 				mDrive_heat_generation = Math.floor(mDrive_count * 0.5);
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #directed-fusion-details').removeClass('hidden');
@@ -811,28 +878,28 @@ $(document).ready(function(){
 				mDrive_tonnage = mDrive_count;
 				mDrive_power_use = Math.floor(mDrive_count * 0.75);
 				mDrive_fuel_use = Math.floor(mDrive_count * 0.75);
-				mDrive_agility_raw = (mDrive_count * 0.333333)/(tonnage/100);
-				mDrive_thrust_raw = (mDrive_count * 0.75)/(tonnage/100);
-				mDrive_heat_generation = Math.floor(mDrive_count * 0.75);
+				mDrive_agility_raw = (mDrive_count * 0.4)/(tonnage/100);
+				mDrive_thrust_raw = (mDrive_count * 0.8)/(tonnage/100);
+				mDrive_heat_generation = Math.floor(mDrive_count * 0.7);
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #pulsed-fusion-details').removeClass('hidden');
 			} else if (mDrive_type == 'Ion Accelerator') {
 				mDrive_cost = (mDrive_count * 10000) * manufacturer_mDrive_cost_mod;
 				mDrive_tonnage = mDrive_count;
-				mDrive_power_use = Math.floor(mDrive_count * 0.333333);
-				mDrive_fuel_use = Math.floor(mDrive_count * 0.333333);
+				mDrive_power_use = Math.floor(mDrive_count * 0.3);
+				mDrive_fuel_use = Math.floor(mDrive_count * 0.3);
 				mDrive_agility_raw = (mDrive_count * 0.125)/(tonnage/100);
-				mDrive_thrust_raw = (mDrive_count * 0.333333)/(tonnage/100);
-				mDrive_heat_generation = Math.floor(mDrive_count * 0.5);
+				mDrive_thrust_raw = (mDrive_count * 0.4)/(tonnage/100);
+				mDrive_heat_generation = Math.floor(mDrive_count * 0.4);
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #ion-accelerator-details').removeClass('hidden');
 			} else if (mDrive_type == 'Slipstream Rocket') {
 				mDrive_cost = (mDrive_count * 25000) * manufacturer_mDrive_cost_mod;
 				mDrive_tonnage = mDrive_count;
 				mDrive_power_use = Math.floor(mDrive_count * 0.8);
-				mDrive_fuel_use = Math.floor(mDrive_count * 0.1);
+				mDrive_fuel_use = Math.floor(mDrive_count * 0.2);
 				mDrive_agility_raw = (mDrive_count * 0.2)/(tonnage/100);
-				mDrive_thrust_raw = (mDrive_count * 0.6)/(tonnage/100);
+				mDrive_thrust_raw = (mDrive_count * 0.9)/(tonnage/100);
 				mDrive_heat_generation = Math.floor(mDrive_count * 0.5);
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #slipstream-rocket-details').removeClass('hidden');
@@ -841,7 +908,7 @@ $(document).ready(function(){
 				mDrive_tonnage = mDrive_count;
 				mDrive_power_use = Math.floor(mDrive_count * 0.1);
 				mDrive_fuel_use = Math.floor(mDrive_count * 0.8);
-				mDrive_agility_raw = (mDrive_count * 0.3)/(tonnage/100);
+				mDrive_agility_raw = (mDrive_count * 0.4)/(tonnage/100);
 				mDrive_thrust_raw = (mDrive_count * 0.4)/(tonnage/100);
 				mDrive_heat_generation = Math.floor(mDrive_count * 0.5);
 				$('#m-drive-details .advice').addClass('hidden');
@@ -873,15 +940,15 @@ $(document).ready(function(){
 				interior_structure_mod = 0.8;
 			} else if  (interior_type == 'Military') {
 				interior_cost_mod = 1000;
-				interior_tonnage = 2;
+				interior_tonnage = (tonnage/50);
 				interior_structure_mod = 1.5;
 			} else if (interior_type == 'Minimalism') {
 				interior_cost_mod = 1500;
-				interior_tonnage = 1;
+				interior_tonnage = (tonnage/100);
 				interior_structure_mod = 1.2;
 			} else if (interior_type == 'Opulent') {
 				interior_cost_mod = 2500;
-				interior_tonnage = 5;
+				interior_tonnage = (tonnage/25);
 				interior_structure_mod = 1.2;
 			}
 
@@ -1862,9 +1929,9 @@ $(document).ready(function(){
 				$('#srm-6-count-output').text(srm6_count);
 				$('#srm-8-count-output').text(srm8_count);
 				$('#srm-2-ammo-count-output').text(srm2_ammo);
-				$('#srm-2-ammo-count-output').text(srm2_ammo);
-				$('#srm-2-ammo-count-output').text(srm2_ammo);
-				$('#srm-2-ammo-count-output').text(srm2_ammo);
+				$('#srm-4-ammo-count-output').text(srm2_ammo);
+				$('#srm-6-ammo-count-output').text(srm2_ammo);
+				$('#srm-8-ammo-count-output').text(srm2_ammo);
 				$('#lrm-5-count-output').text(lrm5_count);
 				$('#lrm-10-count-output').text(lrm10_count);
 				$('#lrm-15-count-output').text(lrm15_count);
@@ -1876,11 +1943,11 @@ $(document).ready(function(){
 				$('#torpedo-tube-count-output').text(tt_count);
 				$('#torpedo-tube-array-count-output').text(tta_count);
 				$('#torpedo-tube-ammo-count-output').text(tt_ammo);
-				$('#torpedo-tube-array-ammo--count-output').text(tta_ammo);
+				$('#torpedo-tube-array-ammo-count-output').text(tta_ammo);
 				$('#sandcaster-count-output').text(sc_count);
-				$('#sandcaster-array-count-output').text(sca_count);
+				$('#rapid-sandcaster-count-output').text(rsc_count);
 				$('#sandcaster-ammo-count-output').text(sc_ammo);
-				$('#sandcaster-array-ammo-count-output').text(sca_ammo);
+				$('#rapid-sandcaster-ammo-count-output').text(rsc_ammo);
 				$('#spdl-count-output').text(spdl_count);
 				$('#mpdl-count-output').text(mpdl_count);
 				$('#lpdl-count-output').text(lpdl_count);
@@ -1982,7 +2049,7 @@ $(document).ready(function(){
 		                srm8_tonnage, srm8_power, lrm5_count, lrm5_cost, lrm5_tonnage, lrm5_power, lrm10_count, lrm10_cost,
 		                lrm10_tonnage, lrm10_power, lrm15_count, lrm15_cost, lrm15_tonnage, lrm15_power, lrm20_count, lrm20_cost,
 		                lrm20_tonnage, lrm20_power, tt_count, tt_cost, tt_tonnage, tt_power, tta_count, tta_cost, tta_tonnage,
-		                tta_power, sc_count, sc_cost, sc_tonnage, sc_power, sca_count, sca_cost, sca_tonnage, sca_power,
+		                tta_power, sc_count, sc_cost, sc_tonnage, sc_power, rsc_count, rsc_cost, rsc_tonnage, rsc_power,
 		                spdl_count, spdl_cost, spdl_tonnage, spdl_power, mpdl_count, mpdl_cost, mpdl_tonnage, mpdl_power,
 		                lpdl_count, lpdl_cost, lpdl_tonnage, lpdl_power, designation, average_type, cost, upkeep, monthly,
 		                tonnage_used, remaining_tonnage, power, hull, structure, agility, kinetic_dr, energy_dr, rad_dr,

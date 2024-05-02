@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Ship Builder | 1.0.1</title>
+		<title>Ship Builder | 1.0.3</title>
 		<link rel="icon" type="image/x-icon" href="images/shuttle.png">
 
 		<!-- jQuery 3.7.1 -->
@@ -19,7 +19,7 @@
 		<script type="text/javascript" src="ship-builder.js"></script>
 
 	</head>
-	<body class="infinite-horizons">
+	<body id="infinite-horizons">
 		<div class="core">
 		<!-- <div id="sidebar-controls" class="right-sidebar">
 				<p id="sidebar-status">||</p>
@@ -70,6 +70,9 @@
 									<option value="Conglomerate Inc">Conglomerate Inc.</option>
 									<option value="Imperial Designs">Imperial Designs</option>
 									<option value="Raider">Raider Corp</option>
+									<option value="Mars Core" class="cyber-traveller">Mars Core</option>
+									<option value="Terra Firma" class="cyber-traveller">Terra Firma</option>
+									<option value="Future Industries" class="cyber-traveller">Future Industries</option>
 								</select>
 								<div class="variable-section" id="manufacturer-details">
 									<p class="advice" id="infinite-horizons-details">More expensive but better power and software systems.</p>
@@ -77,6 +80,9 @@
 									<p class="advice hidden" id="conglomerate-inc-details">Cheaper construction with lower speed and toughness.</p>
 									<p class="advice hidden" id="imperial-designs-details">High costs, faster and tougher, with improved armor.</p>
 									<p class="advice hidden" id="raider-corp-details">No cost changes and improved weapons and defenses.</p>
+									<p class="advice hidden" id="mars-core-details">High quality Mars tech that comes at a cost.</p>
+									<p class="advice hidden" id="terra-firma-details">Readily available and cheaply made.</p>
+									<p class="advice hidden" id="future-industries-details">Fringe tech with specific purpose.</p>
 								</div>
 							</div>
 							<div class="item basic">
@@ -767,16 +773,6 @@
 							<img src="images/antenna.png" class="icon-image">
 						</div>
 						<div class="specification">
-							<p><strong>Sensors</strong></p>
-							<img src="images/radar.png" class="icon-image">
-							<p class="listed-item visible" id="multispectrum-output">Multispectrum Scope<br><span class="advice">Passively detects visible, infrared, and ultraviolet light.</span></p>
-							<p class="listed-item visible" id="radar-output">Radar<br><span class="advice">Active sensor that detects all nearby solid objects.</span></p>
-							<p class="listed-item hidden" id="lidar-output">LIDAR Scanner<br><span class="advice">Actively detects range and basic shape of locked target.</span></p>
-							<p class="listed-item hidden" id="densitrometer-output">Densitrometer<br><span class="advice">Actively creates 3d projection map of an object.</span></p>
-							<p class="listed-item hidden" id="bioscanner-output">Bioscanner<br><span class="advice">Passively detects electrical signals in brain activity.</span></p>
-							<p class="listed-item hidden" id="jammer-output">Sensor Jammer<br><span class="advice">Imposes penalties to detection and interrupts locks.</span></p>
-						</div>
-						<div class="specification">
 							<p><strong>Computer</strong></p>
 							<img src="images/cpu.png" class="icon-image">
 							<p>Processors: <span id="total-processor-output">5</span></p>
@@ -804,6 +800,16 @@
 								<br><span class="advice">Talk to your ship! Provides intelligent responses and data collation.</span></p>
 							<p class="listed-item hidden" id="diagnostics-software-output">Diagnostics Software
 								<br><span class="advice">Grants superior information about ship operations and status.</span></p>
+						</div>
+						<div class="specification">
+							<p><strong>Sensors</strong></p>
+							<img src="images/radar.png" class="icon-image">
+							<p class="listed-item visible" id="multispectrum-output">Multispectrum Scope<br><span class="advice">Passively detects visible, infrared, and ultraviolet light.</span></p>
+							<p class="listed-item visible" id="radar-output">Radar<br><span class="advice">Active sensor that detects all nearby solid objects.</span></p>
+							<p class="listed-item hidden" id="lidar-output">LIDAR Scanner<br><span class="advice">Actively detects range and basic shape of locked target.</span></p>
+							<p class="listed-item hidden" id="densitrometer-output">Densitrometer<br><span class="advice">Actively creates 3d projection map of an object.</span></p>
+							<p class="listed-item hidden" id="bioscanner-output">Bioscanner<br><span class="advice">Passively detects electrical signals in brain activity.</span></p>
+							<p class="listed-item hidden" id="jammer-output">Sensor Jammer<br><span class="advice">Imposes penalties to detection and interrupts locks.</span></p>
 						</div>
 						<div class="specification full-width-specification">
 							<p class="action-title"><strong>Bridge Actions</strong> <span class="action-status">+</span></p>
@@ -1042,6 +1048,7 @@
 							<p class="hidden" id="ortillery-4-ammo-output">&rdsh; OR 4: <span id="ortillery-4-ammo-count-output">0</span></p>
 							<p class="hidden" id="ortillery-8-ammo-output">&rdsh; OR 8: <span id="ortillery-8-ammo-count-output">0</span></p>
 							<p class="hidden" id="ortillery-16-ammo-output">&rdsh; OR 16: <span id="ortillery-16-ammo-count-output">0</span></p>
+							<p class="hidden" id="ortillery-32-ammo-output">&rdsh; OR 32: <span id="ortillery-32-ammo-count-output">0</span></p>
 							<p class="hidden" id="srm-2-ammo-output">&rdsh; SRM 2: <span id="srm-2-ammo-count-output">0</span></p>
 							<p class="hidden" id="srm-4-ammo-output">&rdsh; SRM 4: <span id="srm-4-ammo-count-output">0</span></p>
 							<p class="hidden" id="srm-6-ammo-output">&rdsh; SRM 6: <span id="srm-6-ammo-count-output">0</span></p>
@@ -1053,7 +1060,7 @@
 							<p class="hidden" id="torpedo-tube-ammo-output">&rdsh; TT: <span id="torpedo-tube-ammo-count-output">0</span></p>
 							<p class="hidden" id="torpedo-tube-array-ammo-output">&rdsh; TTA: <span id="torpedo-tube-array-ammo-count-output">0</span></p>
 							<p class="hidden" id="sandcaster-ammo-output">&rdsh; SC: <span id="sandcaster-ammo-count-output">0</span></p>
-							<p class="hidden" id="sandcaster-array-ammo-output">&rdsh; RSC: <span id="sandcaster-array-ammo-count-output">0</span></p>
+							<p class="hidden" id="rapid-sandcaster-ammo-output">&rdsh; RSC: <span id="rapid-sandcaster-ammo-count-output">0</span></p>
 						</div>
 						<div class="specification full-width-specification">
 							<p><strong>Weapons</strong></p>
@@ -2050,7 +2057,7 @@
 								</div>
 								<div class="item-card hidden" id="rsc-output">
 									<img src="images/security.png" class="icon-image">
-									<p>Sand Caster Array <span class="advice">x<span id="sandcaster-array-count-output">0</span></span></p>
+									<p>Rapdi Sand Caster <span class="advice">x<span id="rapid-sandcaster-count-output">0</span></span></p>
 									<p class="advice">Energy weapon disruption cloud, rapid fire</p>
 									<p class="brackets">
 										<span>A</span>
