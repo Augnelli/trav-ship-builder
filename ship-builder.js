@@ -801,28 +801,28 @@ $(document).ready(function(){
 				mDrive_tonnage = mDrive_count;
 				mDrive_power_use = Math.floor(mDrive_count * 0.5);
 				mDrive_fuel_use = Math.floor(mDrive_count * 0.5);
-				mDrive_agility_raw = (mDrive_count * 0.25)/(tonnage/100);
-				mDrive_thrust_raw = (mDrive_count * 0.5)/(tonnage/100);
+				mDrive_agility_raw = (mDrive_count * 0.3)/(tonnage/100);
+				mDrive_thrust_raw = (mDrive_count * 0.6)/(tonnage/100);
 				mDrive_heat_generation = Math.floor(mDrive_count * 0.5);
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #directed-fusion-details').removeClass('hidden');
 			} else if (mDrive_type == 'Pulsed Fusion Drive') {
 				mDrive_cost = (mDrive_count * 50000) * manufacturer_mDrive_cost_mod;
 				mDrive_tonnage = mDrive_count;
-				mDrive_power_use = Math.floor(mDrive_count * 0.75);
-				mDrive_fuel_use = Math.floor(mDrive_count * 0.75);
-				mDrive_agility_raw = (mDrive_count * 0.333333)/(tonnage/100);
-				mDrive_thrust_raw = (mDrive_count * 0.75)/(tonnage/100);
-				mDrive_heat_generation = Math.floor(mDrive_count * 0.75);
+				mDrive_power_use = Math.floor(mDrive_count * 0.7);
+				mDrive_fuel_use = Math.floor(mDrive_count * 0.7);
+				mDrive_agility_raw = (mDrive_count * 0.4)/(tonnage/100);
+				mDrive_thrust_raw = (mDrive_count * 0.8)/(tonnage/100);
+				mDrive_heat_generation = Math.floor(mDrive_count * 0.7);
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #pulsed-fusion-details').removeClass('hidden');
 			} else if (mDrive_type == 'Ion Accelerator') {
 				mDrive_cost = (mDrive_count * 10000) * manufacturer_mDrive_cost_mod;
 				mDrive_tonnage = mDrive_count;
-				mDrive_power_use = Math.floor(mDrive_count * 0.333333);
-				mDrive_fuel_use = Math.floor(mDrive_count * 0.333333);
-				mDrive_agility_raw = (mDrive_count * 0.125)/(tonnage/100);
-				mDrive_thrust_raw = (mDrive_count * 0.333333)/(tonnage/100);
+				mDrive_power_use = Math.floor(mDrive_count * 0.4);
+				mDrive_fuel_use = Math.floor(mDrive_count * 0.4);
+				mDrive_agility_raw = (mDrive_count * 0.2)/(tonnage/100);
+				mDrive_thrust_raw = (mDrive_count * 0.4)/(tonnage/100);
 				mDrive_heat_generation = Math.floor(mDrive_count * 0.5);
 				$('#m-drive-details .advice').addClass('hidden');
 				$('#m-drive-details #ion-accelerator-details').removeClass('hidden');
@@ -830,7 +830,7 @@ $(document).ready(function(){
 				mDrive_cost = (mDrive_count * 25000) * manufacturer_mDrive_cost_mod;
 				mDrive_tonnage = mDrive_count;
 				mDrive_power_use = Math.floor(mDrive_count * 0.8);
-				mDrive_fuel_use = Math.floor(mDrive_count * 0.1);
+				mDrive_fuel_use = Math.floor(mDrive_count * 0.2);
 				mDrive_agility_raw = (mDrive_count * 0.2)/(tonnage/100);
 				mDrive_thrust_raw = (mDrive_count * 0.6)/(tonnage/100);
 				mDrive_heat_generation = Math.floor(mDrive_count * 0.5);
@@ -839,7 +839,7 @@ $(document).ready(function(){
 			} else if (mDrive_type == 'Photon Rocket') {
 				mDrive_cost = (mDrive_count * 25000) * manufacturer_mDrive_cost_mod;
 				mDrive_tonnage = mDrive_count;
-				mDrive_power_use = Math.floor(mDrive_count * 0.1);
+				mDrive_power_use = Math.floor(mDrive_count * 0.2);
 				mDrive_fuel_use = Math.floor(mDrive_count * 0.8);
 				mDrive_agility_raw = (mDrive_count * 0.3)/(tonnage/100);
 				mDrive_thrust_raw = (mDrive_count * 0.4)/(tonnage/100);
